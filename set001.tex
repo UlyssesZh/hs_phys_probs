@@ -40,6 +40,20 @@
 	求 $k$ 级虹的在水中折射率为 $n$ 的颜色的曲线上的在天球上具有最大高度角的点的方位角的变化率 (注意正负号).
 \end{enumerate}
 
+\item
+抛手机
+
+\item
+(不一定均匀的) 细杆的两端分别与恒温热源接触, 其余部分绝热.
+只考虑杆内的热传导过程, 且不考虑热胀效应.
+证明当该体系 (包括杆和两个热源) 的熵的变化速率最小时, 杆上的温度梯度为常数.
+
+提醒: Fourier 热传导定律不一定成立,
+热流可能是温度和温度梯度的非线性函数.
+
+提示: 变分问题 $\delta\int L\left(y,y',x\right)=0$
+可由 Euler--Lagrange 方程 $\frac{\mathrm d}{\mathrm dx}\frac{\partial L}{\partial y'}-\frac{\partial L}{\partial y}=0$ 求解.
+
 \end{enumerate}
 
 \newpage
@@ -293,6 +307,90 @@
 	这一结果意味着在北半球上看到的南方的 $k$ 级虹和在南半球上看到的北方的 $k$ 级虹会向西移动, 而在北半球上看到的北方的 $k$ 级虹和在南半球上看到的南方的 $k$ 级虹会向东移动.
 
 \end{enumerate}
+
+\item
+抛手机
+
+\item
+设 $t$ 时刻杆在 $x\in\left[a,b\right]$ 处的温度为 $T\left(t,x\right)$,
+熵线密度为 $s\left(t,x\right)$,
+单位时间内通过 $x$ 处的热量 (即 $x$ 处的热流) 为 $J\left(t,x\right)$.
+两个恒温热源的温度分别为
+\begin{equation}
+	T\left(t,a\right)=T_a,\qquad T\left(t,b\right)=T_b.
+	\label{eq:变分边界条件}
+\end{equation}
+
+取杆上的线微元 $\left[x,x+\mathrm dx\right]$.
+在 $\mathrm dt$ 时间内, 在 $x$ 处有 $J\left(t,x\right)\mathrm dt$ 的热量流入微元,
+在 $x+\mathrm dx$ 处有 $J\left(t,x+\mathrm dx\right)\mathrm dt$ 的热量流出微元,
+从而 $t+\mathrm dt$ 时刻该线微元获得熵增
+\begin{equation}
+	\frac{J\left(t,x\right)\mathrm dt-J\left(t,x+\mathrm dx\right)\mathrm dt}{T}=-\frac1T\frac{\partial J}{\partial x}\mathrm dx\mathrm dt,
+\end{equation}
+即
+\begin{equation}
+	\frac{\partial s}{\partial t}=-\frac1T\frac{\partial J}{\partial x}.
+	\label{eq:熵线密度的变化速率}
+\end{equation}
+
+将式 \ref{eq:熵线密度的变化速率} 对 $x$ 积分, 可得杆的熵的变化速率
+\begin{equation}
+	\frac{\mathrm dS_0}{\mathrm dt}=\int_a^b\frac{\partial s}{\partial t}\mathrm dx=\int_a^b-\frac1T\frac{\partial J}{\partial x}\mathrm dx.
+	\label{eq:杆的熵的变化速率前}
+\end{equation}
+对式 \ref{eq:杆的熵的变化速率前} 右边应用分部积分可得
+\begin{equation}
+	\frac{\mathrm dS_0}{\mathrm dt}=-\frac{J\left(t,b\right)}{T_b}+\frac{J\left(t,a\right)}{T_a}+\int_a^bJ\frac{\partial\frac1T}{\partial x}\mathrm dx.
+	\label{eq:杆的熵的变化速率}
+\end{equation}
+
+另一方面, 显然, 两个恒温热源的熵的变化速率分别为
+\begin{equation}
+	\frac{\mathrm dS_a}{\mathrm dt}=-\frac{J\left(t,a\right)}{T_a},\qquad
+	\frac{\mathrm dS_b}{\mathrm dt}=\frac{J\left(t,b\right)}{T_b}.
+	\label{eq:热源的熵的变化速率}
+\end{equation}
+将式 \ref{eq:杆的熵的变化速率} 与式 \ref{eq:热源的熵的变化速率} 相加, 得到整个体系的熵的变化速率
+\begin{equation}
+	\frac{\mathrm dS}{\mathrm dt}=\int_a^bJ\frac{\partial\frac1T}{\partial x}\mathrm dx=\int_a^b-\frac{J}{T^2}\frac{\partial T}{\partial x}\mathrm dx.
+	\label{eq:整个体系的熵的变化速率}
+\end{equation}
+
+令
+\begin{equation}
+	L\left(T,T',x\right)=-J\left(T,T'\right)\frac{T'}{T^2},
+	\label{eq:lagrangian}
+\end{equation}
+其中 $T'=\frac{\partial T}{\partial x}$.
+注意, 这里 $J\left(T,T'\right)$ 与前文中的 $J\left(t,x\right)$ 虽然是同一个物理量, 但具有不同的意义.
+$J\left(T,T'\right)$ 表征了与热传导有关的物理定律, Fourier 热传导定律是它的一个例子.
+显然, 由时空平移不变性, 当作为物理定律时, $J$ 不应与 $t,x$ 有关.
+
+此时问题转化为变分问题
+\begin{equation}
+	\delta\int_a^bL\left(T,T',x\right)\mathrm dx=0,
+\end{equation}
+其中在变分过程中有固定的边界条件式 \ref{eq:变分边界条件}.
+写出 Euler--Lagrange 方程
+\begin{equation}
+	\frac{\partial}{\partial x}\frac{\partial L}{\partial T'}-\frac{\partial L}{\partial T}=0
+	\label{eq:EL方程}
+\end{equation}
+(这里的 $\frac{\partial}{\partial x}$ 要求将 $T,T'$ 看作是依赖于 $x$ 的, 但 $t$ 是不依赖于 $x$ 的).
+
+为了利用式 \ref{eq:EL方程}, 根据式 \ref{eq:lagrangian} 写出 $L$ 的偏导数
+\begin{equation}
+	\frac{\partial L}{\partial T}=-T'\left(\frac{\partial J}{\partial T}\frac1{T^2}-\frac{2J}{T^3}\right),
+	\qquad\frac{\partial L}{\partial T'}=-\frac{1}{T^2}\left(\frac{\partial J}{\partial T'}T'+J\right),
+	\qquad\frac{\partial L}{\partial x}=0.
+	\label{eq:lagrangian的偏导数}
+\end{equation}
+将 \ref{eq:lagrangian的偏导数} 代入 \ref{eq:EL方程} 并进行一些繁琐的计算后可得
+\begin{equation}
+	T''=0.
+\end{equation}
+由此得证.
 
 \end{enumerate}
 
