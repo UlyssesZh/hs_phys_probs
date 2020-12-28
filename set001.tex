@@ -3,6 +3,7 @@
 \usepackage{tikz}
 \usepackage{caption}
 \usepackage{amsmath}
+\usepackage{hyperref}
 \usepackage[total={7in,10in}]{geometry}
 
 \usetikzlibrary{decorations.markings}
@@ -44,15 +45,23 @@
 抛手机
 
 \item
-(不一定均匀的) 细杆的两端分别与恒温热源接触, 其余部分绝热.
-只考虑杆内的热传导过程, 且不考虑热胀效应.
-证明当该体系 (包括杆和两个热源) 的熵的变化速率最小时, 杆上的温度梯度为常数.
+均匀细杆的两端分别与恒温热源接触, 其余部分绝热.
+因为温度梯度导致的热传导, 杆上存在着热流和熵增.
 
-提醒: Fourier 热传导定律不一定成立,
-热流可能是温度和温度梯度的非线性函数.
+\begin{enumerate}
 
-提示: 变分问题 $\delta\int L\left(y,y',x\right)=0$
-可由 Euler--Lagrange 方程 $\frac{\mathrm d}{\mathrm dx}\frac{\partial L}{\partial y'}-\frac{\partial L}{\partial y}=0$ 求解.
+	\item
+	若热流符合 Fourier 热传导定律 $J=-\kappa\nabla T$, 求使得体系 (包括杆和两个热源) 的熵的变化率最小的杆的温度分布.
+
+	\item
+	若热流符合线性唯象律 $J=L\nabla\frac1T$, 求使得体系的熵的变化率最小的杆的温度分布, 并说明此时杆达到非平衡定态 (各处的温度不会再随时间改变).
+
+	\item
+	若热流符合某种热传导定律 $J=\nabla\varphi\left(T\right)$, 使得体系的熵的变化率最小的杆的温度分布为线性函数 (温度梯度为常数), 求 $\varphi$ 的形式.
+
+\end{enumerate}
+
+提示: 带有固定边界条件 $y\left(a\right)=y_1$, $y\left(b\right)=y_2$ 的变分问题 $\delta\int_a^bL\left(y,y',x\right)=0$ 的解由 Euler--Lagrange 方程 $\frac{\mathrm d}{\mathrm dx}\frac{\partial L}{\partial y'}-\frac{\partial L}{\partial y}=0$ 给出.
 
 \end{enumerate}
 
@@ -322,8 +331,8 @@
 \end{equation}
 
 取杆上的线微元 $\left[x,x+\mathrm dx\right]$.
-在 $\mathrm dt$ 时间内, 在 $x$ 处有 $J\left(t,x\right)\mathrm dt$ 的热量流入微元,
-在 $x+\mathrm dx$ 处有 $J\left(t,x+\mathrm dx\right)\mathrm dt$ 的热量流出微元,
+在 $\mathrm dt$ 时间内, 在 $x$ 处有 $J\left(t,x\right)\mathrm dt$ 的热量流入该线微元,
+在 $x+\mathrm dx$ 处有 $J\left(t,x+\mathrm dx\right)\mathrm dt$ 的热量流出该线微元,
 从而 $t+\mathrm dt$ 时刻该线微元获得熵增
 \begin{equation}
 	\frac{J\left(t,x\right)\mathrm dt-J\left(t,x+\mathrm dx\right)\mathrm dt}{T}=-\frac1T\frac{\partial J}{\partial x}\mathrm dx\mathrm dt,
@@ -334,63 +343,123 @@
 	\label{eq:熵线密度的变化速率}
 \end{equation}
 
-将式 \ref{eq:熵线密度的变化速率} 对 $x$ 积分, 可得杆的熵的变化速率
+将式 \ref{eq:熵线密度的变化速率} 对 $x$ 积分, 可得杆的熵产
 \begin{equation}
 	\frac{\mathrm dS_0}{\mathrm dt}=\int_a^b\frac{\partial s}{\partial t}\mathrm dx=\int_a^b-\frac1T\frac{\partial J}{\partial x}\mathrm dx.
-	\label{eq:杆的熵的变化速率前}
+	\label{eq:杆的熵产前}
 \end{equation}
-对式 \ref{eq:杆的熵的变化速率前} 右边应用分部积分可得
+对式 \ref{eq:杆的熵产前} 右边应用分部积分可得
 \begin{equation}
 	\frac{\mathrm dS_0}{\mathrm dt}=-\frac{J\left(t,b\right)}{T_b}+\frac{J\left(t,a\right)}{T_a}+\int_a^bJ\frac{\partial\frac1T}{\partial x}\mathrm dx.
-	\label{eq:杆的熵的变化速率}
+	\label{eq:杆的熵产}
 \end{equation}
 
-另一方面, 显然, 两个恒温热源的熵的变化速率分别为
+另一方面, 显然, 两个恒温热源的熵产分别为
 \begin{equation}
 	\frac{\mathrm dS_a}{\mathrm dt}=-\frac{J\left(t,a\right)}{T_a},\qquad
 	\frac{\mathrm dS_b}{\mathrm dt}=\frac{J\left(t,b\right)}{T_b}.
-	\label{eq:热源的熵的变化速率}
+	\label{eq:热源的熵产}
 \end{equation}
-将式 \ref{eq:杆的熵的变化速率} 与式 \ref{eq:热源的熵的变化速率} 相加, 得到整个体系的熵的变化速率
+将式 \ref{eq:杆的熵产} 与式 \ref{eq:热源的熵产} 相加, 得到整个体系的熵产
 \begin{equation}
 	\frac{\mathrm dS}{\mathrm dt}=\int_a^bJ\frac{\partial\frac1T}{\partial x}\mathrm dx=\int_a^b-\frac{J}{T^2}\frac{\partial T}{\partial x}\mathrm dx.
-	\label{eq:整个体系的熵的变化速率}
+	\label{eq:整个体系的熵产}
 \end{equation}
 
 令
 \begin{equation}
-	L\left(T,T',x\right)=-J\left(T,T'\right)\frac{T'}{T^2},
+	\mathcal L\left(T,T',x\right)=-J\left(T,T'\right)\frac{T'}{T^2},
 	\label{eq:lagrangian}
 \end{equation}
-其中 $T'=\frac{\partial T}{\partial x}$.
+其中 $T'=\nabla T=\frac{\partial T}{\partial x}$.
 注意, 这里 $J\left(T,T'\right)$ 与前文中的 $J\left(t,x\right)$ 虽然是同一个物理量, 但具有不同的意义.
 $J\left(T,T'\right)$ 表征了与热传导有关的物理定律, Fourier 热传导定律是它的一个例子.
 显然, 由时空平移不变性, 当作为物理定律时, $J$ 不应与 $t,x$ 有关.
 
-此时问题转化为变分问题
+此时最小化熵产的问题转化为变分问题
 \begin{equation}
-	\delta\int_a^bL\left(T,T',x\right)\mathrm dx=0,
+	\delta\int_a^b\mathcal L\left(T,T',x\right)\mathrm dx=0,
 \end{equation}
 其中在变分过程中有固定的边界条件式 \ref{eq:变分边界条件}.
 写出 Euler--Lagrange 方程
 \begin{equation}
-	\frac{\partial}{\partial x}\frac{\partial L}{\partial T'}-\frac{\partial L}{\partial T}=0
+	\frac{\partial}{\partial x}\frac{\partial\mathcal L}{\partial T'}-\frac{\partial\mathcal L}{\partial T}=0
 	\label{eq:EL方程}
 \end{equation}
 (这里的 $\frac{\partial}{\partial x}$ 要求将 $T,T'$ 看作是依赖于 $x$ 的, 但 $t$ 是不依赖于 $x$ 的).
 
 为了利用式 \ref{eq:EL方程}, 根据式 \ref{eq:lagrangian} 写出 $L$ 的偏导数
 \begin{equation}
-	\frac{\partial L}{\partial T}=-T'\left(\frac{\partial J}{\partial T}\frac1{T^2}-\frac{2J}{T^3}\right),
-	\qquad\frac{\partial L}{\partial T'}=-\frac{1}{T^2}\left(\frac{\partial J}{\partial T'}T'+J\right),
-	\qquad\frac{\partial L}{\partial x}=0.
+	\frac{\partial\mathcal L}{\partial T}=-T'\left(\frac{\partial J}{\partial T}\frac1{T^2}-\frac{2J}{T^3}\right),
+	\qquad\frac{\partial\mathcal L}{\partial T'}=-\frac{1}{T^2}\left(\frac{\partial J}{\partial T'}T'+J\right),
+	\qquad\frac{\partial\mathcal L}{\partial x}=0.
 	\label{eq:lagrangian的偏导数}
 \end{equation}
-将 \ref{eq:lagrangian的偏导数} 代入 \ref{eq:EL方程} 并进行一些繁琐的计算后可得
+将式 \ref{eq:lagrangian的偏导数} 代入式 \ref{eq:EL方程} 可得
 \begin{equation}
-	T''=0.
+	\frac{\partial}{\partial x}\left(-\frac{1}{T^2}\left(\frac{\partial J}{\partial T'}T'+J\right)\right)+T'\left(\frac{\partial J}{\partial T}\frac1{T^2}-\frac{2J}{T^3}\right)=0.
+	\label{eq:一般的J的EL方程}
 \end{equation}
-由此得证.
+
+\begin{enumerate}
+
+	\item
+	将 Fourier 热传导定律 $J\left(T,T'\right)=-\kappa T'$ 代入式 \ref{eq:一般的J的EL方程} 可得
+	\begin{equation}
+		\frac{\partial}{\partial x}\frac{2\kappa T'}{T^2}+\frac{2\kappa T'^2}{T^3}=0.
+		\label{eq:Fourier热传导定律的EL方程}
+	\end{equation}
+	由式 \ref{eq:Fourier热传导定律的EL方程} 可得关于 $T\left(x\right)$ 的常微分方程
+	\begin{equation}
+		T''=\frac{T'^2}{T}.
+	\end{equation}
+	将 $T''$ 写成 $T'\frac{\mathrm dT'}{\mathrm dT}$, 进行两次分离变量和积分, 由边界条件式 \ref{eq:变分边界条件} 确定积分常数.
+	最终可得温度分布
+	\begin{equation}
+		T=T_a\left(\frac{T_b}{T_a}\right)^{\frac{x-a}{b-a}}.
+	\end{equation}
+
+	\item
+	将线性唯象律 $J\left(T,T'\right)=L\nabla\frac1T=-\frac{LT'}{T^2}$ 代入式 \ref{eq:一般的J的EL方程}.
+	经过与上一问类似的操作, 最终可得温度分布
+	\begin{equation}
+		T=\frac{T_a}{1-\frac{x-a}{b-a}\left(1-\frac{T_a}{T_b}\right)}.
+	\end{equation}
+	显然, 该温度分布能使得温度倒数的梯度在杆上处处相等.
+	由于线性唯象律给出热流与温度倒数的梯度成正比, 该温度分布能使得杆上的热流处处相等.
+	从而热流的散度为零, 热量无法积累使得内能密度改变, 体系达到非平衡定态.
+
+	\item
+	将 $J\left(T,T'\right)=\nabla\varphi\left(T\right)=\varphi'\left(T\right)T'$ 代入式 \ref{eq:lagrangian} 可得
+	\begin{equation}
+		\mathcal L=-\frac{\varphi'\left(T\right)T'^2}{T^2}.
+		\label{eq:线性温度分布的lagrangian}
+	\end{equation}
+	从而
+	\begin{align}
+		\frac{\partial}{\partial x}\frac{\partial\mathcal L}{\partial T'}
+		=\frac{\partial}{\partial x}\left(-\frac{2\varphi'\left(T\right)T'}{T^2}\right)=-2T'^2\frac{\partial}{\partial T}\frac{\varphi'\left(T\right)}{T^2}-2T''\frac{\varphi'\left(T\right)}{T^2},
+		\label{eq:线性温度分布的EL方程第一项}
+	\end{align}
+	\begin{equation}
+		\frac{\partial\mathcal L}{\partial T}=-T'^2\frac{\partial}{\partial T}\frac{\varphi'\left(T\right)}{T^2}.
+		\label{eq:线性温度分布的EL方程第二项}
+	\end{equation}
+
+	将式 \ref{eq:线性温度分布的EL方程第一项} 和式 \ref{eq:线性温度分布的EL方程第二项} 代入 \ref{eq:EL方程} 后整理可得
+	\begin{equation}
+		\frac{\mathrm d}{\mathrm dT}\ln\frac{\varphi'\left(T\right)}{T^2}=-\frac{2T''}{T'^2}.
+	\end{equation}
+	对于温度梯度处处为常数的温度分布, $T''=0$.
+	从而 $\frac{\varphi'\left(T\right)}{T^2}$ 为常数.
+	从而应有
+	\begin{equation}
+		\varphi\left(T\right)=-kT^3+C,
+	\end{equation}
+	其中 $k$ 和 $C$ 为积分常量.
+	注意到最终的熵产是最小值而不是最大值, 应有 $k>0$.
+
+\end{enumerate}
 
 \end{enumerate}
 
