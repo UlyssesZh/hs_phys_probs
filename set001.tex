@@ -5,13 +5,14 @@
 \usepackage{amsmath}
 \usepackage{hyperref}
 \usepackage{titlesec}
+\usepackage{graphicx}
 \usepackage[total={7in,10in}]{geometry}
 
 \newcounter{para}
 \newcommand\mypara{\par\refstepcounter{para}(\thepara)\space}
 \titleformat{\section}[block]{\Large\bfseries\filcenter}{}{0em}{}
 \renewcommand\thesection{}
-\renewcommand\thesubsection{\setcounter{para}{0}第 \arabic{subsection} 题}
+\renewcommand\thesubsection{\setcounter{para}{0}\setcounter{equation}{0}第 \arabic{subsection} 题}
 
 \usetikzlibrary{decorations.markings}
 
@@ -48,10 +49,16 @@
 求 $k$ 级虹的在水中折射率为 $n$ 的颜色的曲线上的在天球上具有最大高度角的点的方位角的变化率 (注意正负号).
 
 \subsection{Magdeburg 季球}
-将 $4$ 个相同的刚性的轻质的内角为 $\frac{2\pi}3$ 的等边球面三角形拼成一个半径为 $R$ 的球面,
-然后将球内抽成真空, 放置在具有压强 $p$ 的大气中.
+如图 \ref{fig:Magdeburg季球} 所示, 将 $4$ 个相同的刚性的轻质的内角为 $\frac{2\pi}3$ 的等边球面三角形拼成一个半径为 $R$ 的球面.
+将球内抽成真空, 放置在具有压强 $p$ 的大气中.
 在其中两个等边球面三角形的中心施加方向相反的大小为 $T$ 的拉力, 球静力平衡.
 逐渐增大 $T$, 求使得球恰好被拉开时的 $T$.
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\linewidth]{magdeburg_quarter_sphere.png}
+	\caption{}
+	\label{fig:Magdeburg季球}
+\end{figure}
 
 \subsection{杆上产熵}
 均匀细杆的两端分别与恒温热源接触, 其余部分绝热.
@@ -80,7 +87,40 @@
 
 \mypara
 若杆不够坚硬, 在上一问的条件下, 对门施加足够大的力可以使杆断裂.
-若杆能承受的最大剪切力为 $F$, 求杆的断裂位置的高度.
+若杆能承受的最大剪切力为 $T$, 求杆的断裂位置的高度.
+
+\subsection{进退两难的死飞}
+死飞车是后轮与脚蹬永远处于联动状态的自行车.
+图 \ref{fig:自行车结构} 是死飞车的驱动装置简易图.
+自行车飞轮半径为 $r_1$, 链轮半径为 $r_2$, 后轮半径为 $R_1$, 曲柄长度为 $R_2$.
+规定极轴从飞轮圆心指向链轮圆心.
+飞轮圆心到链轮圆心的距离为 $d$.
+曲柄和极轴的夹角为 $\theta_2$.
+用绳子连接后轮上 $\theta_1$ 处和脚蹬.
+求缩短绳子能使自行车前进的条件.
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw (0, 0) circle (0.3);
+		\draw (0, 0) circle (2.5);
+		\draw (5, 0) circle (0.6);
+		\draw (-0.09/5, 0.299459513123227) -- (5-0.18/5, 0.598919026246454);
+		\draw (-0.09/5, -0.299459513123227) -- (5-0.18/5, -0.598919026246454);
+		\draw[double distance = 1mm,line cap=round] (4, 1) -- (6, -1);
+		\draw[thick] (1.5, 2) -- (4, 1);
+		\draw[dashed] (0, 0) -- (1.5, 2);
+		\draw[dashed] (-4, 0) -- (7, 0);
+		\node at (0.5, 0.2) {$\theta_1$};
+		\node at (5.2, 0.2) {$\theta_2$};
+		\node at (-2.3,-1.8) {后轮};
+		\node at (-0.5, 0.5) {飞轮};
+		\node at (4.7, 0.9) {曲柄};
+		\node at (6, 0.3) {链轮};
+		\node at (4.1, 1.4) {脚蹬};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:自行车结构}
+\end{figure}
 
 \newpage
 \section{参考答案}
@@ -464,7 +504,74 @@ $J\left(T,T'\right)$ 表征了与热传导有关的物理定律, Fourier 热传�
 \begin{equation}
 	\varphi\left(T\right)=-kT^3+C,
 \end{equation}
-其中 $k$ 和 $C$ 为积分常量.
+其中 $k$ 和 $C$ 为积分常量 (答案中不包含 $C$ 项也算对).
 注意到最终的熵产是最小值而不是最大值, 应有 $k>0$.
+
+\subsection{门外有坏人}
+\mypara
+设杆与地面间的弹力为 $N$, 静摩擦力为 $f$.
+如图 \ref{fig:杆受力分析}, 对杆进行受力分析.
+
+\begin{figure}
+	\centering
+	\begin{tikzpicture}
+		\draw (0, 0) -- (0, 4);
+		\draw (0, 0) -- (5, 0);
+		\draw[double distance = 1mm,line cap=round] (0, 3) -- (4, 0);
+		\draw[thick,->] (0, 3) -- (0.8, 2) node [anchor=north] {$F$};
+		\draw[thick,->] (2, 1.5) -- (2, 0.7) node [anchor=east] {$mg$};
+		\draw[thick,->] (4, 0) -- (4, 1.8) node [anchor=south] {$N$};
+		\draw[thick,->] (4, 0) -- (3.2, 0) node [anchor=north] {$f$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:杆受力分析}
+\end{figure}
+
+对铰链处总力矩为零, 可得
+\begin{equation}
+	fh+mg\frac{\sqrt{l^2-h^2}}2-N\sqrt{l^2-h^2}=0.
+\end{equation}
+整理得
+\begin{equation}
+	\frac fN=\left(1-\frac{mg}{2N}\right)\sqrt{\frac{l^2}{h^2}-1}<\sqrt{\frac{l^2}{h^2}-1}.
+\end{equation}
+为保证不滑动, 对于任意的 $N$, $\frac fN$ 应恒小于 $\mu$.
+从而
+\begin{equation}
+	\mu\ge\sqrt{\frac{l^2}{h^2}-1},
+\end{equation}
+即 $\frac hl\in\left(0,\frac1{\sqrt{1+\mu^2}}\right)$.
+
+\subsection{进退两难的死飞}
+由齿轮-链条约束, 有
+\begin{equation}
+	r_1\mathrm d\theta_1=r_2\mathrm d\theta_2=\mathrm dx,
+	\label{eq:齿轮-链条约束}
+\end{equation}
+其中 $\mathrm dx$ 是人为定义的微元.
+$\mathrm dx<0$ 表征自行车前进, $\mathrm dx>0$ 表征自行车后退.
+
+由几何关系易得连接后轮和脚蹬的绳子的长度的平方
+\begin{equation}
+	l^2=\left(R_2\cos\theta_2-R_1\cos\theta_1+d\right)^2+\left(R_2\sin\theta_2-R_1\sin\theta_1\right)^2.
+	\label{eq:绳子长度}
+\end{equation}
+对式 \ref{eq:绳子长度} 两边取微分, 得
+\begin{equation}
+\begin{split}
+	2l\mathrm dl
+	=2&\left(R_2\cos\theta_2-R_1\cos\theta_1+d\right)\left(-R_2\sin\theta_2\mathrm d\theta_2+R_1\sin\theta_1\mathrm d\theta_1\right)+\\
+	2&\left(R_2\sin\theta_2-R_1\sin\theta_1\right)\left(R_2\cos\theta_2\mathrm d\theta_2-R_1\cos\theta_1\mathrm d\theta_1\right).
+\end{split}
+\end{equation}
+全部展开并整理, 再利用式 \ref{eq:齿轮-链条约束} 可得
+\begin{equation}
+	l\mathrm dl=R_1R_2\sin\left(\theta_2-\theta_1\right)\left(\frac1{r_2}-\frac1{r_1}\right)\mathrm dx-d\left(\frac{R_2\sin\theta_2}{r_2}-\frac{R_1\sin\theta_1}{r_1}\right)\mathrm dx.
+\end{equation}
+缩短绳子使得自行车前进的条件是 $\mathrm dl/\mathrm dx>0$.
+从而
+\begin{equation}
+	R_1R_2\left(r_1-r_2\right)\sin\left(\theta_2-\theta_1\right)>d\left(r_1R_2\sin\theta_2-r_2R_1\sin\theta_1\right).
+\end{equation}
 
 \end{document}
