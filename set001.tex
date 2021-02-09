@@ -77,17 +77,16 @@
 
 \subsection{门外有坏人}
 门与地面垂直.
-门上高度为 $h$ 处铰接一根长度为 $l>h$ 的质量为 $m$ 的均匀杆.
-杆可以在垂直于门的平面内转动.
+门上高度为 $h$ 处铰接一根长度为 $l>h$ 的质量为 $m$ 的均匀硬杆.
+杆可以在垂直于门的平面内无摩擦地转动.
 把杆的自由端放在地上.
 杆与地面的静摩擦系数为 $\mu$.
 
 \mypara
-若杆足够坚硬, 无论对门施加多大的力都无法推动杆, 求 $\frac hl$ 的范围.
+若无论对门施加多大的力都无法推动杆, 求 $\frac hl$ 的范围.
 
 \mypara
-若杆不够坚硬, 在上一问的条件下, 对门施加足够大的力可以使杆断裂.
-若杆能承受的最大剪切力为 $T$, 求杆的断裂位置的高度.
+接上问, 若对门施加的推力为 $F$, 求杆上距离铰链 $x$ 处的内部作用力的大小和方向.
 
 \subsection{进退两难的死飞}
 死飞车是后轮与脚蹬永远处于联动状态的自行车.
@@ -121,6 +120,23 @@
 	\caption{}
 	\label{fig:自行车结构}
 \end{figure}
+
+\subsection{容感串并}
+考虑电容 $C$ 和电感 $L$.
+令元件 A 为 $C$ 与 $L$ 串联, 元件 B 为 $C$ 与 $L$ 并联.
+将 A 与 B 并联接在圆频率恒定为 $\omega$ 的理想交流电源上.
+
+\mypara
+求通过 A 与 B 的交变电流的相位差.
+
+\mypara
+为 A 和 B 分别串联电阻 $R_\mathrm A$ 和 $R_\mathrm B$,
+满足通过 A 与 B 的交变电流的相位差为 $-\frac\pi2$.
+求 $\omega$ 的取值范围.
+
+\mypara
+接上问, 求 $R_\mathrm A+R_\mathrm B$ 的最小值,
+并证明当它取到最小值时通过 A 与 B 的交变电流的幅值的倒数平方和也取最小值.
 
 \newpage
 \section{参考答案}
@@ -513,7 +529,7 @@ $J\left(T,T'\right)$ 表征了与热传导有关的物理定律, Fourier 热传�
 
 如图 \ref{fig:杆受力分析}, 对杆进行受力分析.
 
-\begin{figure}
+\begin{figure}[h!]
 	\centering
 	\begin{tikzpicture}
 		\draw (0, 0) -- (0, 4);
@@ -544,7 +560,7 @@ $J\left(T,T'\right)$ 表征了与热传导有关的物理定律, Fourier 热传�
 即 $\frac hl\in\left[\frac1{\sqrt{1+\mu^2}},1\right)$.
 
 \mypara
-
+TODO
 
 \subsection{进退两难的死飞}
 由齿轮-链条约束, 有
@@ -577,5 +593,77 @@ $\mathrm dx<0$ 表征自行车前进, $\mathrm dx>0$ 表征自行车后退.
 \begin{equation}
 	R_1R_2\left(r_1-r_2\right)\sin\left(\theta_2-\theta_1\right)>d\left(r_1R_2\sin\theta_2-r_2R_1\sin\theta_1\right).
 \end{equation}
+
+\subsection{容感串并}
+\mypara
+A 的阻抗
+\begin{equation}
+	Z_\mathrm A=\frac1{\mathrm i\omega C}+\mathrm i\omega L=\frac{\mathrm i}C\left(\omega CL-\frac1\omega\right),
+	\label{eq:A的阻抗}
+\end{equation}
+B 的阻抗
+\begin{equation}
+	Z_\mathrm B=\frac{\frac1{\mathrm i\omega C}\cdot\mathrm i\omega L}{\frac1{\mathrm i\omega C}+\mathrm i\omega L}=-\mathrm iL\left(\omega CL-\frac1\omega\right)^{-1}.
+	\label{eq:B的阻抗}
+\end{equation}
+从而 A 与 B 的阻抗总是符号相反的纯虚数, 从而 A 与 B 的电流的相位差为 $\pi$.
+
+\mypara
+A 与 $R_\mathrm A$ 的总阻抗
+\begin{equation}
+	Z_\mathrm A'=R_\mathrm A+\frac{\mathrm i}C\left(\omega CL-\frac1\omega\right),
+\end{equation}
+B 与 $R_\mathrm B$ 的总阻抗
+\begin{equation}
+	Z_\mathrm B'=R_\mathrm B-\mathrm iL\left(\omega CL-\frac1\omega\right)^{-1}.
+\end{equation}
+
+将 $Z_\mathrm A'$ 与 $Z_\mathrm B'$ 画在复平面中, 如图 \ref{fig:阻抗复平面} 所示.
+为了几何表述的方便起见,
+令复平面上的点 $\mathrm A$, $\mathrm A'$, $\mathrm B$, $\mathrm B'$
+分别表示 $Z_\mathrm A$, $Z_\mathrm A'$, $Z_\mathrm B$, $Z_\mathrm B'$.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw[->] (-0.5, 0) -- (5, 0) node [anchor=west] {$\Re$};
+		\draw[->] (0, -2) -- (0, 2) node [anchor=west] {$\Im$};
+		\draw[thick] (0, -1) node [anchor=east] {B} -- (4, -1) node [anchor=west] {N};
+		\draw[thick] (0, 1.5) node [anchor=east] {A} -- (4, 1.5) node [anchor=west] {M};
+		\draw[thick] (0, 0) node [anchor=north east] {O} -- (0.8, 1.5) node [anchor=south] {$\mathrm A'$};
+		\draw[thick] (0, 0) -- (1.875, -1) node [anchor=north] {$\mathrm B'$};
+		\draw[thick,dashed] (0.8, 1.5) -- (1.875, -1);
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:阻抗复平面}
+\end{figure}
+
+显然, 当 $R_\mathrm A$ 与 $R_\mathrm B$ 变化时,
+$\mathrm A'$ 与 $\mathrm B'$ 分别在射线 AM 与射线 BN 上运动,
+且保持 $\angle\mathrm{A'OB'}=\frac\pi2$.
+
+要呈现这样一种几何图形, 必须要求 A 在 O 上方, 而 B 在 O 下方.
+由式 \ref{eq:A的阻抗} 和式 \ref{eq:B的阻抗} 可知, 这要求 $\omega CL-\frac1\omega>0$, 即
+\begin{equation}
+	\omega\in\left(\frac1{\sqrt{CL}},+\infty\right).
+\end{equation}
+
+\mypara
+由相似关系 $\triangle\mathrm{OAA'}\sim\triangle\mathrm{B'BO}$ 可得
+\begin{equation}
+	\mathrm{AA'}\cdot\mathrm{BB'}=\mathrm{OA}\cdot\mathrm{OB}=\frac LC.
+\end{equation}
+从而由基本不等式,
+\begin{equation}
+	R_\mathrm A+R_\mathrm B=\mathrm{AA'}+\mathrm{BB'}\ge2\sqrt{\mathrm{AA'}\cdot\mathrm{BB'}}=2\sqrt{\frac LC},
+\end{equation}
+当且仅当 $R_\mathrm A=R_\mathrm B=\sqrt{\frac LC}$ 时取等.
+
+显然 $\mathrm{A'B'}$ 在 $\mathrm{AA'}=\mathrm{BB'}$ 时最小 (因为此时它是平行线间的距离).
+又, 注意到
+\begin{equation}
+	\mathrm{A'B'}^2=\mathrm{OA'}^2+\mathrm{OB'}^2\propto\frac1{I_\mathrm A^2}+\frac1{I_\mathrm B^2},
+\end{equation}
+可知当 $R_\mathrm A+R_\mathrm B$ 取到最小值时通过 A 与 B 的交变电流的幅值的倒数平方和也取最小值.
 
 \end{document}
