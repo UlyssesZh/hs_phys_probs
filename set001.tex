@@ -15,6 +15,7 @@
 \renewcommand\thesubsection{\setcounter{para}{0}\setcounter{equation}{0}第 \arabic{subsection} 题}
 
 \usetikzlibrary{decorations.markings}
+\usetikzlibrary{calc}
 
 \title{hs\_phys\_probs 001}
 \author{詹有丘}
@@ -52,7 +53,7 @@
 如图 \ref{fig:Magdeburg季球} 所示, 将 $4$ 个相同的刚性的轻质的内角为 $\frac{2\pi}3$ 的等边球面三角形拼成一个半径为 $R$ 的球面.
 将球内抽成真空, 放置在具有压强 $p$ 的大气中.
 在其中两个等边球面三角形的中心施加方向相反的大小为 $T$ 的拉力, 球静力平衡.
-逐渐增大 $T$, 求使得球恰好被拉开时的 $T$.
+逐渐增大 $T$, 求使得球恰好被拉开时的 $T$ (可不解出过于复杂的代数方程).
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.4\linewidth]{magdeburg_quarter_sphere.png}
@@ -71,9 +72,12 @@
 若热流符合线性唯象律 $J=L\nabla\frac1T$, 求使得体系的熵的变化率最小的杆的温度分布, 并说明此时杆达到非平衡定态 (各处的温度不会再随时间改变).
 
 \mypara
-若热流符合某种热传导定律 $J=\nabla\varphi\left(T\right)$, 使得体系的熵的变化率最小的杆的温度分布为线性函数 (温度梯度为常数), 求 $\varphi$ 的形式.
+若热流符合某种热传导定律 $J=\nabla\varphi\!\left(T\right)$, 使得体系的熵的变化率最小的杆的温度分布为线性函数 (温度梯度为常数), 求 $\varphi$ 的形式.
 
-提示: 带有固定边界条件 $y\left(a\right)=y_1$, $y\left(b\right)=y_2$ 的变分问题 $\delta\int_a^bL\left(y,y',x\right)=0$ 的解由 Euler--Lagrange 方程 $\frac{\mathrm d}{\mathrm dx}\frac{\partial L}{\partial y'}-\frac{\partial L}{\partial y}=0$ 给出.
+提示: 带有固定边界条件 $y\!\left(a\right)=y_1$, $y\!\left(b\right)=y_2$ 的变分问题
+$\delta\int_a^b\mathcal L\!\left(y,y',x\right)\mathrm dx=0$ 的解由 Euler--Lagrange 方程
+$\frac{\mathrm d}{\mathrm dx}\frac{\partial\mathcal L}{\partial y'}-\frac{\partial\mathcal L}{\partial y}=0$
+给出.
 
 \subsection{门外有坏人}
 门与地面垂直.
@@ -131,12 +135,30 @@
 
 \mypara
 为 A 和 B 分别串联电阻 $R_\mathrm A$ 和 $R_\mathrm B$,
-满足通过 A 与 B 的交变电流的相位差为 $-\frac\pi2$.
-求 $\omega$ 的取值范围.
+使得通过 A 与 B 的交变电流的相位差为 $-\frac\pi2$.
+若能做到这一点, 求 $\omega$ 的取值范围.
 
 \mypara
 接上问, 求 $R_\mathrm A+R_\mathrm B$ 的最小值,
 并证明当它取到最小值时通过 A 与 B 的交变电流的幅值的倒数平方和也取最小值.
+
+\subsection{衰变粒子束}
+A 粒子的质量为 $M$, 能衰变为两个全同的质量为 $m$ 的 B 粒子,
+且衰变产生的 B 粒子的出射方向在质心系中是均匀分布的.
+A 粒子的平均寿命为 $\tau$.
+
+\mypara
+A 粒子以高速 $v$ 运动时发生了衰变,
+求产生的 B 粒子的运动方向与原 A 粒子的运动方向的夹角 $\theta$ 的概率分布函数.
+注意, 该分布应当被归一化, 使其在 $[0,\pi]$ 上的积分为 $2$.
+
+\mypara
+在 $t=0$ 时刻 $N$ 个 A 粒子从原点以高速 $v$ 沿 $z$ 轴射出.
+建立柱坐标系 $\left(z,\rho,\varphi\right)$.
+在 $\left(z,\rho,\varphi\right)$ 处取小体积 $\mathrm dV$,
+在 $t$ 时刻 $\mathrm dV$ 内有 $f\!\left(z,\rho,\theta,t\right)\mathrm dV$
+个运动方向与 $z$ 轴夹角为 $\theta$ 的粒子.
+求 $f$.
 
 \newpage
 \section{参考答案}
@@ -385,14 +407,257 @@ $x$ 方向的单位矢量为
 这一结果意味着在北半球上看到的南方的 $k$ 级虹和在南半球上看到的北方的 $k$ 级虹会向西移动, 而在北半球上看到的北方的 $k$ 级虹和在南半球上看到的南方的 $k$ 级虹会向东移动.
 
 \subsection{Magdeburg 季球}
+(采用记号 $\left<\mathbf v\right>$ 表示沿 $\mathbf v$ 的单位向量.)
+
+令该立体几何图形上的四个重要交点 A, B, C, D 的位置向量分别为
+$\mathbf a$, $\mathbf b$, $\mathbf c$, $\mathbf d$.
+将它们对称地放在 $xyz$ 坐标空间的第一, 三, 六, 八卦限, 可以容易地写出它们的坐标
+\begin{equation}
+	\mathbf P=\left[\begin{matrix}\mathbf a & \mathbf b & \mathbf c & \mathbf d\end{matrix}\right]
+	=\frac R{\sqrt3}\left[\begin{matrix}1 & -1 & -1 & 1 \\ 1 & -1 & 1 & -1 \\ 1 & 1 & -1 & -1\end{matrix}\right]
+\end{equation}
+(即从正立方体的八个顶点中选取四个成为正四面体的顶点).
+
+定义 $x_1y_1z_1$ 坐标空间以 $\mathbf a-\mathbf b$ 为 $y_1$ 轴正方向, 以 $\mathbf d-\mathbf c$ 为 $x_1$ 轴正方向.
+显然从 $xyz$ 到 $x_1y_1z_1$ 的变换是正交变换
+\begin{equation}
+	\mathbf Q_1=\left[\begin{matrix}
+		\left<\mathbf d-\mathbf c\right>^\mathrm T \\
+		\left<\mathbf a-\mathbf b\right>^\mathrm T \\
+		\left<\left(\mathbf d-\mathbf c\right)\times\left(\mathbf a-\mathbf b\right)\right>^\mathrm T
+	\end{matrix}\right]=\frac1{\sqrt2}\left[\begin{matrix}
+		1 & -1 & 0 \\ 1 & 1 & 0 \\ 0 & 0 & \sqrt2
+	\end{matrix}\right].
+\end{equation}
+于是
+\begin{equation}
+	\mathbf P_1=\mathbf Q_1\mathbf P=\frac R{\sqrt3}\left[\begin{matrix}
+		0 & 0 & -\sqrt2 & \sqrt2 \\ \sqrt2 & -\sqrt2 & 0 & 0 \\ 1 & 1 & -1 & -1
+	\end{matrix}\right].
+\end{equation}
+
+定义 $x_2y_2z_2$ 坐标空间以 $-\mathbf d$ 为 $z_2$ 轴正方向, 以 $\mathbf b-\mathbf c$ 为 $y_2$ 轴正方向.
+显然从 $xyz$ 到 $x_2y_2z_2$ 的变换是正交变换
+\begin{equation}
+	\mathbf Q_2=\left[\begin{matrix}
+		\left<\mathbf d\times\left(\mathbf b-\mathbf c\right)\right>^\mathrm T \\
+		\left<\mathbf b-\mathbf c\right>^\mathrm T \\
+		\left<-\mathbf d\right>^\mathrm T
+	\end{matrix}\right]=\frac1{\sqrt6}\left[\begin{matrix}
+		-2 & -1 & -1 \\ 0 & -\sqrt3 & \sqrt3 \\ -\sqrt2 & \sqrt2 & \sqrt2
+	\end{matrix}\right].
+\end{equation}
+于是
+\begin{equation}
+	\mathbf P_2=\mathbf Q_2\mathbf P=\frac R3\left[\begin{matrix}
+		-2\sqrt2 & \sqrt2 & \sqrt2 & 0 \\ 0 & \sqrt6 & -\sqrt6 & 0 \\ 1 & 1 & 1 & -3
+	\end{matrix}\right].
+\end{equation}
+
+在 $x_2y_2z_2$ 系中, 等边球面三角形 ABC (记为 $\Sigma$) 的中心刚好在 $\left(0,0,R\right)$ 处
+(因为 D 在 $z_2$ 轴上, 而 $\Sigma$ 刚好在 D 的对面).
+由对称性, $\Sigma$ 上受到的大气压力沿 $z_2$ 轴负方向.
+因此在积分时, 只需要考虑 $z_2$ 方向的分力.
+又由于球面上的法线是过球心的, 所以对于球面上 $z_2>0$ 的点,
+面微元 $\mathrm dS$ 受到的压力的 $z_2$ 方向分力的大小为 $\frac{z_2}Rp\mathrm dS$.
+又由于 $\Sigma$ 的对称性, 我们将它切成相同的 $6$ 份.
+令 $\Sigma_{1/6}$ 为 $\Sigma$ 上被 $x_2z_2$ 平面和 $\mathbf b_2$ 所在的竖直平面所截的区域.
+由于对称性, 在 $\Sigma$ 上的积分相当于 $6$ 倍的 $\Sigma_{1/6}$ 上的积分.
+考虑 $\Sigma_{1/6}$ 上的积分会比较方便,
+因为由 $\Sigma$ 关于 $x_2z_2$ 平面的对称性可知,
+$\Sigma_{1/6}$ 的弧形边界在 $x_2y_2$ 平面上的投影可以用椭圆的标准方程描述.
+
+接下来求 $\Sigma_{1/6}$ 的弧形边界在 $x_2y_2$ 平面上的投影的方程.
+显然 $\Sigma_{1/6}$ 的弧形边界的端点在 $\mathbf b_2$ 和 $R\left<\mathbf b_2+\mathbf c_2\right>$.
+即, 该标准椭圆过 $x_2y_2$ 平面上的点 $\left(\frac{\sqrt2}3R,\frac{\sqrt6}3R\right)$
+和点 $\left(\frac{\sqrt6}3R,0\right)$.
+于是可得椭圆的方程
+\begin{equation}
+	\frac{x_2^2}{2/3}+y_2^2=R^2.
+\end{equation}
+又, 可以容易地得到 $\Sigma_{1/6}$ 的两条直线边界在 $x_2y_2$ 平面上的投影为
+\begin{equation}
+	y_2=0
+\end{equation}
+和
+\begin{equation}
+	y_2=\sqrt3x_2.
+\end{equation}
+
+最后, 再计算一下面微元 $\mathrm dS$ 的大小.
+注意到上半球面的方程为 $z_2=\sqrt{R^2-x_2^2-y_2^2}$, 于是可计算得
+\begin{equation}
+	\mathrm dS=\sqrt{
+		\left(\frac{\partial z_2}{\partial x_2}\right)^2+
+		\left(\frac{\partial z_2}{\partial y_2}\right)^2+1
+	}\mathrm dx_2\mathrm dy_2=\frac R{z_2}\mathrm dx_2\mathrm dy_2.
+\end{equation}
+
+于是可以计算积分
+\begin{equation}
+	F=\iint_{\Sigma}\frac{z_2}Rp\mathrm dS
+	=\frac{6p}R\iint_{\Sigma_{1/6}}z_2\mathrm dS
+	=\frac{6p}R\int_{y_2=0}^{\frac{\sqrt6}3R}
+		\int_{x_2=\frac{y_2}{\sqrt3}}^{\sqrt{\frac23\left(R^2-y_2^2\right)}}
+		z_2\cdot\frac R{z_2}\mathrm dx_2\mathrm dy_2
+	=pR^2\sqrt6\arcsin\sqrt\frac23.
+	\label{eq:大气压力}
+\end{equation}
+
+接下来在 $x_1y_1z_1$ 系中对各个等边球面三角形进行受力分析.
+假设拉力作用在等边球面三角形 ABC 的中心和等边球面三角形 ABD 的中心.
+为了使球整体力矩平衡, 显然作用在 ABC 上的拉力沿 $x_1$ 轴负方向, 而作用在 ABD 上的拉力沿 $x_1$ 轴正方向.
+
+等边球面三角形两两之间存在压力, 压力作用于接壤处 (缝).
+虽然缝上的压力并不一定是在缝上均匀分布的, 但因为这些缝都是球面上的大圆, 显然存在等效作用点,
+且压力的方向同时垂直于在等效作用点处的缝的切线和球面的法线.
+
+缝 AB 上的压力 $N_1$ 显然作用在弧 AB 的中点.
+缝 CD 上的压力 $N_3$ 显然作用在弧 CD 的中点.
+由对称性, 缝 AC, AD, BC, BD 上的压力大小相同 (都设为 $N_2$), 作用点的 $z_1$ 坐标相同,
+但无法容易地确定作用点的位置.
+
+作用在等边球面三角形上的大气压力的大小已经被求出, 作用点仍无法容易地被得到.
+但由对称性, 大气压力的作用线是等边球面三角形中心处的法线.
+
+等边球面三角形 ABD 上受到的大气压力为
+\begin{equation}
+	\mathbf F_{\mathrm{ABD}}=F\left<\mathbf c_1\right>=
+	-\frac F{\sqrt3}\left[\begin{matrix}\sqrt2 & 0 & 1\end{matrix}\right]^\mathrm T.
+\end{equation}
+ABD 受到的来自 ABC 的压力为
+\begin{equation}
+	\mathbf N_{1,\mathrm{ABD}}=\left[\begin{matrix}N_1 & 0 & 0\end{matrix}\right]^\mathrm T.
+\end{equation}
+ABD 受到的来自 BCD 和 ACD 的压力的合力为
+\begin{equation}
+	\mathbf N_{2,\mathrm{ABD}}=\left[\begin{matrix}2N_{2,x_1} & 0 & 2N_{2,z_1}\end{matrix}\right]^\mathrm T
+\end{equation}
+于是由 ABD 在 $z_1$ 方向的受力平衡可得
+\begin{equation}
+	2N_{2,z_1}-\frac F{\sqrt3}=0.
+	\label{eq:z1受力平衡}
+\end{equation}
+由 ABD 在 $x_1$ 方向的受力平衡可得
+\begin{equation}
+	N_1+2N_{2,x_1}+T-\frac{\sqrt6}3F=0.
+	\label{eq:x1受力平衡}
+\end{equation}
+令 G 为 $\mathbf N_{1,\mathrm{ABD}}$ 的作用线和 $\mathbf F_{\mathrm{ABD}}$ 的作用线的交点.
+该交点显然存在, 且它的坐标为
+\begin{equation}
+	\mathbf g=R\left[\begin{matrix}\sqrt2 & 0 & 1\end{matrix}\right]^\mathrm T
+\end{equation}
+设 $\mathbf N_{2,\mathrm{ABD}}$ 的作用点为
+$R\left[\begin{matrix}\xi & \eta & \zeta\end{matrix}\right]^\mathrm T$,
+并注意到 $\mathbf T_{\mathrm ABD}$ 的作用点在 $-R\left<\mathbf c\right>$,
+则 ABD 对 $\mathbf g$ 的在 $y_1$ 方向力矩平衡给出
+\begin{equation}
+	\left(\sqrt2-\xi\right)\cdot2N_{2,z_1}-\left(1-\eta\right)\cdot2N_{2,x_1}-\left(1-\frac1{\sqrt3}\right)\cdot T=0.
+	\label{eq:y1受力矩平衡}
+\end{equation}
+
+接下来将弧 BD 表示为参数方程.
+令 $\alpha=\angle\mathrm{BOD}$, 则易得
+\begin{equation}
+	\cos\alpha=-\frac1{\sqrt3},\qquad\sin\alpha=\sqrt\frac23.
+\end{equation}
+因为弧 BD 是圆心在原点的圆弧, 容易得到它的参数方程为
+\begin{equation}
+	R\left[\begin{matrix}\xi \\ \eta \\ \zeta\end{matrix}\right]
+	=\mathbf b_1\cos t+\frac{\mathbf d_1-\mathbf b_1\cos\alpha}{\sin\alpha}\sin t,
+	\qquad t\in\left[0,\alpha\right]
+	\label{eq:BD参数方程}
+\end{equation}
+(得到它的方法是在 $\mathbf b_1$ 和 $\mathbf d_1-\mathbf b_1\cos\alpha$
+张成的平面内以这两个向量为基写出圆的参数方程).
+将它对 $t$ 求导可得弧 BD 上的切向量.
+于是 $\mathbf N_{2,\mathrm{BD}}$ 与弧 BD 上的切向量垂直的条件可写为
+\begin{equation}
+	\left[\begin{matrix}N_{2,x_1} & N_{2,y_1} & N_{2,z_1}\end{matrix}\right]
+	\left(-\mathbf b_1\sin t+\frac{\mathbf d_1-\mathbf b_1\cos\alpha}{\sin\alpha}\cos t\right)=0
+	\label{eq:N2与BD垂直}
+\end{equation}
+而 $\mathbf N_{2,\mathrm{BD}}$ 与球面法线垂直的条件可写为
+\begin{equation}
+	\left[\begin{matrix}N_{2,x_1} & N_{2,y_1} & N_{2,z_1}\end{matrix}\right]
+	\left[\begin{matrix}\xi & \eta & \zeta\end{matrix}\right]^\mathrm T=0.
+	\label{eq:N2与球面相切}
+\end{equation}
+
+式 \ref{eq:z1受力平衡}, \ref{eq:x1受力平衡}, \ref{eq:y1受力矩平衡}, \ref{eq:BD参数方程}, \ref{eq:N2与BD垂直}, \ref{eq:N2与球面相切}
+共有七个方程, 再得到一个方程可得
+$\xi$, $\eta$, $\zeta$, $N_{2,x_1}$, $N_{2,y_1}$, $N_{2,z_1}$, $t$, $T$ 八个未知数.
+
+现在讨论第八个方程的内容.
+实际上在刚好拉开这个球的时候, 我们可能有下面三种情形之一:
+\begin{enumerate}
+	\item BD 上的压力的等效作用点离开 B 点:
+	\begin{equation}
+		t=0;
+		\label{eq:情形1}
+	\end{equation}
+	\item BD 上的压力的等效作用点离开 D 点:
+	\begin{equation}
+		t=\alpha;
+		\label{eq:情形2}
+	\end{equation}
+	\item AB 上的压力消失:
+	\begin{equation}
+		N_1=0;
+		\label{eq:情形3}
+	\end{equation}
+\end{enumerate}
+
+(做到这里可得满分.)
+
+先由式 \ref{eq:z1受力平衡}, \ref{eq:y1受力矩平衡}, \ref{eq:BD参数方程}, \ref{eq:N2与BD垂直}
+六个方程可将 $\xi$, $\eta$, $\zeta$, $N_{2,x_1}$, $N_{2,y_1}$, $N_{2,z_1}$ 用 $t$, $T$ 表示:
+\begin{equation}
+\begin{split}
+	\xi&=\frac{\sin t}{\sqrt3},\\
+	\eta&=\frac{-\sqrt2\cos t-\sqrt3\sin t}{\sqrt3},\\
+	\zeta&=\frac{\cos t+\sqrt\frac32\left(1-\frac1{\sqrt3}\right)\sin t}{\sqrt3},\\
+	N_{2,x_1}&=\frac{\left(1-\frac1{\sqrt3}\right)T-\frac{\sqrt2-\frac{\sin t}{\sqrt3}}{\sqrt3}F}{1-\frac{-\sqrt2\cos t-\sqrt3\sin t}{\sqrt3}},\\
+	N_{2,y_1}&=\frac{\frac{-\sqrt\frac32\left(1-\frac1{\sqrt3}\right)\cos t\sin t}{2\sqrt3}F-\frac{\left(1-\frac1{\sqrt3}\right)T-\frac{\sqrt2-\frac{\sin t}{\sqrt3}}{\sqrt3}F}{1-\frac{-\sqrt2\cos t-\sqrt3\sin t}{\sqrt3}}\cos t}{-\sqrt3\cos t+\sqrt2\sin t},\\
+	N_{2,z_1}&=\frac F{2\sqrt3}.
+\end{split}
+	\label{eq:将N2用t,T表示}
+\end{equation}
+将它们代入式 \ref{eq:N2与球面相切} 可得 $t$ 与 $T$ 的关系.
+
+对于情形 1, 将式 \ref{eq:情形1} 代入式 \ref{eq:将N2用t,T表示} 后再代入 \ref{eq:N2与球面相切} 可以解得
+\begin{equation}
+	T^{\text{(1)}}=\frac{15+\sqrt6}{2\sqrt6\left(3-\sqrt3\right)}F\approx2.81F.
+\end{equation}
+
+对于情形 2, 将式 \ref{eq:情形2} 代入式 \ref{eq:将N2用t,T表示} 后再代入 \ref{eq:N2与球面相切} 可以解得
+\begin{equation}
+	T^{\text{(2)}}=\frac{\sqrt6-\sqrt2+11}{2\sqrt6\left(3-\sqrt3\right)}F\approx1.94F.
+\end{equation}
+
+对于情形 3, 将式 \ref{eq:情形3} 代入式 \ref{eq:x1受力平衡}, 从而用 $t$, $T$ 表示 $N_{2,x_1}$.
+再将这一结果与式 \ref{eq:将N2用t,T表示} 比较后可将 $T$ 用 $t$ 表示,
+最后与式 \ref{eq:将N2用t,T表示} 一起代入式 \ref{eq:N2与球面相切} 可以解出 $t$ (可以数值),
+再回代后可得
+\begin{equation}
+	T^{\text{(3)}}=\frac1{\sqrt6}F\approx0.41F
+\end{equation}
+(实际上 $t$ 应当有两解, 但它们对应同一个 $T$).
+
+真实的临界情况 $T_0=\min\!\left(T^{\text{(1)}},T^{\text{(2)}},T^{\text{(3)}}\right)$.
+考虑到式 \ref{eq:大气压力}, 有
+\begin{equation}
+	T_0=pR^2\arcsin\sqrt\frac23\approx0.29pR^2.
+\end{equation}
 
 \subsection{杆上产熵}
-设 $t$ 时刻杆在 $x\in\left[a,b\right]$ 处的温度为 $T\left(t,x\right)$,
-熵线密度为 $s\left(t,x\right)$,
-单位时间内通过 $x$ 处的热量 (即 $x$ 处的热流) 为 $J\left(t,x\right)$.
+设 $t$ 时刻杆在 $x\in\left[a,b\right]$ 处的温度为 $T\!\left(t,x\right)$,
+熵线密度为 $s\!\left(t,x\right)$,
+单位时间内通过 $x$ 处的热量 (即 $x$ 处的热流) 为 $J\!\left(t,x\right)$.
 两个恒温热源的温度分别为
 \begin{equation}
-T\left(t,a\right)=T_a,\qquad T\left(t,b\right)=T_b.
+T\!\left(t,a\right)=T_a,\qquad T\!\left(t,b\right)=T_b.
 \label{eq:变分边界条件}
 \end{equation}
 
@@ -401,7 +666,7 @@ T\left(t,a\right)=T_a,\qquad T\left(t,b\right)=T_b.
 在 $x+\mathrm dx$ 处有 $J\left(t,x+\mathrm dx\right)\mathrm dt$ 的热量流出该线微元,
 从而 $t+\mathrm dt$ 时刻该线微元获得熵增
 \begin{equation}
-\frac{J\left(t,x\right)\mathrm dt-J\left(t,x+\mathrm dx\right)\mathrm dt}{T}=-\frac1T\frac{\partial J}{\partial x}\mathrm dx\mathrm dt,
+\frac{J\!\left(t,x\right)\mathrm dt-J\!\left(t,x+\mathrm dx\right)\mathrm dt}{T}=-\frac1T\frac{\partial J}{\partial x}\mathrm dx\mathrm dt,
 \end{equation}
 即
 \begin{equation}
@@ -416,14 +681,14 @@ T\left(t,a\right)=T_a,\qquad T\left(t,b\right)=T_b.
 \end{equation}
 对式 \ref{eq:杆的熵产前} 右边应用分部积分可得
 \begin{equation}
-\frac{\mathrm dS_0}{\mathrm dt}=-\frac{J\left(t,b\right)}{T_b}+\frac{J\left(t,a\right)}{T_a}+\int_a^bJ\frac{\partial\frac1T}{\partial x}\mathrm dx.
+\frac{\mathrm dS_0}{\mathrm dt}=-\frac{J\!\left(t,b\right)}{T_b}+\frac{J\!\left(t,a\right)}{T_a}+\int_a^bJ\frac{\partial\frac1T}{\partial x}\mathrm dx.
 \label{eq:杆的熵产}
 \end{equation}
 
 另一方面, 显然, 两个恒温热源的熵产分别为
 \begin{equation}
-\frac{\mathrm dS_a}{\mathrm dt}=-\frac{J\left(t,a\right)}{T_a},\qquad
-\frac{\mathrm dS_b}{\mathrm dt}=\frac{J\left(t,b\right)}{T_b}.
+\frac{\mathrm dS_a}{\mathrm dt}=-\frac{J\!\left(t,a\right)}{T_a},\qquad
+\frac{\mathrm dS_b}{\mathrm dt}=\frac{J\!\left(t,b\right)}{T_b}.
 \label{eq:热源的熵产}
 \end{equation}
 将式 \ref{eq:杆的熵产} 与式 \ref{eq:热源的熵产} 相加, 得到整个体系的熵产
@@ -434,17 +699,17 @@ T\left(t,a\right)=T_a,\qquad T\left(t,b\right)=T_b.
 
 令
 \begin{equation}
-\mathcal L\left(T,T',x\right)=-J\left(T,T'\right)\frac{T'}{T^2},
+\mathcal L\!\left(T,T',x\right)=-J\!\left(T,T'\right)\frac{T'}{T^2},
 \label{eq:lagrangian}
 \end{equation}
 其中 $T'=\nabla T=\frac{\partial T}{\partial x}$.
-注意, 这里 $J\left(T,T'\right)$ 与前文中的 $J\left(t,x\right)$ 虽然是同一个物理量, 但具有不同的意义.
-$J\left(T,T'\right)$ 表征了与热传导有关的物理定律, Fourier 热传导定律是它的一个例子.
+注意, 这里 $J\!\left(T,T'\right)$ 与前文中的 $J\!\left(t,x\right)$ 虽然是同一个物理量, 但具有不同的意义.
+$J\!\left(T,T'\right)$ 表征了与热传导有关的物理定律, Fourier 热传导定律是它的一个例子.
 显然, 由时空平移不变性, 当作为物理定律时, $J$ 不应与 $t,x$ 有关.
 
 此时最小化熵产的问题转化为变分问题
 \begin{equation}
-\delta\int_a^b\mathcal L\left(T,T',x\right)\mathrm dx=0,
+\delta\int_a^b\mathcal L\!\left(T,T',x\right)\mathrm dx=0,
 \end{equation}
 其中在变分过程中有固定的边界条件式 \ref{eq:变分边界条件}.
 写出 Euler--Lagrange 方程
@@ -496,29 +761,29 @@ $J\left(T,T'\right)$ 表征了与热传导有关的物理定律, Fourier 热传�
 \mypara
 将 $J\left(T,T'\right)=\nabla\varphi\left(T\right)=\varphi'\left(T\right)T'$ 代入式 \ref{eq:lagrangian} 可得
 \begin{equation}
-	\mathcal L=-\frac{\varphi'\left(T\right)T'^2}{T^2}.
+	\mathcal L=-\frac{\varphi'\!\left(T\right)T'^2}{T^2}.
 	\label{eq:线性温度分布的lagrangian}
 \end{equation}
 从而
-\begin{align}
-	\frac{\partial}{\partial x}\frac{\partial\mathcal L}{\partial T'}
-	=\frac{\partial}{\partial x}\left(-\frac{2\varphi'\left(T\right)T'}{T^2}\right)=-2T'^2\frac{\partial}{\partial T}\frac{\varphi'\left(T\right)}{T^2}-2T''\frac{\varphi'\left(T\right)}{T^2},
-	\label{eq:线性温度分布的EL方程第一项}
-\end{align}
 \begin{equation}
-	\frac{\partial\mathcal L}{\partial T}=-T'^2\frac{\partial}{\partial T}\frac{\varphi'\left(T\right)}{T^2}.
+	\frac{\partial}{\partial x}\frac{\partial\mathcal L}{\partial T'}
+	=\frac{\partial}{\partial x}\left(-\frac{2\varphi'\!\left(T\right)T'}{T^2}\right)=-2T'^2\frac{\partial}{\partial T}\frac{\varphi'\!\left(T\right)}{T^2}-2T''\frac{\varphi'\!\left(T\right)}{T^2},
+	\label{eq:线性温度分布的EL方程第一项}
+\end{equation}
+\begin{equation}
+	\frac{\partial\mathcal L}{\partial T}=-T'^2\frac{\partial}{\partial T}\frac{\varphi'\!\left(T\right)}{T^2}.
 	\label{eq:线性温度分布的EL方程第二项}
 \end{equation}
 
 将式 \ref{eq:线性温度分布的EL方程第一项} 和式 \ref{eq:线性温度分布的EL方程第二项} 代入 \ref{eq:EL方程} 后整理可得
 \begin{equation}
-	\frac{\mathrm d}{\mathrm dT}\ln\frac{\varphi'\left(T\right)}{T^2}=-\frac{2T''}{T'^2}.
+	\frac{\mathrm d}{\mathrm dT}\ln\frac{\varphi'\!\left(T\right)}{T^2}=-\frac{2T''}{T'^2}.
 \end{equation}
 对于温度梯度处处为常数的温度分布, $T''=0$.
-从而 $\frac{\varphi'\left(T\right)}{T^2}$ 为常数.
+从而 $\frac{\varphi'\!\left(T\right)}{T^2}$ 为常数.
 从而应有
 \begin{equation}
-	\varphi\left(T\right)=-kT^3+C,
+	\varphi\!\left(T\right)=-kT^3+C,
 \end{equation}
 其中 $k$ 和 $C$ 为积分常量 (答案中不包含 $C$ 项也算对).
 注意到最终的熵产是最小值而不是最大值, 应有 $k>0$.
@@ -563,7 +828,7 @@ $J\left(T,T'\right)$ 表征了与热传导有关的物理定律, Fourier 热传�
 TODO
 
 \subsection{进退两难的死飞}
-由齿轮-链条约束, 有
+由齿轮--链条约束, 有
 \begin{equation}
 	r_1\mathrm d\theta_1=r_2\mathrm d\theta_2=\mathrm dx,
 	\label{eq:齿轮-链条约束}
@@ -665,5 +930,7 @@ $\mathrm A'$ 与 $\mathrm B'$ 分别在射线 AM 与射线 BN 上运动,
 	\mathrm{A'B'}^2=\mathrm{OA'}^2+\mathrm{OB'}^2\propto\frac1{I_\mathrm A^2}+\frac1{I_\mathrm B^2},
 \end{equation}
 可知当 $R_\mathrm A+R_\mathrm B$ 取到最小值时通过 A 与 B 的交变电流的幅值的倒数平方和也取最小值.
+
+\subsection{衰变粒子束}
 
 \end{document}
