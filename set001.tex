@@ -142,7 +142,7 @@ $\frac{\mathrm d}{\mathrm dx}\frac{\partial\mathcal L}{\partial y'}-\frac{\parti
 接上问, 求 $R_\mathrm A+R_\mathrm B$ 的最小值,
 并证明当它取到最小值时通过 A 与 B 的交变电流的幅值的倒数平方和也取最小值.
 
-\subsection{衰变粒子束}
+\subsection{粒子束衰变}
 A 粒子的质量为 $M$, 能衰变为两个全同的质量为 $m$ 的 B 粒子,
 且衰变产生的 B 粒子的出射方向在质心系中是均匀分布的.
 A 粒子的平均寿命为 $\tau$.
@@ -157,8 +157,25 @@ A 粒子以高速 $v$ 运动时发生了衰变,
 建立柱坐标系 $\left(z,\rho,\varphi\right)$.
 在 $\left(z,\rho,\varphi\right)$ 处取小体积 $\mathrm dV$,
 在 $t$ 时刻 $\mathrm dV$ 内有 $f\!\left(z,\rho,\theta,t\right)\mathrm dV$
-个运动方向与 $z$ 轴夹角为 $\theta$ 的粒子.
+个运动方向与 $z$ 轴夹角为 $\theta$ 的 B 粒子.
 求 $f$.
+
+\subsection{极性陀螺}
+有一个球陀螺, 绕任意过质心的轴转动的转动惯量为 $J$.
+其不均匀带电, 可视作电偶极子 $\mathbf p$.
+空间中有电场 $\mathbf E\!\left(\mathbf r,t\right)$ 和磁场 $\mathbf B\!\left(\mathbf r,t\right)$.
+陀螺的质心的位置也记作 $\mathbf r$.
+陀螺的角速度记作 $\boldsymbol\omega$.
+
+\mypara
+求关于 $\mathbf r$, $\mathbf p$, $\boldsymbol\omega$ 的微分方程,
+原则上应能由写出的微分方程和初始条件完全解出它们随时间的关系.
+注意 $\left|\mathbf p\right|$ 应当不变.
+
+\mypara
+设 $\mathbf E=J\mathbf e$, $\mathbf B=\mathbf b$ 为恒定均匀场, 且陀螺被束缚而无法平动.
+初始条件 $\boldsymbol\omega\!\left(0\right)=\mathbf w$, $\mathbf p\!\left(0\right)=\mathbf s$.
+对于很小的 $\left|t\right|$ 求解 $\boldsymbol\omega$ 与 $t$ 的关系, 精确到 $O\!\left(t^4\right)$.
 
 \newpage
 \section{参考答案}
@@ -648,7 +665,7 @@ $\xi$, $\eta$, $\zeta$, $N_{2,x_1}$, $N_{2,y_1}$, $N_{2,z_1}$, $t$, $T$ 八个�
 真实的临界情况 $T_0=\min\!\left(T^{\text{(1)}},T^{\text{(2)}},T^{\text{(3)}}\right)$.
 考虑到式 \ref{eq:大气压力}, 有
 \begin{equation}
-	T_0=pR^2\arcsin\sqrt\frac23\approx0.29pR^2.
+	T_0=pR^2\arcsin\sqrt\frac23\approx0.96pR^2.
 \end{equation}
 
 \subsection{杆上产熵}
@@ -931,6 +948,116 @@ $\mathrm A'$ 与 $\mathrm B'$ 分别在射线 AM 与射线 BN 上运动,
 \end{equation}
 可知当 $R_\mathrm A+R_\mathrm B$ 取到最小值时通过 A 与 B 的交变电流的幅值的倒数平方和也取最小值.
 
-\subsection{衰变粒子束}
+\subsection{粒子束衰变}
+TODO
+
+\subsection{极性陀螺}
+\mypara
+将电偶极子分解为两个电荷:
+\begin{equation}
+	\mathbf p=q\mathbf l.
+\end{equation}
+则正负电荷的位置
+\begin{equation}
+	\mathbf r_\pm=\mathbf r\pm\frac{\mathbf l}2,
+\end{equation}
+正负电荷的速度
+\begin{equation}
+	\mathbf v_\pm=\mathbf v\pm\boldsymbol\omega\times\frac{\mathbf l}2,
+\end{equation}
+正负电荷受到的 Lorentz 力
+\begin{equation}
+	\mathbf F_\pm=\pm q\left(\mathbf E\!\left(\mathbf r_\pm,t\right)+\mathbf v_\pm\times\mathbf B\!\left(\mathbf r_\pm,t\right)\right),
+\end{equation}
+正负电荷受到对陀螺质心的力矩
+\begin{equation}
+	\mathbf M_\pm=\pm\frac{\mathbf l}2\times\mathbf F_\pm.
+\end{equation}
+
+注意到
+\begin{equation}
+	\mathbf E\!\left(\mathbf r_+,t\right)-\mathbf E\!\left(\mathbf r_-,t\right)=\left(\mathbf l\cdot\nabla\right)\mathbf E,
+	\qquad\mathbf E\!\left(\mathbf r_+,t\right)+\mathbf E\!\left(\mathbf r_-,t\right)=2\mathbf E\!\left(\mathbf r,t\right)
+\end{equation}
+(对于 $\mathbf B$ 也有类似的公式),
+从而由
+\begin{equation}
+	m\ddot{\mathbf r}=\mathbf F_++\mathbf F_-,
+	\qquad J\dot{\boldsymbol\omega}=\mathbf M_++\mathbf M_-
+\end{equation}
+可得运动方程
+\begin{align}
+	&m\ddot{\mathbf r}=\left(\mathbf p\cdot\nabla\right)\mathbf E+\mathbf v\times\left(\mathbf p\cdot\nabla\right)\mathbf B+\boldsymbol\omega\times\mathbf p\times\mathbf B,\\
+	&J\dot{\boldsymbol\omega}=\mathbf p\times\left(\mathbf E+\mathbf v\times\mathbf B\right)
+\end{align}
+(已略去高阶小量).
+最后还有
+\begin{equation}
+	\dot{\mathbf p}=\boldsymbol\omega\times\mathbf p.
+\end{equation}
+
+\mypara
+运动方程约化为
+\begin{equation}
+	\dot{\boldsymbol\omega}=\mathbf p\times\mathbf e,
+	\label{eq:omega方程}
+\end{equation}
+\begin{equation}
+	\dot{\mathbf p}=\boldsymbol\omega\times\mathbf p.
+	\label{eq:p方程}
+\end{equation}
+接下来求 $\boldsymbol\omega$ 的高阶导数.
+令 $\mathrm D=\frac{\mathrm d}{\mathrm dt}$.
+不断运用式 \ref{eq:omega方程} 和式 \ref{eq:p方程} 可得
+\begin{equation}
+	\mathrm D^2\boldsymbol\omega=\mathrm D\mathbf p\times\mathbf e
+	=\boldsymbol\omega\times\mathbf p\times\mathbf e,
+\end{equation}
+\begin{equation}
+\begin{split}
+	\mathrm D^3\boldsymbol\omega&=\mathrm D\boldsymbol\omega\times\mathbf p\times\mathbf e
+		+\boldsymbol\omega\times\mathrm D\mathbf p\times\mathbf e\\
+	&=\mathbf p\times\mathbf e\times\mathbf p\times\mathbf e
+		+\boldsymbol\omega\times\left(\boldsymbol\omega\times\mathbf p\right)\times\mathbf e\\
+	&=\mathbf p\times\mathbf e\times\mathbf p\times\mathbf e
+		-\boldsymbol\omega\times\mathbf p\times\boldsymbol\omega\times\mathbf e,
+\end{split}
+\end{equation}
+\begin{equation}
+\begin{split}
+	\mathrm D^4\boldsymbol\omega=&\,\mathrm D\mathbf p\times\mathbf e\times\mathbf p\times\mathbf e
+		+\mathbf p\times\mathbf e\times\mathrm D\mathbf p\times\mathbf e\\
+		&\,-\mathrm D\boldsymbol\omega\times\mathbf p\times\boldsymbol\omega\times\mathbf e
+		-\boldsymbol\omega\times\mathrm D\mathbf p\times\boldsymbol\omega\times\mathbf e
+		-\boldsymbol\omega\times\mathbf p\times\mathrm D\boldsymbol\omega\times\mathbf e\\
+	=&\,\boldsymbol\omega\times\mathbf p\times\mathbf e\times\mathbf p\times\mathbf e
+		+\mathbf p\times\mathbf e\times\left(\boldsymbol\omega\times\mathbf p\right)\times\mathbf e\\
+		&\,-\mathbf p\times\mathbf e\times\mathbf p\times\boldsymbol\omega\times\mathbf e
+		-\boldsymbol\omega\times\left(\boldsymbol\omega\times\mathbf p\right)\times\boldsymbol\omega\times\mathbf e
+		-\boldsymbol\omega\times\mathbf p\times\left(\mathbf p\times\mathbf e\right)\times\mathbf e\\
+	=&\,\boldsymbol\omega\times\mathbf p\times\mathbf e\times\mathbf p\times\mathbf e
+		+2\mathbf p\times\mathbf e\times\left(\boldsymbol\omega\times\mathbf p\right)\times\mathbf e
+		-\mathbf p\times\mathbf e\times\mathbf p\times\boldsymbol\omega\times\mathbf e
+		+\boldsymbol\omega\times\mathbf p\times\boldsymbol\omega\times\boldsymbol\omega\times\mathbf e.
+\end{split}
+\end{equation}
+
+将 $\boldsymbol\omega$ 展开为 Maclaurin 级数并保留到 $O\!\left(t^4\right)$ 可得
+\begin{equation}
+\begin{split}
+	\boldsymbol\omega=&\,\mathbf w+\left(\mathbf s\times\mathbf e\right)t
+		+\left(\mathbf w\times\mathbf s\times\mathbf e\right)t^2/2
+		+\left(
+			\mathbf s\times\mathbf e\times\mathbf s\times\mathbf e
+			-\mathbf w\times\mathbf s\times\mathbf w\times\mathbf e
+		\right)t^3/6\\
+		&\,+\left(
+			\mathbf w\times\mathbf s\times\mathbf e\times\mathbf s\times\mathbf e
+			+2\mathbf s\times\mathbf e\times\left(\mathbf w\times\mathbf s\right)\times\mathbf e
+			-\mathbf s\times\mathbf e\times\mathbf s\times\mathbf w\times\mathbf e
+			+\mathbf w\times\mathbf s\times\mathbf w\times\mathbf w\times\mathbf e
+		\right)t^4/24.
+\end{split}
+\end{equation}
 
 \end{document}
