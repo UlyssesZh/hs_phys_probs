@@ -149,6 +149,7 @@ $\frac{\mathrm d}{\mathrm dx}\frac{\partial\mathcal L}{\partial y'}-\frac{\parti
 A 粒子的质量为 $M$, 能衰变为两个全同的质量为 $m$ 的 B 粒子,
 且衰变产生的 B 粒子的出射方向在质心系中是均匀分布的.
 A 粒子的平均寿命为 $\tau$.
+(本题可以不写出解析解, 而保留积分, 求导, 求反函数等操作.)
 
 \mypara
 A 粒子以高速 $v$ 运动时发生了衰变,
@@ -156,12 +157,11 @@ A 粒子以高速 $v$ 运动时发生了衰变,
 注意: 该分布应当被归一化, 使其在 $[0,\pi]$ 上的积分为 $2$.
 
 \mypara
-在 $t=0$ 时刻 $N$ 个 A 粒子从原点以高速 $v$ 沿 $z$ 轴射出.
+大量 A 粒子从原点以高速 $v$ 沿 $z$ 轴正方向射出.
 建立柱坐标系 $\left(z,\rho,\varphi\right)$.
-在 $\left(z,\rho,\varphi\right)$ 处取小体积 $\mathrm dV$,
-在 $t$ 时刻 $\mathrm dV$ 内有 $f\!\left(z,\rho,\theta,t\right)\mathrm dV$
-个运动方向与 $z$ 轴夹角为 $\theta$ 的 B 粒子.
-求 $f$.
+在 $\rho$ 柱面上建造 B 粒子探测器.
+求足够长的时间之后探测器上探测到的 B 粒子的 $z$ 坐标的分布.
+注意: 该分布应当被归一化, 使其在 $[0,\pi]$ 上的积分为 $2$.
 
 \subsection{极性陀螺}
 有一个球陀螺, 绕任意过质心的轴转动的转动惯量为 $J$.
@@ -914,12 +914,12 @@ $\mathrm dx<0$ 表征自行车前进, $\mathrm dx>0$ 表征自行车后退.
 \end{equation}
 全部展开并整理, 再利用式 \ref{eq:齿轮-链条约束} 可得
 \begin{equation}
-	l\mathrm dl=R_1R_2\sin\left(\theta_2-\theta_1\right)\left(\frac1{r_2}-\frac1{r_1}\right)\mathrm dx-d\left(\frac{R_2\sin\theta_2}{r_2}-\frac{R_1\sin\theta_1}{r_1}\right)\mathrm dx.
+	l\mathrm dl=R_1R_2\sin\!\left(\theta_2-\theta_1\right)\left(\frac1{r_2}-\frac1{r_1}\right)\mathrm dx-d\left(\frac{R_2\sin\theta_2}{r_2}-\frac{R_1\sin\theta_1}{r_1}\right)\mathrm dx.
 \end{equation}
 缩短绳子使得自行车前进的条件是 $\mathrm dl/\mathrm dx>0$.
 从而
 \begin{equation}
-	R_1R_2\left(r_1-r_2\right)\sin\left(\theta_2-\theta_1\right)>d\left(r_1R_2\sin\theta_2-r_2R_1\sin\theta_1\right).
+	R_1R_2\left(r_1-r_2\right)\sin\!\left(\theta_2-\theta_1\right)>d\left(r_1R_2\sin\theta_2-r_2R_1\sin\theta_1\right).
 \end{equation}
 
 \subsection{容感串并}
@@ -995,7 +995,81 @@ $\mathrm A'$ 与 $\mathrm B'$ 分别在射线 AM 与射线 BN 上运动,
 可知当 $R_\mathrm A+R_\mathrm B$ 取到最小值时通过 A 与 B 的交变电流的幅值的倒数平方和也取最小值.
 
 \subsection{粒子束衰变}
-TODO
+(此解答使用自然单位制.)
+
+\mypara
+首先考虑质心系中 A 粒子的衰变.
+
+设出射方向的角度为 $\theta'$.
+由于出射方向按立体角均匀分布, $\theta'$ 的分布为
+\begin{equation}
+	\frac{\mathrm dN}N=\sin\theta'\,\mathrm d\theta'.
+\end{equation}
+
+由能量守恒可知出射粒子的能量为
+\begin{equation}
+	E'=\frac12M.
+\end{equation}
+于是出射粒子的动量为
+\begin{equation}
+	p'=\sqrt{E'^2-m^2}=\sqrt{M^2/4-m^2}.
+\end{equation}
+利用 Lorentz 变换可得实验室系中出射粒子的动量
+\begin{equation}
+	p_x=\frac{p_x'+vE'}{\sqrt{1-v^2}}=
+	\frac{\sqrt{\frac{M^2}4-m^2}\cos\theta'+v\frac M2}{\sqrt{1-v^2}},
+\end{equation}
+\begin{equation}
+	p_y=p_y'=\sqrt{\frac{M^2}4-m^2}\sin\theta'.
+\end{equation}
+于是出射粒子的方向为
+\begin{equation}
+	\theta=\operatorname{atan2}\!\left(p_y,p_x\right)=g\!\left(\theta'\right),
+\end{equation}
+其中
+\begin{equation}
+	g\!\left(\theta'\right)=\operatorname{atan2}\!\left(\sqrt{1-v^2}\sin\theta',\frac{Mv}{\sqrt{M^2-4m^2}}+\cos\theta'\right).
+	\label{eq:g}
+\end{equation}
+$g$ 显然应是 $[0,\pi]$ 上可导的单调函数.
+
+于是可以得到 $\theta$ 的分布为
+\begin{equation}
+	\frac{\mathrm dN}N=\frac{\sin g^{-1}\!\left(\theta\right)}{g'\!\left(g^{-1}\!\left(\theta\right)\right)}\mathrm d\theta,
+	\label{eq:theta分布}
+\end{equation}
+其中 $g^{-1}$ 是 $g$ 在 $\left[0,\pi\right]$ 上的反函数.
+
+式 \ref{eq:g} 和式 \ref{eq:theta分布} 给出了答案.
+
+\mypara
+衰变发生的时刻 $t$ 的分布为
+\begin{equation}
+	\frac{\mathrm dN}N=\frac{\sqrt{1-v^2}}\tau\mathrm e^{-\frac{t\sqrt{1-v^2}}\tau}\mathrm dt.
+\end{equation}
+在 $t$ 时刻以 $\theta$ 角出射的 B 粒子被探测到时其 $z$ 坐标为
+\begin{equation}
+	z=vt+\rho\cot\theta.
+\end{equation}
+因此被探测到 $z$ 坐标在 $\left[z,z+\mathrm dz\right]$ 中的 B 粒子数为
+\begin{equation}
+	N\iint_{z\le vt+\rho\cot\theta\le z+\mathrm dz}
+	\frac{\sqrt{1-v^2}}\tau\mathrm e^{-\frac{t\sqrt{1-v^2}}\tau}\mathrm dt
+	\cdot
+	\frac{\sin g^{-1}\!\left(\theta\right)}{g'\!\left(g^{-1}\!\left(\theta\right)\right)}\mathrm d\theta.
+\end{equation}
+从而 $z$ 的分布为
+\begin{equation}
+	\frac{\mathrm dN}N=h'\!\left(z\right)\mathrm dz,
+\end{equation}
+其中
+\begin{equation}
+	h\!\left(z\right)=\frac{\sqrt{1-v^2}}\tau
+	\iint_{vt+\rho\cot\theta\le z}
+	\frac{\sin g^{-1}\!\left(\theta\right)}{g'\!\left(g^{-1}\!\left(\theta\right)\right)}
+	\mathrm e^{-\frac{t\sqrt{1-v^2}}\tau}\mathrm dt
+	\mathrm d\theta.
+\end{equation}
 
 \subsection{极性陀螺}
 \mypara
@@ -1023,7 +1097,7 @@ TODO
 注意到
 \begin{equation}
 	\mathbf E\!\left(\mathbf r_+,t\right)-\mathbf E\!\left(\mathbf r_-,t\right)=\left(\mathbf l\cdot\nabla\right)\mathbf E,
-	\qquad\mathbf E\!\left(\mathbf r_+,t\right)+\mathbf E\!\left(\mathbf r_-,t\right)=2\mathbf E\!\left(\mathbf r,t\right)
+	\qquad\mathbf E\!\left(\mathbf r_+,t\right)+\mathbf E\!\left(\mathbf r_-,t\right)=2\mathbf E
 \end{equation}
 (对于 $\mathbf B$ 也有类似的公式),
 从而由
