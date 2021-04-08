@@ -7,6 +7,7 @@
 \usepackage{titlesec}
 \usepackage{graphicx}
 \usepackage[total={7in,10in}]{geometry}
+\usepackage{subcaption}
 
 \newcounter{para}
 \newcommand\mypara{\par\refstepcounter{para}(\thepara)\space}
@@ -29,12 +30,13 @@
 绳子以两个固定点的连线为轴以匀角速度 $\omega$ 转动.
 忽略重力的影响而只考虑离心力.
 转动过程中绳子的形状保持为一个平面图形不变.
+(本题可以以积分及隐函数形式给出隐式解.)
 
 \mypara
 用平面坐标系中的方程描述绳子的形状.
 
 \mypara
-求绳子的角动量的大小.
+求绳子的动能.
 
 \mypara
 求固定点处对绳子的拉力的大小.
@@ -70,8 +72,8 @@ $z$ 轴与地面的夹角被适当地选取, 以至于三锟闸在初始状态�
 质量为 $m$ 的物体一开始绕着质量为 $M\gg m$ 的星体在半径为 $r_1$ 的圆轨道上运动.
 某时其瞬间加速, 使速度方向不变, 速率增大 $\Delta v_1$, 进入椭圆轨道.
 在远心点处, 其再次瞬间加速, 使速度方向不变, 速率增大 $\Delta v_2$,
-进入半径为 $r_2=\alpha r_1$ 的圆轨道上运动.
-证明使 $\Delta v_1+\Delta v_2$ 最大的 $\alpha$ 为
+进入半径为 $r_2=xr_1$ 的圆轨道上运动.
+证明使 $\Delta v_1+\Delta v_2$ 最大的 $x$ 为
 $5+4\sqrt7\cos\!\left(\frac13\arctan\frac{\sqrt3}{37}\right)$.
 
 \subsection{电容势函数}
@@ -82,7 +84,7 @@ $F$ 为极板间作用力, $V$ 为极板间的电势差.
 定义势函数 $U$ 为电容器储存的能量.
 
 \mypara
-证明 $\mathrm dU=V\mathrm dQ-F\mathrm dX$.
+证明 $\mathrm dU=V\,\mathrm dQ-F\,\mathrm dX$.
 
 \mypara
 证明 $\left(\frac{\partial V}{\partial F}\right)_Q=\left(\frac{\partial X}{\partial Q}\right)_F$.
@@ -96,10 +98,235 @@ $F$ 为极板间作用力, $V$ 为极板间的电势差.
 
 \subsection{太空跳绳}
 
+\mypara
+因为绳子的形状是具有最小势能的形状, 所以本题即求解最优化问题
+\begin{alignat}{2}
+	\min_{y\in C^1\left[-b/2,b/2\right]}\quad & \int_{-b/2}^{b/2}-\frac12\cdot\frac ml\sqrt{1+y'^2}\,\mathrm dx\cdot\omega^2\cdot y^2\\
+	\mathrm{s.t.}\quad & y\!\left(-b/2\right)=y\!\left(b/2\right)=0,\\
+	& \int_{-b/2}^{b/2}\sqrt{1+y'^2}\,\mathrm dx=l.
+	\label{eq:绳长约束}
+\end{alignat}
+在目标函数中带上 Lagrange 乘子, 可以略去约束条件式 \ref{eq:绳长约束}, 而目标变为
+\begin{alignat}{2}
+	\max_{y\in C^1\left[-b/2,b/2\right]}\quad & \int_{-b/2}^{b/2}y^2\sqrt{1+y'^2}\,\mathrm dx-\lambda\left(\int_{-b/2}^{b/2}\sqrt{1+y'^2}\,\mathrm dx-l\right)\\
+	\mathrm{s.t.}\quad & y\!\left(-b/2\right)=y\!\left(b/2\right)=0.
+\end{alignat}
+
+定义 Lagrangian
+\begin{equation}
+	\mathcal L:=\left(y^2-\lambda\right)\sqrt{1+y'^2}.
+\end{equation}
+代入 Euler--Lagrange 方程后化简可得
+\begin{equation}
+	2y\left(1+y'^2\right)=\left(y^2-\lambda\right)y''.
+\end{equation}
+进行变换 $p:=y'$ 后可得
+\begin{equation}
+	2y\left(1+p^2\right)=\left(y^2-\lambda\right)p\frac{\mathrm dp}{\mathrm dy}.
+\end{equation}
+分离变量并积分可得
+\begin{equation}
+	\ln\!\left(1+p^2\right)=2\ln\frac{a^2-y^2}{a^2-y_0^2},
+	\label{eq:变分法}
+\end{equation}
+其中 $y_0:=y\!\left(0\right)>0$, $a:=\sqrt\lambda>y_0$.
+回代 $p=y'$, 再次分离变量并积分可得
+\begin{equation}
+	\int_{y_0}^y\frac{\mathrm dy}{\sqrt{\left(\frac{a^2-y^2}{a^2-y_0^2}\right)^2-1}}=\pm x.
+	\label{eq:曲线方程}
+\end{equation}
+式 \ref{eq:曲线方程} 给出描述绳子形状的方程.
+
+约束条件 $y\!\left(-b/2\right)=y\!\left(b/2\right)=0$ 给出
+\begin{equation}
+	b=2\int_0^{y_0}\frac{\mathrm dy}{\sqrt{\left(\frac{a^2-y^2}{a^2-y_0^2}\right)^2-1}}.
+	\label{eq:b约束}
+\end{equation}
+绳子上的长度微元
+\begin{equation}
+	\mathrm ds=\sqrt{1+y'^2}\,\mathrm dx=\frac{a^2-y^2}{a^2-y_0^2}\frac{\mathrm dy}{\sqrt{\left(\frac{a^2-y^2}{a^2-y_0^2}\right)^2-1}}=\frac{\mathrm dy}{\sqrt{1-\left(\frac{a^2-y_0^2}{a^2-y^2}\right)^2}}.
+\end{equation}
+从而
+\begin{equation}
+	l=2\int_0^{y_0}\frac{\mathrm dy}{\sqrt{1-\left(\frac{a^2-y_0^2}{a^2-y^2}\right)^2}}.
+	\label{eq:l约束}
+\end{equation}
+式 \ref{eq:b约束} 与式 \ref{eq:l约束} 隐式给出了式 \ref{eq:曲线方程} 中的参数 $a$ 和 $y_0$.
+
+\mypara
+\begin{equation}
+	E_\mathrm k=\int_{x=-b/2}^{b/2}\frac12\cdot\frac ml\,\mathrm ds\cdot \omega^2y^2=\frac{m\omega^2}{l}\int_0^{y_0}\frac{y^2\,\mathrm dy}{\sqrt{1-\left(\frac{a^2-y_0^2}{a^2-y^2}\right)^2}}.
+\end{equation}
+
+\mypara
+质心位置为
+\begin{equation}
+	y_\mathrm c=\frac1m\int_{x=-b/2}^{b/2}y\cdot\frac ml\,\mathrm ds
+	=\frac2l\int_0^{y_0}\frac{y\,\mathrm dy}{\sqrt{1-\left(\frac{a^2-y_0^2}{a^2-y^2}\right)^2}}=\frac{y_0\sqrt{2a^2-y_0^2}}l.
+\end{equation}
+绳子受到的合力
+\begin{equation}
+	F=m\omega^2y_\mathrm c
+	=\frac{m\omega^2y_0\sqrt{2a^2-y_0^2}}l.
+\end{equation}
+
+在 $x=\pm b/2$ 处曲线的切线斜率
+\begin{equation}
+	y'\!\left(\pm b/2\right)=\mp\tan\theta=\mp\sqrt{\left(\frac{a^2}{a^2-y_0^2}\right)^2-1},
+\end{equation}
+从而固定点处对绳子的拉力大小
+\begin{equation}
+	T_{\pm b/2}=\frac F{2\sin\theta}
+	=\frac{m\omega^2y_0\sqrt{2a^2-y_0^2}}{2l\sqrt{1-\left(\frac{a^2-y_0^2}{a^2}\right)^2}}
+	=\frac{m\omega^2a}{2l}.
+\end{equation}
+
+\textit{另}: 此题可用受力法解.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw[thick,->] (-1,0) -- (5,0) node[anchor=north] {$x$};
+		\draw[thick,->] (0,-1) -- (0,5) node[anchor=east] {$y$};
+		\draw[domain=0:2,smooth,variable=\x] plot ({\x}, {4-\x*\x/2});
+		\draw[thick,->] (0,4) node[anchor=north east] {$y_0$} -- (-0.7,4) node[anchor=east] {$T_0$};
+		\draw[thick,->] (1,3.5) -- (1,4.9) node[anchor=west] {$\int_0^x\frac ml\,\mathrm ds\cdot\omega^2\cdot y$};
+		\draw[dashed] (2,2) node[anchor=north west] {$\theta$} -- (3,2);
+		\draw[thick,->] (2,2) -- (2.7,0.6) node[anchor=west] {$T$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:绳子受力分析}
+\end{figure}
+
+设绳子在 $x=0$ 处的张力为水平方向 $T_0$,
+考虑 $\left[0,x\right]$ 上的一段绳子的受力平衡, 如图 \ref{fig:绳子受力分析} 所示.
+考虑到 $\tan\theta=-y'$, 有
+\begin{equation}
+	\int_0^x\frac ml\,\mathrm ds\cdot\omega^2\cdot y=-T_0y'.
+\end{equation}
+两边对 $x$ 求导可得
+\begin{equation}
+	\frac{m\omega^2}{l}\sqrt{1+y'^2}=-T_0y''.
+\end{equation}
+变换 $p:=y'$, 分离变量得
+\begin{equation}
+	\frac{p\,\mathrm dp}{\sqrt{1+p^2}}=-\frac{m\omega^2}{T_0l}y\,\mathrm dy.
+\end{equation}
+两边积分得
+\begin{equation}
+	\sqrt{1+p^2}-1=-\frac{m\omega^2}{2T_0l}\left(y^2-y_0^2\right).
+	\label{eq:受力法}
+\end{equation}
+代换 $a:=\sqrt{\frac{2T_0l}{m\omega^2}+y_0^2}$ 可将式 \ref{eq:受力法} 变为与式 \ref{eq:变分法} 等价的形式.
+
 \subsection{地铁站闸机}
 
-\subsection{Holmann 转移轨道}
+\subsection{Hohmann 转移轨道}
+
+物体的速度变化的全过程为
+\begin{equation}
+	\underbrace{\sqrt{\frac{GM}{r_1}}}_{\text{圆轨道}}\xrightarrow{\Delta v_1}
+	\underbrace{\sqrt{-\frac{2GM}{r_1+r_2}+\frac{2GM}{r_1}}
+	\rightarrow\sqrt{-\frac{2GM}{r_1+r_2}+\frac{2GM}{r_2}}}_{\text{椭圆轨道}}
+	\xrightarrow{\Delta v_2}\underbrace{\sqrt{\frac{GM}{r_2}}}_{\text{圆轨道}}.
+\end{equation}
+
+于是
+\begin{equation}
+	\Delta v_1+\Delta v_2\propto f\!\left(x\right):=\sqrt{\frac{2x}{1+x}}-1+\sqrt{\frac1x}-\sqrt{\frac2{x\left(1+x\right)}}.
+\end{equation}
+为了使 $\Delta v_1+\Delta v_2$ 极大,
+\begin{equation}
+	f'\!\left(x\right)=-\frac12x^{-\frac32}-\frac1{\sqrt2}x^{-\frac12}\left(1+x\right)^{-\frac32}+\frac1{\sqrt2}\left(1+2x\right)x^{-\frac32}\left(1+x\right)^{-\frac32}=0.
+	\label{eq:f'(x)=0}
+\end{equation}
+在式 \ref{eq:f'(x)=0} 两边乘 $2x^{\frac32}\left(1+x\right)^{\frac32}$ 可得
+\begin{equation}
+	\sqrt2\left(1+3x\right)-\left(1+x\right)^{\frac32}=0.
+\end{equation}
+此方程可约化为多项式方程
+\begin{equation}
+	P\!\left(x\right):=x^3-15x^2-9x-1=0.
+\end{equation}
+
+注意到
+\begin{equation*}
+	\cos3y=\cos y\left(2\cos^2y-1\right)-2\cos y\left(1-\cos^2y\right)=4\cos^3y-3\cos y,
+\end{equation*}
+所以
+\begin{equation*}
+	\cos^3\frac y3=\frac14\left(\cos y+3\cos\frac y3\right).
+\end{equation*}
+
+令 $x^\star:=5+4\sqrt7\cos\!\left(\frac13\arctan\frac{\sqrt3}{37}\right)$, 则
+\begin{align}
+	\left(x^\star-5\right)^3&=16\cdot 7^{\frac 32}\left(\cos\arctan\frac{\sqrt3}{37}+3\cos\!\left(\frac13\arctan\frac{\sqrt3}{37}\right)\right)\\
+	&=16\cdot 7^{\frac 32}\left(\frac{37}{2\cdot 7^{\frac32}}+3\cdot\frac{x^\star-5}{4\sqrt7}\right)\\
+	&=84x^\star-124.
+\end{align}
+由此可得 $P\!\left(x^\star\right)=0$.
 
 \subsection{电容势函数}
+
+\mypara
+$V\,\mathrm dQ$ 是电源对电容所做的功, $-F\,\mathrm dX$ 是外力对电容所做的功.
+
+\mypara
+令 $H:=U+FX$, 则
+\begin{equation}
+	\mathrm dH=V\,\mathrm dQ+X\,\mathrm dF.
+\end{equation}
+从而
+\begin{equation}
+	V=\left(\frac{\partial H}{\partial Q}\right)_F,\qquad X=\left(\frac{\partial H}{\partial F}\right)_Q.
+\end{equation}
+由于求偏导次序可交换,
+$\frac{\partial^2H}{\partial Q\partial F}=\frac{\partial^2H}{\partial F\partial Q}$,
+因此
+\begin{equation}
+	\left(\frac{\partial V}{\partial F}\right)_Q=\left(\frac{\partial X}{\partial Q}\right)_F.
+\end{equation}
+
+\mypara
+设 $C\!\left(X\right)=\alpha/X$, 则由 $Q=CV$ 可得状态方程
+\begin{equation}
+	QX=\alpha V.
+\end{equation}
+内能表达式为
+\begin{equation}
+	U=\frac12QV=\frac{Q^2X}{2\alpha}.
+\end{equation}
+于是
+\begin{equation}
+	F=-\left(\frac{\partial U}{\partial X}\right)_Q=\frac{Q^2}{2\alpha}=\frac{\alpha V^2}{2X^2}.
+\end{equation}
+于是可以在 $F$-$X$ 图作出如图 \ref{fig:电容势函数的图} 所示的曲线.
+图 \ref{fig:等V过程} 与图 \ref{fig:等Q过程} 分别是等 $V$ 过程与等 $Q$ 过程的图像.
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\begin{tikzpicture}
+			\draw[thick,->] (0,0) -- (5,0) node[anchor=north] {$X$};
+			\draw[thick,->] (0,0) -- (0,4) node[anchor=east] {$F$};
+			\draw[domain=0.9:4.5,smooth,variable=\x] plot ({\x},{3/\x/\x});
+		\end{tikzpicture}
+		\caption{等 $V$ 过程}
+		\label{fig:等V过程}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.4\linewidth}
+		\centering
+		\begin{tikzpicture}
+			\draw[thick,->] (0,0) -- (5,0) node[anchor=north] {$X$};
+			\draw[thick,->] (0,0) -- (0,4) node[anchor=east] {$F$};
+			\draw (0.5,2.5) -- (4.5,2.5);
+		\end{tikzpicture}
+		\caption{等 $Q$ 过程}
+		\label{fig:等Q过程}
+	\end{subfigure}
+	\caption{}
+	\label{fig:电容势函数的图}
+\end{figure}
 
 \end{document}
