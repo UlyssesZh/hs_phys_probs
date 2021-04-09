@@ -93,6 +93,36 @@ $F$ 为极板间作用力, $V$ 为极板间的电势差.
 若 $C\!\left(X\right)$ 是反比例函数,
 在 $F$-$X$ 图中分别作出等 $V$ 过程和等 $Q$ 过程的图像.
 
+\subsection{张拉整体}
+张拉整体 (tensegrity) 是一个由一些互不触碰的受压结构 (刚体) 以及连接它们的受拉结构 (绳) 组成的稳定结构.
+其在建筑学, 工程学, 生物学等领域都有应用.
+图 \ref{fig:张拉整体} (Cmglee, 2012) 是一个例子,
+其由顶部和底部各一个边长为 $a$ 的正 $n$ 边形 (图中 $n=4$) 组成.
+记底面的正 $n$ 边形为多边形 $\mathrm A_0\cdots\mathrm A_{n-1}$,
+顶面上的正 $n$ 边形为多边形 $\mathrm B_0\cdots\mathrm B_{n-1}$.
+$\mathrm A_0$ 与 $\mathrm A_n$ 是同一个点,
+$\mathrm B_0$ 与 $\mathrm B_n$ 是同一个点.
+对每个 $j$, 用长度为 $b$ 的轻绳连接 $\mathrm A_j\mathrm B_j$,
+用长度为 $l$ 的轻杆连接 $\mathrm A_j\mathrm B_{j+1}$.
+
+\mypara
+多边形 $\mathrm A_0\cdots\mathrm A_{n-1}$ 在旋转一定角度 (旋转的方向与 $\mathrm A_j$ 随 $j$ 变化的环绕方向相同) 之后,
+可以平移至与多边形 $\mathrm B_0\cdots\mathrm B_{n-1}$ 重合.
+求该转角的最小正值.
+
+\mypara
+记 $T\!\left(\mathrm{PQ}\right)$ 为连接 $\mathrm P,\mathrm Q$ 两点的绳或杆上的力,
+正值表示张力, 负值表示压力.
+已知, 对每个 $j$, $T\!\left(\mathrm A_j\mathrm A_{j+1}\right)=T_0$.
+对每个 $j$, 求 $T\!\left(\mathrm A_j\mathrm B_j\right)$ 和 $T\!\left(\mathrm A_j\mathrm B_{j+1}\right)$.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\linewidth]{Tensegrity_simple_4_RL.png}
+	\caption{}
+	\label{fig:张拉整体}
+\end{figure}
+
 \newpage
 \section{参考答案}
 
