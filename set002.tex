@@ -123,6 +123,100 @@ $\mathrm B_0$ 与 $\mathrm B_n$ 是同一个点.
 	\label{fig:张拉整体}
 \end{figure}
 
+\subsection{彩色视觉}
+
+视觉感受器 (眼睛) 中对彩色视觉至关重要的生物基础是视锥细胞 (corn cell).
+在光线充足的情况下, 视锥细胞比视杆细胞 (rod cell) 更加活跃,
+我们因此不考虑视杆细胞对视觉带来的影响.
+某种动物的视网膜上有 $n$ 种视锥细胞, 从而可以产生 $n$ 色视觉 ($n$-chromacy)
+(人类有三色视觉 (trichromacy),
+梅花雀有四色视觉 (tetrachromacy)\footnote{
+	Hart N. S., Partridge J. C., Bennett A. T., Cuthill I. C.\@. ``Visual pigments, cone oil droplets and ocular media in four species of estrildid finch''. \textit{Journal of Comparative Physiology A}. Jul--Aug, 2000; \textbf{186} (7--8): 681--694. doi: 10.1007/s003590000121. PMID: 11016784. S2CID: 19458550.
+},
+青凤蝶 (\textit{Graphium sarpedon}) 有十五色视觉\footnote{
+	Chen P., Awata H., Matsushita A., Yang E., Arikawa K.\@. ``Extreme Spectral Richness in the Eye of the Common Bluebottle Butterfly, \textit{Graphium sarpedon}''. \textit{Frontiers in Ecology and Evolution}, vol. 4, pp. 18. Mar 8, 2016. doi: 10.3389/fevo.2016.00018. ISSN: 2296-701X.
+}).
+第 $j$ 种视锥细胞对波长为 $\lambda$ 的光的吸收率为 $f_j\!\left(\lambda\right)$,
+其中 $f_j$ 看作 $\mathbf f:\left(0,+\infty\right)\to$ 的第 $j$ 个分量.
+第 $j$ 种视锥细胞在某种光刺激下的响应程度正比于它从中吸收的总功率.
+视锥细胞在受到刺激后, 会将响应信号以电信号的形式告诉大脑,
+大脑即可获得视网膜上某处的各种视锥细胞的响应程度 $\mathbf c\in\left[0,+\infty\right)^n$,
+其中 $\mathbf c$ 的分量 $c_j$ 为第 $j$ 种视锥细胞的响应程度.
+从而颜色可以与 $C:=\left[0,+\infty\right)^n$ 中的向量一一对应.
+
+规定两种变换: $T_u:c_j\mapsto uc_j$ ($u>0$)
+以及 $S_v:c_j\mapsto v\left(c_j-l\right)+l$ ($0<v\le\frac l{c_{\min}}$),
+其中 $l$ 是 $\mathbf c$ 中最小分量 $c_{\min}$ 和最大分量 $c_{\max}$ 的平均值.
+我们认为在这两种变换下 $\mathbf c$ 的色相保持不变.
+我们关于色相建立一个等价关系: $\mathbf c\sim\mathbf c'$
+当且仅当存在 $u,v$, 使得 $\mathbf c=T_uS_v\mathbf c'$.
+
+设某种设备 (不妨称为彩灯) 能发出固定的 $n$ 种单色光, 其波长分别为 $\lambda_k$.
+它能以任意不同的功率合成并发出这些单色光, 产生对视锥细胞的光刺激.
+
+彩虹中包含了所有的单色光.
+
+\mypara
+设某个光刺激中能量随波长的分布为已知函数 $g\!\left(\lambda\right)$,
+求该光刺激代表的颜色.
+
+\mypara
+求彩灯能产生的所有的颜色的集合 $L\subseteq C$.
+
+\mypara
+求彩虹中所有的颜色的集合 $R\subseteq C$.
+
+\mypara
+若存在一组 $\left\{\lambda_k\right\}$, 使得 $L=C$.
+求 $f_j$ 需要满足的条件.
+
+\mypara
+是否对于任意的 $\mathbf c\in C$, 存在 $\mathbf c'\in R$, 使得 $\mathbf c\sim\mathbf c'$?
+若是, 给出构造 $\mathbf c'$ 的方法.
+若否, 是否对于几乎所有的 $\mathbf c\in C$, 不存在这样的 $\mathbf c'$?
+
+\mypara
+是否对于任意的 $\mathbf c\in C$, 存在 $\mathbf c'\in L$, 使得 $\mathbf c\sim\mathbf c'$?
+若是, 给出构造 $\mathbf c'$ 的方法.
+若否, 是否对于任意的 $\mathbf c\in R$, 存在 $\mathbf c'\in L$, 使得 $\mathbf c\sim\mathbf c'$?
+
+\subsection{互 LC 震荡}
+
+我们知道电感有自感和互感.
+但是, 虽然我们有``互电容''的概念, 其并不能与互感很好地对应.
+我们现在来构造一种与互感相对应的概念``互容'':
+考虑四块的面积为 $S$ 的平行极板, 依次编号为 a--d.
+极板 a 和极板 c 看作一个电容器, 极板间距为 $d_1$;
+极板 b 和极板 d 看作一个电容器, 极板间距为 $d_2$;
+极板 b 和极板 c 的间距为 $d$.
+
+\mypara
+求这两个电容器之间的互容系数.
+
+\mypara
+设有两个 LC 电路,
+电路中分别有电容 $C_1$ 与 $C_2$, 电感 $L_1$ 与 $L_2$.
+两个电容之间的互容系数为 $N$, 两个电感之间的互感系数为 $M$.
+设在 $t=0$ 时两个电容分别带电 $Q_{10}$ 与 $Q_{20}$,
+求任意时刻 $t$ 时两个电容所带的电荷量 $Q_1\!\left(t\right)$ 与 $Q_2\!\left(t\right)$.
+
+\subsection{球套黑球}
+
+本题中提到的黑体都是余弦辐射体.
+将一个热容为 $C$ 的半径为 $r$ 的均匀的球形的黑体 A
+放在一个半径为 $R$ 的均匀的薄球壳 B 内.
+两个球心的距离为 $d<R-r$.
+在 $t=0$ 时, A 的温度为 $T_0$.
+A 内部的热传导很快.
+
+\mypara
+B 是热容为 $D$, 初始温度为 $S_0$ 的黑体.
+求 $t$ 时刻 A 的温度 $T\!\left(t\right)$.
+
+\mypara
+B 的内壁是可以完全反射热辐射的镜面.
+求 $t$ 时刻 A 的温度 $T\!\left(t\right)$.
+
 \newpage
 \section{参考答案}
 
@@ -358,5 +452,13 @@ $\frac{\partial^2H}{\partial Q\partial F}=\frac{\partial^2H}{\partial F\partial 
 	\caption{}
 	\label{fig:电容势函数的图}
 \end{figure}
+
+\subsection{张拉整体}
+
+\subsection{彩色视觉}
+
+\subsection{互 LC 震荡}
+
+\subsection{球套黑球}
 
 \end{document}
