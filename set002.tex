@@ -120,17 +120,7 @@ $\mathrm A_0$ 与 $\mathrm A_n$ 是同一个点,
 $\mathrm B_0$ 与 $\mathrm B_n$ 是同一个点.
 对每个 $j$, 用长度为 $b$ 的轻绳连接 $\mathrm A_j\mathrm B_j$,
 用长度为 $l$ 的轻杆连接 $\mathrm A_j\mathrm B_{j+1}$.
-
-\mypara
-多边形 $\mathrm A_0\cdots\mathrm A_{n-1}$ 在旋转一定角度 (旋转的方向与 $\mathrm A_j$ 随 $j$ 变化的环绕方向相同) 之后,
-可以平移至与多边形 $\mathrm B_0\cdots\mathrm B_{n-1}$ 重合.
-求该转角的最小正值.
-
-\mypara
-记 $T\!\left(\mathrm{PQ}\right)$ 为连接 $\mathrm P,\mathrm Q$ 两点的绳或杆上的力,
-正值表示张力, 负值表示压力.
-已知, 对每个 $j$, $T\!\left(\mathrm A_j\mathrm A_{j+1}\right)=T_0$.
-对每个 $j$, 求 $T\!\left(\mathrm A_j\mathrm B_j\right)$ 和 $T\!\left(\mathrm A_j\mathrm B_{j+1}\right)$.
+若该结构是一个张拉整体, 求 $l$.
 
 \begin{figure}[h!]
 	\centering
@@ -212,10 +202,15 @@ $\left\{f_j\right\}$ 是线性无关的.
 我们知道电感有自感和互感.
 但是, 虽然我们有``互电容''的概念, 其并不能与互感很好地对应.
 我们现在来构造一种与互感相对应的概念``互容'':
+若两个电容器的电容量分别为 $C_1$ 和 $C_2$, 且它们之间的互容系数为 $N$, 则
+$U_1=\frac{Q_1}{C_1}+\frac{Q_2}N$,
+且 $U_2=\frac{Q_2}{C_2}+\frac{Q_1}N$.
+
 考虑四块的面积为 $S$ 的平行极板, 依次编号为 a--d.
 极板 a 和极板 c 看作一个电容器, 极板间距为 $d_1$;
 极板 b 和极板 d 看作一个电容器, 极板间距为 $d_2$;
 极板 b 和极板 c 的间距为 $d$.
+其中 $d<d_1\ll\sqrt S$, 且 $d<d_2\ll\sqrt S$.
 
 \mypara
 求这两个电容器之间的互容系数.
@@ -224,8 +219,8 @@ $\left\{f_j\right\}$ 是线性无关的.
 设有两个 LC 电路,
 电路中分别有电容 $C_1$ 与 $C_2$, 电感 $L_1$ 与 $L_2$.
 两个电容之间的互容系数为 $N$, 两个电感之间的互感系数为 $M$.
-设在 $t=0$ 时两个电容分别带电 $Q_{10}$ 与 $Q_{20}$,
-求任意时刻 $t$ 时两个电容所带的电荷量 $Q_1\!\left(t\right)$ 与 $Q_2\!\left(t\right)$.
+求电路的振动频率.
+若该振动由多个频率不同的简谐振动叠加而成, 求出所有的频率.
 
 \subsection{球套黑球}
 
@@ -492,6 +487,84 @@ $\frac{\partial^2H}{\partial Q\partial F}=\frac{\partial^2H}{\partial F\partial 
 
 \subsection{张拉整体}
 
+设多边形 $\mathrm A_0\cdots\mathrm A_{n-1}$ 在旋转一定角度 $\alpha$
+(旋转的方向与 $\mathrm A_j$ 随 $j$ 变化的环绕方向相同) 之后,
+可以平移至与多边形 $\mathrm B_0\cdots\mathrm B_{n-1}$ 重合.
+设两个正 $n$ 边形所在平面之间的距离为 $h$,
+两个正 $n$ 边形的半径为
+\begin{equation}
+	r:=\frac a{2\sin\frac\pi n}.
+\end{equation}
+
+建立坐标系. 给出点的坐标:
+\begin{equation}
+	\mathrm A_j\left(r\cos\frac{2j\pi}n,r\sin\frac{2j\pi}n,0\right),
+	\quad\mathrm B_j\left(r\cos\!\left(\frac{2j\pi}n+\alpha\right),r\sin\!\left(\frac{2j\pi}n+\alpha\right),h\right).
+\end{equation}
+则几何约束为
+\begin{equation}
+	\left(r\cos\alpha-r\right)^2+\left(r\sin\alpha\right)^2+h^2=b^2,
+\end{equation}
+\begin{equation}
+	\left(r\cos\!\left(\alpha+\frac{2\pi}n\right)-r\right)^2
+	+\left(r\sin\!\left(\alpha+\frac{2\pi}n\right)\right)^2+h^2=l^2.
+\end{equation}
+将其看做关于 $\alpha,h$ 的方程组, 解得
+\begin{equation}
+	\sin\!\left(\alpha+\frac\pi n\right)
+	=\frac{l^2-b^2}{4r^2\sin\frac\pi n}
+	=\frac{l^2-b^2}{a^2}\sin\frac\pi n,
+	\label{eq:几何约束三角方程}
+\end{equation}
+
+考虑对称性, 每个 $T\!\left(\mathrm A_j\mathrm B_j\right)$ 相等,
+每个 $T\!\left(\mathrm A_j\mathrm B_{j+1}\right)$ 相等,
+每个 $T\!\left(\mathrm A_j\mathrm A_{j+1}\right)$ 相等.
+令 $T_a:=T\!\left(\mathrm A_j\mathrm A_{j+1}\right)$,
+$T_b:=T\!\left(\mathrm A_j\mathrm B_j\right)$,
+以及 $T_l:=T\!\left(\mathrm A_j\mathrm B_{j+1}\right)$.
+
+点 $\mathrm A_0$ 静力平衡给出条件
+\begin{equation}
+	\mathbf T\!\left(\mathrm A_0\mathrm A_1\right)+
+	\mathbf T\!\left(\mathrm A_0\mathrm A_{n-1}\right)+
+	\mathbf T\!\left(\mathrm A_0\mathrm B_0\right)+
+	\mathbf T\!\left(\mathrm A_0\mathrm B_1\right)=\mathbf0,
+	\label{eq:静力平衡}
+\end{equation}
+其中各个力
+\begin{gather}
+	\mathbf T\!\left(\mathrm A_0\mathrm A_1\right)=\frac{T_a}a
+	\left[\begin{matrix}r\cos\frac{2\pi}n-r\\r\sin\frac{2\pi}n\\0\end{matrix}\right],\\
+	\mathbf T\!\left(\mathrm A_0\mathrm A_{n-1}\right)=\frac{T_a}a
+	\left[\begin{matrix}r\cos\frac{2\pi}n-r\\-r\sin\frac{2\pi}n\\0\end{matrix}\right],\\
+	\mathbf T\!\left(\mathrm A_0\mathrm B_0\right)=\frac{T_b}b
+	\left[\begin{matrix}r\cos\alpha-r\\r\sin\alpha\\h\end{matrix}\right],\\
+	\mathbf T\!\left(\mathrm A_0\mathrm B_1\right)=\frac{T_l}l
+	\left[\begin{matrix}r\cos\!\left(\alpha+\frac{2\pi}n\right)-r\\r\sin\!\left(\alpha+\frac{2\pi}n\right)\\h\end{matrix}\right].
+\end{gather}
+注意到式 \ref{eq:静力平衡} 的 $y$ 和 $z$ 分量给出
+\begin{equation}
+	\begin{dcases}
+		\frac{T_b}br\sin\alpha+\frac{T_l}lr\sin\!\left(\alpha+\frac{2\pi}n\right)=0,\\
+		\frac{T_b}bh+\frac{T_l}lh=0.
+	\end{dcases}
+\end{equation}
+该方程组要有非零解, 于是系数行列式为零. 从而得到条件
+\begin{equation}
+	\sin\alpha=\sin\!\left(\alpha+\frac{2\pi}n\right).
+	\label{eq:张拉结构条件}
+\end{equation}
+满足式 \ref{eq:张拉结构条件} 的最小的正的 $\alpha$ 为
+\begin{equation}
+	\alpha=\left(\frac12-\frac1n\right)\pi.
+	\label{eq:alpha}
+\end{equation}
+将式 \ref{eq:alpha} 代入式 \ref{eq:几何约束三角方程} 可得
+\begin{equation}
+	l=\sqrt{\frac{a^2}{\sin\frac\pi n}+b^2}.
+\end{equation}
+
 \subsection{彩色视觉}
 
 \mypara
@@ -609,6 +682,8 @@ $b$ 与 $\varepsilon$ 的取值如表 \ref{tab:be} 所示.
 
 \begin{table}[h!]
 	\centering
+	\caption{}
+	\label{tab:be}
 	\begin{tabular}{c|ccc}
 		$\min,\max$&$1$&$2$&$3$\\
 		\hline
@@ -616,8 +691,6 @@ $b$ 与 $\varepsilon$ 的取值如表 \ref{tab:be} 所示.
 		$2$&$0,-1$&&$-2,1$\\
 		$3$&$0,1$&$2,-1$&
 	\end{tabular}
-	\caption{}
-	\label{tab:be}
 \end{table}
 
 此时各种情况都有可能出现.
@@ -760,11 +833,130 @@ $\forall\lambda:f_1\!\left(\lambda\right)>f_2\!\left(\lambda\right)$.
 该曲线也有可能完全处在超棱锥所表达的色相之内, 取决于 $\mathbf f$ 的具体形式.
 因此, 若并不是对于任意的 $\mathbf c\in C^*$,
 存在与 $\mathbf c$ 等色相的 $\mathbf c'\in L$,
-那么对于可能对于任意的 $\mathbf c\in R$,
+那么可能对于任意的 $\mathbf c\in R$,
 存在与 $\mathbf c$ 等色相的 $\mathbf c'\in L$,
 这取决于 $\mathbf f$ 的形式.
 
 \subsection{互 LC 震荡}
+
+\mypara
+如图 \ref{fig:四块极板} 所示, 四块极板将空间分割为五个部分,
+分别设为 I--V.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw[thick] (0,0) node[anchor=east] {a} -- (5,0) node[anchor=north west] {$Q_1$};
+		\draw[thick] (0,-1) node[anchor=north east] {b} -- (5,-1) node[anchor=west] {$Q_2$};
+		\draw[thick] (0,-2) node[anchor=east] {c} -- (5,-2) node[anchor=south west] {$-Q_1$};
+		\draw[thick] (0,-3) node[anchor=south east] {d} -- (5,-3) node[anchor=west] {$-Q_2$};
+		\node at (2.5,0.5) {I};
+		\node at (2.5,-0.5) {II};
+		\node at (2.5,-1.5) {III};
+		\node at (2.5,-2.5) {IV};
+		\node at (2.5,-3.5) {V};
+		\draw (4,0) -- (4,0.2) -- (6.25,0.2);
+		\draw (1,-1) -- (1,-0.8) -- (-1.25,-0.8);
+		\draw (4,-2) -- (4,-2.2) -- (6.25,-2.2);
+		\draw (1,-3) -- (1,-3.2) -- (-1.25,-3.2);
+		\draw[<->] (6,0.2) -- (6,-2.2);
+		\draw[<->] (-1,-0.8) -- (-1,-3.2);
+		\node[anchor=west] at (6,-1) {$U_1$};
+		\node[anchor=east] at (-1,-2) {$U_2$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:四块极板}
+\end{figure}
+
+分别列出五块区域中的电场 (以向下为正):
+\begin{gather}
+	2\varepsilon_0SE_\mathrm I=-Q_1-Q_2+Q_1+Q_2=0,\\
+	2\varepsilon_0SE_\mathrm{II}=Q_1-Q_2+Q_1+Q_2=2Q_1,\\
+	2\varepsilon_0SE_\mathrm{III}=Q_1+Q_2+Q_1+Q_2=2\left(Q_1+Q_2\right),\\
+	2\varepsilon_0SE_\mathrm{IV}=Q_1+Q_2-Q_1+Q_2=2Q_2,\\
+	2\varepsilon_0SE_\mathrm V=Q_1+Q_2-Q_1-Q_2=0.
+\end{gather}
+从而电势差
+\begin{gather}
+	U_1=E_\mathrm{II}\left(d_1-d\right)+E_\mathrm{III}d=\frac{d_1}{\varepsilon_0S}Q_1+\frac d{\varepsilon_0S}Q_2,\\
+	U_2=E_\mathrm{III}d+E_\mathrm{IV}\left(d_2-d\right)=\frac{d_2}{\varepsilon_0S}Q_2+\frac d{\varepsilon_0S}Q_1.
+\end{gather}
+比较互容的定义, 可得互容系数
+\begin{equation}
+	N=\frac{\varepsilon_0S}d.
+\end{equation}
+
+\mypara
+分别对两个 LC 电路应用 Kirchhoff 电压定律, 可得方程组
+\begin{equation}
+	\begin{dcases}
+		\frac{Q_1}{C_1}+\frac{Q_2}N=L_1\ddot Q_1+M\ddot Q_2,\\
+		\frac{Q_2}{C_2}+\frac{Q_1}N=L_2\ddot Q_2+M\ddot Q_1.
+	\end{dcases}
+	\label{eq:Kirchhoff电压}
+\end{equation}
+定义电容矩阵
+\begin{equation}
+	\mathbf C:=\left[\begin{matrix}\frac1{C_1}&\frac1N\\
+	\frac1N&\frac1{C_2}\end{matrix}\right]^{-1},
+\end{equation}
+电感矩阵
+\begin{equation}
+	\mathbf L:=\left[\begin{matrix}L_1&M\\M&L_2\end{matrix}\right],
+\end{equation}
+从而式 \ref{eq:Kirchhoff电压} 可重写为
+\begin{equation}
+	\mathbf C^{-1}\mathbf Q=\mathbf L\ddot{\mathbf Q},
+\end{equation}
+或者
+\begin{equation}
+	\ddot{\mathbf Q}=\mathbf L^{-1}\mathbf C^{-1}\mathbf Q,
+	\label{eq:二阶ODE}
+\end{equation}
+其中 $\mathbf Q:=\left[\begin{matrix}Q_1\\Q_2\end{matrix}\right]$.
+将 $\mathbf L^{-1}\mathbf C^{-1}$ 特征分解:
+\begin{equation}
+	\mathbf L^{-1}\mathbf C^{-1}=\mathbf P\boldsymbol\Lambda\mathbf P^{-1},
+\end{equation}
+其中 $\boldsymbol\Lambda:=
+\left[\begin{matrix}-\omega_1^2&0\\0&-\omega_2^2\end{matrix}\right]$
+是对角矩阵.
+令
+\begin{equation}
+	\left[\begin{matrix}q_1\\q_2\end{matrix}\right]:=\mathbf P^{-1}\mathbf Q,
+\end{equation}
+从而式 \ref{eq:二阶ODE} 可重写为
+\begin{equation}
+	\begin{dcases}
+		\ddot q_1=-\omega_1^2q_1,\\
+		\ddot q_2=-\omega_2^2q_2,
+	\end{dcases}
+\end{equation}
+其解为
+\begin{equation}
+	\begin{dcases}
+		q_1=A_1\cos\omega_1t+B_1\sin\omega_1t,\\
+		q_2=A_2\cos\omega_2t+B_2\sin\omega_2t.\\
+	\end{dcases}
+\end{equation}
+从而可得解
+\begin{equation}
+	\mathbf Q=\mathbf P\left[\begin{matrix}
+		A_1\cos\omega_1t+B_1\sin\omega_1t\\
+		A_2\cos\omega_2t+B_2\sin\omega_2t
+	\end{matrix}\right].
+\end{equation}
+因此电路中的振动是由频率为 $\omega_1$ 和 $\omega_2$ 的简谐振动合成的.
+
+经过一番冗长的计算后可得
+\begin{equation}
+	\omega_{1,2}=\sqrt{\frac{p\pm\sqrt\Delta}{L_1L_2-M^2}},
+\end{equation}
+其中
+\begin{gather}
+	p:=\frac MN-\frac12\left(\frac{L_1}{C_2}+\frac{L_2}{C_1}\right),\\
+	\Delta:=\frac{L_1L_2}{N^2}+\frac{M^2}{C_1C_2}+\frac14\left(\frac{L_1}{C_2}-\frac{L_2}{C_1}\right)^2-\left(\frac{L_1}{C_2}+\frac{L_2}{C_1}\right)\frac MN.
+\end{gather}
 
 \subsection{球套黑球}
 
