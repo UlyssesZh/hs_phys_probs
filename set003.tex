@@ -1,0 +1,352 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage[total={7in,10in}]{geometry}
+\usepackage{amssymb}
+\usepackage{siunitx}
+\usepackage{mathrsfs}
+\usepackage{mhchem}
+
+\newcounter{para}
+\newcommand\mypara{\par\refstepcounter{para}(\thepara)\space}
+\titleformat{\section}[block]{\Large\bfseries\filcenter}{}{0em}{}
+\renewcommand\thesection{}
+\renewcommand\thesubsection{\protect\setcounter{equation}{0}\protect\setcounter{para}{0}第 \arabic{subsection} 题}
+
+\title{hs\_phys\_probs 003}
+\author{詹有丘}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\subsection{原电池}
+氧化还原反应是物质得或失电子的反应. 它可以用于制造化学电池.
+
+\mypara
+考虑还原 (正向) / 氧化 (逆向) 反应 $\ce{A + e- <=> B}$.
+在某种条件 (浓度, 压强, 温度等) 下, 反应正向进行 $\SI{1}{mol}$
+产生的 Gibbs 能变化量为 $\Delta G_\mathrm m$.
+现在考虑某个装置, 使物质 A 和物质 B 相接触, 并将它们接入某个可以帮助转移电子的回路中.
+当反应发生时, A-B 体系减少的 Gibbs 能被完全转化为电能
+(即 A-B 体系与外界的能量交换完全以电功的形式完成).
+求当该反应发生时 A 端与 B 端的电势差 $\mathscr E_{\ce A/\ce B}$.
+
+\mypara
+若建成了上一问的装置, 由于反应是自发产生的,
+而且化学能到电能的转化被认为是完全的,
+所以实际上 A-B 体系在该装置中产生了电动势 $\mathscr E_{\ce A/\ce B}$.
+我们利用这一点制造铜锌原电池.
+铜锌原电池由 $\ce{CuSO4}$ 溶液, $\ce{ZnSO4}$ 溶液以及分别插在其中的
+$\ce{Cu}$ 固体和 $\ce{Zn}$ 固体组成.
+在两个溶液之间有盐桥连接, 使它们能交换 $\ce{SO4^{2-}}$.
+负载的两端分别接在 $\ce{Cu}$ 固体上和 $\ce{Zn}$ 上.
+盐桥内有电阻 $r=1.00\,\Omega$.
+在某种条件下, 我们有下面的热化学数据
+\begin{gather*}
+	\ce{\frac12Cu^{2+}(aq) + e- <=> \frac12Cu(s)},\qquad
+	\Delta G_\mathrm m=-\SI{4.78}{eV}\cdot N_\mathrm A;\\
+	\ce{\frac12Zn^{2+}(aq) + e- <=> \frac12Zn(s)},\qquad
+	\Delta G_\mathrm m=-\SI{3.68}{eV}\cdot N_\mathrm A.
+\end{gather*}
+将电池接上纯电阻负载 $R=5.00\,\Omega$,
+分别求阳极 (氧化反应) 与阴极 (还原反应) 的功率 (注意正负号).
+
+\mypara
+考虑一个三电极原电池.
+三个电极分别为 $\ce{Zn^{2+}}$-$\ce{Zn}$ 体系,
+$\ce{Cu^{2+}}$-$\ce{Cu}$ 体系,
+$\ce{Ag^+}$-$\ce{Ag}$ 体系.
+三个溶液两两之间以具有电阻 $r=1.00\,\Omega$ 的盐桥连接.
+在某种条件下, 上一问中的热化学数据仍然成立, 另外,
+\begin{equation*}
+	\ce{Ag+(aq) + e- <=> Ag(s)},\qquad
+	\Delta G_\mathrm m=-\SI{5.24}{eV}\cdot N_\mathrm A.
+\end{equation*}
+为该原电池接入负载 $R_{\ce{Zn}\text-\ce{Cu}}=5.00\,\Omega$,
+$R_{\ce{Cu}\text-\ce{Ag}}=6.00\,\Omega$,
+$R_{\ce{Ag}\text-\ce{Zn}}=7.00\,\Omega$.
+求 $\ce{Cu^{2+}}$-$\ce{Cu}$ 体系的功率.
+判断它正在发生氧化反应还是还原反应.
+
+\subsection{步步高升}
+
+Kat 踩着高跷在与水平面的夹角为 $\alpha\in\left(-\frac\pi2,\frac\pi2\right)$ 的斜坡上走路,
+$\alpha>0$ 表示上坡, $\alpha<0$ 表示下坡.
+高跷始终在与斜坡垂直的平面内运动.
+将 Kat 视为质量为 $m$ 的质点, 将高跷视为轻硬细杆. 称杆的末端为``脚''.
+每次开始迈步时, 斜坡给予后脚大小为 $\eta m\sqrt{gl}$ 的瞬时冲量, 使这一结构从静止开始运动;
+每次结束迈步时, 斜坡给予前脚一个瞬时冲量, 使这一结构静止.
+每次迈步的过程中, 一只脚不与地面接触, 另一只脚始终与地面接触且不滑动
+(即地面与脚之间的静摩擦系数 $\mu$ 足够大).
+当脚与地面接触时, 其到 Kat 的距离保持为 $l$.
+Kat 的步幅 (当两只脚同时与斜坡接触时它们之间的距离) 恒定为 $2\xi l$,
+其中 $\xi\in\left(0,1\right)$.
+
+\mypara
+求 $\mu$ 的范围.
+
+\mypara
+在 $\xi$-$\alpha$ 平面中,
+求能让 Kat 按题目所说的方式走路的区域的面积.
+
+\mypara
+Kat 会在每次前脚落下的同时迈出后脚.
+求 Kat 的平均速度的大小与 $\sqrt{gl}$ 的比值, 用 $\alpha,\xi,\eta$ 表示.
+可以保留积分号.
+
+\subsection{帮助 Kat}
+
+\mypara
+考虑等温大气模型: 温度随海拔线性改变.
+求大气密度 $\rho$ 随海拔 $z$ 的函数关系.
+可以按需引入一些常数.
+
+\mypara
+Kat 想要研究在力场 $F\!\left(z\right)$ 的作用下竖直下落的物体的运动,
+它在下落的过程中还会受到正比于大气密度 $\rho$ 和运动速度的平方 $\dot z^2$ 的阻力.
+帮 Kat 写出这一运动的微分方程.
+可以按需引入一些常数.
+
+\mypara
+Kat 看到你写下的方程后皱了皱眉: 它是一个二阶的微分方程.
+但你自信地拍了拍胸脯, 说只需要令 $v:=\dot z$, 就可以将原本的二阶微分方程化为一阶微分方程.
+帮 Kat 写出这个一阶的微分方程.
+
+\mypara
+Kat 看到你写下的新的方程后皱了皱眉: 它是一个非线性的微分方程.
+但你自信地拍了拍胸脯, 说你可以找到一个 $\varphi\!\left(z\right)$,
+使得令 $u:=\varphi\!\left(z\right)v$ 后就可以将原本的非线性微分方程化为线性的.
+帮 Kat 写出这个线性的微分方程.
+
+\mypara
+Kat 觉得你很厉害, 于是你决定帮人帮到底.
+帮 Kat 写出 $z\!\left(t\right)$ 的形式, 从而将求解微分方程的问题约化为积分问题.
+
+\subsection{宏观 van der Waals 力}
+
+1937 年, London 指出, van der Waals 力是分子间的七次方反比力.
+同年, Hamaker 通过积分给出了两个匀质的宏观球之间的 van der Waals 力.
+现在我们来复现一下 Hamaker 当年的成果.
+
+\mypara
+有两个匀质球, 半径分别为 $r_1$ 和 $r_2$, 球心之间距离为 $z$, 分子数密度分别为 $q_1$ 和 $q_2$.
+分别来自两个球的分子之间的吸引力反比于两个分子之间的距离的七次方, 比例系数为 $6\lambda$.
+求这两个球之间的吸引力的大小.
+
+\mypara
+有一块具有厚度为 $t$ 的无限大匀质平板, 以及一个半径为 $R$ 的匀质球.
+这两个物体之间的间隙为 $d$.
+这两个物体中的分子数密度都为 $q$, 分子间作用力仍然是比例系数为 $6\lambda$ 的七次方反比力.
+求这两个物体之间的吸引力的大小.
+
+\subsection{Moiré 纹}
+
+考虑这样一种``光栅'', 它们像寻常的衍射光栅一样有密集分布的条纹, 用于遮挡光线.
+我们所使用的光的波长的尺度远小于条纹的细节, 所以实际上无法观察到衍射现象.
+当一束均匀的平行光垂直射入光栅时, 光栅背后的光屏上会展示出条纹.
+它们不是光的干涉或衍射条纹, 暗纹的出现仅仅是因为本应到达该处的光被光栅上的条纹遮挡.
+当我们远远地观看光屏时, 因为眼睛的辨别能力有限 (即条纹间距远小于 Rayleigh 判据的要求),
+实际上观察到的是一片亮度随空间分布的光斑, 越暗的地方条纹越密.
+我们定义观察到的光斑在 $\left(x,y\right)$ 处的亮度为,
+在 $\left(x,y\right)$ 处取的一块小面积 $\mathrm dS$ (虽然很小, 但其尺度远大于条纹的细节)
+上未被条纹遮挡的部分的面积占比.
+
+\mypara
+现在我们制作了两个相同的光栅,
+光栅上均匀分布着平直的条纹, 条纹宽度都为 $d$, 条纹之间的间隙都为 $p$.
+现在将两个光栅倾斜摆放, 使得它们的条纹与 $x$ 轴的夹角分别为 $\theta$ 和 $-\theta$.
+两个光栅关于 $y$ 轴对称.
+将这两个倾斜摆放的光栅贴在一起后得到一个新的光栅.
+求均匀的平行光垂直通过这一光栅之后光屏上得到的亮度分布 $I\!\left(x,y\right)$.
+量级 $d\sim p\ll\sqrt{\mathrm dS}\ll d/\theta$.
+
+\mypara
+现在我们制作了两个相同的光栅,
+光栅上分布着同心圆形状的条纹, 条纹的宽度和条纹之间的间隙都为 $d$.
+现在将两个光栅错位摆放, 使得它们的圆心分别位于 $\left(a,0\right)$ 和 $\left(-a,0\right)$.
+将这两个错位摆放的光栅贴在一起后得到一个新的光栅.
+设均匀的平行光垂直通过这一光栅之后在光屏上得到的亮度分布为 $I\!\left(x,y\right)$.
+分别求 $I\!\left(x,y\right)=\frac14$ (极暗) 和
+$I\!\left(x,y\right)=\frac34$ (极亮) 的曲线方程.
+量级 $d\sim\left|a\right|\ll\sqrt{\mathrm dS}\ll\sqrt{x^2+y^2}$.
+
+\subsection{磁感线的秘密}
+
+已知某个静磁场的磁感线是一族曲线
+$$C_{k,n}:\begin{cases}x^2+\frac{y^2}{k^2}=k^2R^2,\\z=nR,\end{cases}$$
+其中参数 $k,n$ 等步长地变化以给出不同的磁感线.
+求能够形成这个静磁场的稳恒电流的电流密度场 $\mathbf j\!\left(x,y,z\right)$.
+
+\subsection{向着胜利前进}
+
+飞船在自身的瞬时静止系中每单位时间发射出速度为 $-u$ 的质量为 $\mu$ 的推进剂.
+$t=0$ 时, 飞船静止在 $x=0$ 处, 质量为 $m$.
+
+\mypara
+求 $t$ 时刻飞船的坐标.
+
+\mypara
+求 $t$ 时刻单位时间掠过 $x=0$ 点的推进剂携带的能量.
+
+\subsection{金属球散射}
+
+一束带 $q$ 电的质量为 $m$ 的粒子以初速度 $v$
+从无穷远处射向半径为 $R$ 的固定的不带电的金属球.
+求微分散射截面 $\mathrm d\sigma/\mathrm d\Omega$
+(单位立体角的出射粒子对应的入射截面的大小),
+表示为关于散射角 $\theta$ 的函数.
+
+\newpage
+\section{参考答案}
+
+\subsection{原电池}
+
+\mypara
+反应 $\ce{A + e- <=> B}$ 的 Gibbs 能变化为 $\Delta G_\mathrm m$
+意味着每当有单位物质的量的电子流入 $A$ 端, A-B 体系的能量就会增加 $\Delta G_\mathrm m$,
+从而有 $-\Delta G_\mathrm m$ 的能量以电功的形式被释放到外界.
+也就是说, 从 $A$ 端流出单位电荷, 就能对外界做 $-\frac{\Delta G_\mathrm m}{eN_\mathrm A}$ 的电功.
+因此,
+\begin{equation}
+	\mathscr E_{\ce A/\ce B}=-\frac{\Delta G_\mathrm m}{eN_\mathrm A}.
+\end{equation}
+
+\subsection{步步高升}
+
+此解答采用自然单位 $m=g=l=1$.
+
+\mypara
+因为杆是轻质的, 所以斜坡对杆的作用力 (弹力和摩擦力的合力) 必然沿杆.
+应用摩擦角的方法易得
+\begin{equation}
+	\mu\ge\tan\arcsin\xi=\frac{\xi}{\sqrt{1-\xi^2}}.
+\end{equation}
+
+\mypara
+令 $$\beta:=\arcsin\xi.$$
+
+首先, 当两只脚都与地面接触时体系静力平衡,
+因此此时 Kat (重心) 必然在两脚之间.
+这一几何关系给出 $\beta$ 的下限
+\begin{equation}
+	\label{eq:beta下限}
+	\beta>\left|\alpha\right|.
+\end{equation}
+
+现在考虑迈步的过程.
+令 $\varphi$ 为与斜坡接触的腿与斜坡的法线的夹角.
+易得迈步过程中的能量守恒
+\begin{equation}
+	\frac12\dot\varphi^2+\cos\!\left(\varphi-\alpha\right)=E,
+\end{equation}
+从而有
+\begin{equation}
+	\label{eq:phi的微分方程}
+	\dot\varphi^2=2\left(E-\cos\!\left(\varphi-\alpha\right)\right),
+	\qquad\ddot\varphi=\sin\!\left(\varphi-\alpha\right).
+\end{equation}
+
+建立坐标系, 以与斜坡接触的脚为原点, 沿斜坡方向为 $x$ 轴.
+易得 Kat 的 $y$ 坐标
+\begin{equation}
+	\label{eq:Kat坐标}
+	\qquad y=\cos\varphi.
+\end{equation}
+对式 \ref{eq:Kat坐标} 求二阶导得
+\begin{equation}
+	\label{eq:Kat加速度}
+	\ddot y=-\ddot\varphi\sin\varphi-\dot\varphi^2\cos\varphi.
+\end{equation}
+另一方面, 在垂直于斜坡方向的 Newton 第二定律给出
+\begin{equation}
+	\label{eq:Newton第二定律}
+	\ddot y=N-\cos\alpha,
+\end{equation}
+其中 $N$ 为斜坡对脚的弹力.
+
+将式 \ref{eq:phi的微分方程} 与式 \ref{eq:Newton第二定律} 代入式 \ref{eq:Kat加速度} 可得
+\begin{equation*}
+	N-\cos\alpha=-\sin\!\left(\varphi-\alpha\right)\sin\varphi
+	-2\left(E-\cos\!\left(\varphi-\alpha\right)\right)\cos\varphi.
+\end{equation*}
+化简得
+\begin{equation}
+	N=\cos\varphi\left(3\cos\!\left(\varphi-\alpha\right)-2E\right).
+\end{equation}
+代入不脱离斜面的条件 $N>0$ 可得
+\begin{equation}
+	\label{eq:E上限}
+	E<\frac32\cos\!\left(\varphi-\alpha\right).
+\end{equation}
+式 \ref{eq:E上限} 必须对所有 $\varphi\in\left[-\beta,\beta\right]$ 成立.
+因此
+\begin{equation}
+	\label{eq:E上限2}
+	E<\frac32\cos\!\left(\beta+\left|\alpha\right|\right).
+\end{equation}
+另一方面, 为了翻越 $\varphi=0$ 势垒, 有
+\begin{equation}
+	\label{eq:E下限}
+	E>1.
+\end{equation}
+对于由式 \ref{eq:E上限2} 与式 \ref{eq:E下限} 组成的不等式组, 为了让 $E$ 有解, 得
+\begin{equation}
+	1<\frac32\cos\!\left(\beta+\left|\alpha\right|\right).
+\end{equation}
+其给出 $\beta$ 的上限
+\begin{equation}
+	\label{eq:beta上限}
+	\beta<\arccos\frac23-\left|\alpha\right|.
+\end{equation}
+
+由式 \ref{eq:beta下限} 与式 \ref{eq:beta上限} 得
+\begin{equation*}
+	\left|\alpha\right|<\beta<\arccos\frac23-\left|\alpha\right|,
+\end{equation*}
+即
+\begin{equation}
+	\sin\left|\alpha\right|<\xi<\sin\!\left(\arccos\frac23-\left|\alpha\right|\right).
+\end{equation}
+注意到为了让 $\xi$ 有解, $\alpha\in\left(-\frac12\arccos\frac23,\frac12\arccos\frac23\right)$.
+
+从而最终可得所要求的面积
+\begin{equation}
+\int_{-\frac12\arccos\frac23}^{\frac12\arccos\frac23}
+\left(\sin\!\left(\arccos\frac23-\left|\alpha\right|\right)-\sin\left|\alpha\right|\right)
+\mathrm d\alpha=\frac23\left(\sqrt{30}-5\right).
+\end{equation}
+
+\mypara
+当斜坡给予后脚冲量 $\eta$ 时, 后腿将该冲量传递至 Kat.
+从而 Kat 获得的垂直于前腿方向的冲量为 $\eta\sin2\beta$.
+容易写出 Kat 此时具有的能量为
+\begin{equation}
+	\label{eq:E}
+	E=\frac12\eta^2\sin^22\beta+\cos\!\left(\beta-\alpha\right)
+	=2\eta^2\xi^2\left(1-\xi^2\right)+\cos\!\left(\beta-\alpha\right).
+\end{equation}
+将式 \ref{eq:E} 代入式 \ref{eq:phi的微分方程} 可得
+\begin{equation}
+	\dot\varphi^2=2\left(2\eta^2\xi^2\left(1-\xi^2\right)+
+	\cos\!\left(\beta-\alpha\right)-\cos\!\left(\varphi-\alpha\right)\right).
+\end{equation}
+迈一步所需要的时间是 $\varphi$ 从 $-\beta$ 变化到 $\beta$ 需要的时间
+\begin{equation}
+	T=\int_{-\beta}^\beta\frac{\mathrm d\varphi}{\sqrt{
+	2\left(2\eta^2\xi^2\left(1-\xi^2\right)+
+	\cos\!\left(\beta-\alpha\right)-\cos\!\left(\varphi-\alpha\right)\right)}}.
+\end{equation}
+用步幅 $2\xi$ 除以 $T$ 即可得平均速度
+\begin{equation}
+	\frac{2\xi}T=\frac{2\sqrt2\xi}{
+	\int_{-\arcsin\xi}^{\arcsin\xi}\frac{\mathrm d\varphi}{\sqrt{
+	2\eta^2\xi^2\left(1-\xi^2\right)+
+	\cos\left(\arcsin\xi-\alpha\right)-\cos\left(\varphi-\alpha\right)}}}.
+\end{equation}
+
+\end{document}
