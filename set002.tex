@@ -72,17 +72,26 @@ $z$ 轴与地面的夹角被适当地选取, 以至于三锟闸在初始状态�
 长方体足够高.
 
 \mypara
-求满足以下条件的长方体的最大宽度 $a_0$: 人能完全通过闸机, 且长方体的厚度可以任意大.
+求满足以下条件的长方体的最大宽度 $w_0$: 人能完全通过闸机, 且长方体的厚度可以任意大.
 
 \mypara
-接上问, 若长方体的宽度 $a>a_0$, 求满足以下条件的长方体的最大横截面积: 人能完全通过闸机.
+接上问, 若长方体的宽度大于 $w_0$, 求满足以下条件的长方体的最大横截面积: 人能完全通过闸机.
+只需写出它是什么函数在什么区间上的最大值即可.
 
 \mypara
-若长方体的宽度为 $a$, 人在完全通过闸机的过程中需要克服三种摩擦:
-来自墙面和地面的滑动摩擦力 (大小恒定为 $f$),
-来自杆的滑动摩擦力 (摩擦系数为 $\mu$),
-来自三锟闸转轴的滑动摩擦力矩 (大小恒定为 $K$).
-求人在缓慢地完全通过闸机的过程中, 来自杆的滑动摩擦耗散的能量为多少.
+长方体的宽度为 $w$. 人在完全通过闸机的过程中, 与杆之间存在滑动摩擦, 摩擦系数为 $\mu$.
+在三锟闸的转轴内有滑动摩擦力矩, 其大小恒定为 $K$.
+求人在缓慢地完全通过闸机的过程中, 对杆做的功.
+可以保留积分.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.4\linewidth]{201841818446441.png}
+	\caption{
+		\href{http://www.hnsfj.com/product_view_21_155.html}{三锟闸},
+		版权所有 © 2021 郑州思诺电子有限公司
+	}
+\end{figure}
 
 \subsection{Hohmann 转移轨道}
 质量为 $m$ 的物体一开始绕着质量为 $M\gg m$ 的星体在半径为 $r_1$ 的圆轨道上运动.
@@ -112,7 +121,7 @@ $F$ 为极板间作用力, $V$ 为极板间的电势差.
 \subsection{张拉整体}
 张拉整体 (tensegrity) 是一个由一些互不触碰的受压结构 (刚体) 以及连接它们的受拉结构 (绳) 组成的稳定结构.
 其在建筑学, 工程学, 生物学等领域都有应用.
-图 \ref{fig:张拉整体} (Cmglee, 2012) 是一个例子,
+图 \ref{fig:张拉整体} 是一个例子,
 其由顶部和底部各一个边长为 $a$ 的正 $n$ 边形 (图中 $n=4$) 组成.
 记底面的正 $n$ 边形为多边形 $\mathrm A_0\cdots\mathrm A_{n-1}$,
 顶面上的正 $n$ 边形为多边形 $\mathrm B_0\cdots\mathrm B_{n-1}$.
@@ -125,7 +134,11 @@ $\mathrm B_0$ 与 $\mathrm B_n$ 是同一个点.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.5\linewidth]{Tensegrity_simple_4_RL.png}
-	\caption{}
+	\caption{
+		\href{https://commons.wikimedia.org/wiki/File:Tensegrity_simple_4_RL.png}{Tensegrity\_simple\_4.gif: Cmglee, derivative work: Cmglee},
+		\href{https://creativecommons.org/licenses/by-sa/3.0}{CC BY-SA 3.0},
+		via Wikimedia Commons
+	}
 	\label{fig:张拉整体}
 \end{figure}
 
@@ -373,6 +386,265 @@ B 的内壁是可以完全反射热辐射的镜面.
 代换 $a:=\sqrt{\frac{2T_0l}{m\omega^2}+y_0^2}$ 可将式 \ref{eq:受力法} 变为与式 \ref{eq:变分法} 等价的形式.
 
 \subsection{地铁站闸机}
+
+如图 \ref{fig:三锟闸} 所示, 建立坐标系.
+以人前进的方向为 $x$ 轴和 $x'$ 轴, $z'$ 轴水平, $y,y',z,z'$ 四根轴在同一平面.
+设 $z'$ 轴与 $z$ 轴的夹角为 $\beta$.
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{0.6\linewidth}
+		\centering
+		\begin{tikzpicture}
+		\draw (-6,2) rectangle (-3,-4);
+		\draw (-6,2) -- (-4.5,3);
+		\draw (-3,2) -- (-1.5,3);
+		\draw (-3,-4) -- (-1.5,-3);
+		\draw (-4.5,3) -- (-1.5,3) -- (-1.5,-3);
+		\node[anchor=south] at (0,0) {O};
+		\draw[ultra thick] (0,0) -- (-4,-2) node[anchor=east] {B};
+		\draw[ultra thick] (0,0) -- (-1.5,0.5) node[anchor=east] {A};
+		\draw[ultra thick] (0,0) -- (-0.5,-3) node[anchor=north] {C};
+		\fill[black] (-3,-1.5) node[anchor=south east] {D} circle (0.1);
+		\fill[black] (-1.5,0.5) circle (0.1);
+		\draw[thick] (0,0) -- (-2.25,0);
+		\draw[thick,dashed] (-2.25,0) -- (-6,0);
+		\draw[thick,->] (-6,0) -- (-7,0) node[anchor=east] {$z'$};
+		\draw[thick,->] (0,0) -- (0,-2.5) node[anchor=north] {$y'$};
+		\draw[thick,->] (0,0) -- (2.1,1.4) node[anchor=south] {$x,x'$};
+		\draw[thick,->] (0,0) -- (-2.1,-2.8) node[anchor=east] {$z$};
+		\draw[thick,->] (0,0) -- (2,-1.5) node[anchor=north] {$y$};
+		\draw (-0.5,0) arc (180:233:0.5);
+		\node[anchor=north east] at (-0.7,0) {$\beta$};
+		\end{tikzpicture}
+		\caption{}
+		\label{fig:三锟闸坐标系}
+	\end{subfigure}
+	\begin{subfigure}{0.3\linewidth}
+		\centering
+		\begin{tikzpicture}
+		\node[anchor=south east] at (0,0) {O};
+		\draw[thick,->] (0,0) -- (-2.25,0) node[anchor=east] {$z'$};
+		\draw[thick,->] (0,0) -- (0,-2.5) node[anchor=north] {$y'$};
+		\draw[thick,->] (0,0) -- (-2.1,-2.8) node[anchor=east] {$z$};
+		\draw[thick,->] (0,0) -- (2,-1.5) node[anchor=north] {$y$};
+		\node[anchor=south west] at (0,0) {$\bigotimes~x,x'$};
+		\draw (-0.5,0) arc (180:233:0.5);
+		\node[anchor=north east] at (-0.5,0) {$\beta$};
+		\end{tikzpicture}
+		\caption{}
+		\label{fig:三锟闸坐标系正视图}
+	\end{subfigure}
+	\caption{}
+	\label{fig:三锟闸}
+\end{figure}
+
+初始时, 杆 OA 水平, 于是可以写出初始时 $\mathrm A,\mathrm B,\mathrm C$ 三点的坐标
+\begin{equation}
+	\left[\begin{matrix}x_\mathrm A\\y_\mathrm A\\z_\mathrm A\end{matrix}\right]=
+	l\left[\begin{matrix}0\\-\sin\beta\\\cos\beta\end{matrix}\right],\qquad
+	\left[\begin{matrix}x_\mathrm B\\y_\mathrm B\\z_\mathrm B\end{matrix}\right]=
+	l\left[\begin{matrix}-\frac{\sqrt3}2\sin\beta\\\frac12\sin\beta\\\cos\beta\end{matrix}\right],\qquad
+	\left[\begin{matrix}x_\mathrm C\\y_\mathrm C\\z_\mathrm C\end{matrix}\right]=
+	l\left[\begin{matrix}\frac{\sqrt3}2\sin\beta\\\frac12\sin\beta\\\cos\beta\end{matrix}\right].
+\end{equation}
+因为三根杆两两夹角为 $\alpha$, 所以我们可以通过将它们的坐标点乘来获得 $\beta$ 与 $\alpha$ 的关系
+\begin{equation}
+	\label{eq:beta关于alpha}
+	\left[\begin{matrix}x_\mathrm A\\y_\mathrm A\\z_\mathrm A\end{matrix}\right]\cdot
+	\left[\begin{matrix}x_\mathrm B\\y_\mathrm B\\z_\mathrm B\end{matrix}\right]=
+	l^2\cos\alpha\Rightarrow
+	\cos\beta=\sqrt{\frac{1+2\cos\alpha}3}.
+\end{equation}
+
+现在研究 $xyz$ 坐标系与 $x'y'z'$ 坐标系之间的换算关系.
+可以看做绕 $x$ 轴旋转 $\beta$:
+\begin{equation}
+	\left[\begin{matrix}x\\y\\z\end{matrix}\right]=
+	\left[\begin{matrix}1&0&0\\0&\cos\beta&-\sin\beta\\0&\sin\beta&\cos\beta\end{matrix}\right]
+	\left[\begin{matrix}x'\\y'\\z'\end{matrix}\right].
+\end{equation}
+再考虑三根杆的旋转变换.
+设三根杆旋转了 $\varphi$ 角后 A 在 $xyz$ 坐标系中的坐标为 $\mathbf a\!\left(\varphi\right)$, 则
+\begin{equation}
+	\mathbf a\!\left(\varphi\right)=
+	\left[\begin{matrix}\cos\varphi&-\sin\varphi&0\\\sin\varphi&\cos\varphi&0\\0&0&1\end{matrix}\right]
+	\mathbf a\!\left(0\right).
+\end{equation}
+令
+\begin{equation}
+	\mathbf R\!\left(\varphi\right):=
+	\left[\begin{matrix}1&0&0\\0&\cos\beta&-\sin\beta\\0&\sin\beta&\cos\beta\end{matrix}\right]^{-1}
+	\left[\begin{matrix}\cos\varphi&-\sin\varphi&0\\\sin\varphi&\cos\varphi&0\\0&0&1\end{matrix}\right]
+	\left[\begin{matrix}1&0&0\\0&\cos\beta&-\sin\beta\\0&\sin\beta&\cos\beta\end{matrix}\right],
+\end{equation}
+于是可得三根杆转了 $\varphi$ 角后 A 在 $xyz$ 坐标系中的坐标
+\begin{equation}
+	\label{eq:a'(phi)未展开}
+	\mathbf a'\!\left(\varphi\right)=\mathbf R\!\left(\varphi\right)\mathbf a'\!\left(0\right),
+\end{equation}
+其中
+\begin{equation}
+	\mathbf a'\!\left(0\right):=\left[\begin{matrix}0\\0\\l\end{matrix}\right].
+\end{equation}
+是 A 的初始坐标.
+将式 \ref{eq:a'(phi)未展开} 全部展开后化简可得
+\begin{equation}
+	\label{eq:a'(phi)}
+	\mathbf a'\!\left(\varphi\right)=l\left[\begin{matrix}
+		\sin\beta\sin\varphi\\
+		\sin2\beta\sin^2\frac\varphi2\\
+		1-2\sin^2\beta\sin^2\frac\varphi2
+	\end{matrix}\right].
+\end{equation}
+同时我们可以获得 B 和 C 的坐标
+\begin{equation}
+	\mathbf b'\!\left(\varphi\right)=\mathbf a'\!\left(\varphi-\frac{2\pi}3\right),\qquad
+	\mathbf c'\!\left(\varphi\right)=\mathbf a'\!\left(\varphi+\frac{2\pi}3\right).
+\end{equation}
+
+\mypara
+若长方体的宽度小于等于三根杆的末端到墙的距离 (三个中最小的那个) 的最大值,
+则它的厚度可以无限大.
+很明显, 当三根杆的末端到墙的距离最大时, 应有 $\varphi=\frac\pi3$,
+此时三根杆的位形刚好跟初始状态相反.
+容易计算得
+\begin{equation}
+	w_0=l-a'_3\!\left(\frac\pi3\right)=\frac l2\sin^2\beta=\frac l3\left(1-\cos\alpha\right).
+\end{equation}
+
+\mypara
+设长方体的宽度为 $w$.
+假定长方体可以完全通过三锟闸.
+令长方体的厚度逐渐增加, 直到它恰好能完全通过三锟闸.
+在临界情况下, 它刚好能够把 OA 杆推至一个它不需要再推就能使它继续通过的角度
+(即 $l-a'_3\!\left(\varphi\right)=w$).
+``刚好'' 意味着, 如果它再厚一点, OB 杆就会撞到长方体.
+这表明, 在临界情况下, 当 $l-a'_3\!\left(\varphi\right)=w$ 时,
+杆 OB 刚好触碰到长方体的另一条棱.
+这一情形在图 \ref{fig:三锟闸坐标系} 中被画出.
+而杆 OC 是不必担心的, 因为 C 点的 $z'$ 坐标不可能大于其初始值.
+
+经过上述讨论可以得知, 我们需要考察 OB 杆上与 A 点恰好具有相同的 $z'$ 坐标的点 D.
+因为 OD 与 OB 平行, 容易写出 D 的坐标
+\begin{equation}
+	\mathbf d'\!\left(\varphi\right)=\frac{a'_3\!\left(\varphi\right)}
+	{a'_3\!\left(\varphi-\frac{2\pi}3\right)}
+	\mathbf a'\!\left(\varphi-\frac{2\pi}3\right).
+\end{equation}
+在临界情况下, 宽度为 $l-a'_3\!\left(\varphi\right)$ 的长方体的厚度刚好相当于 A 与 D 的 $x'$ 坐标之差.
+于是我们可以得到所要求的横截面积与刚好能离开三锟闸时的转角 $\varphi$ 的关系
+\begin{equation}
+	\label{eq:S关于a'}
+	S\!\left(\varphi\right)=\left(l-a'_3\!\left(\varphi\right)\right)
+	\left(a'_1\!\left(\varphi\right)-\frac{a'_3\!\left(\varphi\right)}
+	{a'_3\!\left(\varphi-\frac{2\pi}3\right)}
+	a'_1\!\left(\varphi-\frac{2\pi}3\right)\right).
+\end{equation}
+将式 \ref{eq:a'(phi)} 代入式 \ref{eq:S关于a'} 可得
+\begin{equation}
+	S\!\left(\varphi\right)=l^2\cdot2\sin^2\beta\sin^2\frac\varphi2\left(
+		\sin\beta\sin\varphi-
+		\frac{1-2\sin^2\beta\sin^2\frac\varphi2}{1-2\sin^2\beta\sin^2\!\left(\frac\varphi2-\frac\pi3\right)}
+		\sin\beta\sin\!\left(\varphi-\frac{2\pi}3\right)
+	\right).
+\end{equation}
+由题目中所说, 长方体的宽度大于 $w_0$, 所以在研究最大厚度时 $\varphi\ge\frac\pi3$.
+另一方面, 长方体的宽度不能大于初始时 B 到墙面的距离, 所以 $\varphi\le\frac{2\pi}3$.
+从而, 问题被转化为求 $S\!\left(\varphi\right)$
+在区间 $\left[\frac\pi3,\frac{2\pi}3\right]$ 上的最大值.
+
+\mypara
+记人推动杆的过程中杆与长方体的棱的交点为 H.
+显然 H 的 $z'$ 坐标恒为 $l-w$, 且 OH 平行于 OA.
+因此可以写出 H 的坐标
+\begin{equation}
+	\label{eq:h'}
+	\mathbf h'=\frac{l-w}{a'_3}\mathbf a'=\frac{l-w}{1-2\sin^2\beta\sin^2\frac\varphi2}
+	\left[\begin{matrix}
+		\sin\beta\sin\varphi\\
+		\sin2\beta\sin^2\frac\varphi2\\
+		1-2\sin^2\beta\sin^2\frac\varphi2
+	\end{matrix}\right].
+\end{equation}
+
+记固连在杆上的 H 点的元位移为 $\mathrm d_1\mathbf h'$,
+固连在长方体上的 H 点的元位移为 $\mathrm d_2\mathbf h'$.
+显然有
+\begin{equation}
+	\label{eq:d1h'}
+	\mathrm d_1\mathbf h'=\mathbf R\!\left(\mathrm d\varphi\right)\mathbf h'-\mathbf h'
+	=\left(l-w\right)\frac{\sin\beta}{1-2\sin^2\beta\sin^2\frac\varphi2}
+	\left[\begin{matrix}\cos\varphi\\\cos\beta\sin\varphi\\-\sin\beta\sin\varphi\end{matrix}\right]
+	\mathrm d\varphi,
+\end{equation}
+\begin{equation}
+	\mathrm d_2\mathbf h'=\mathrm d\mathbf h'\left[\begin{matrix}0\\0\\1\end{matrix}\right]
+	=\left(l-w\right)\frac{\cos\varphi+2\sin^2\beta\sin^2\frac\varphi2}
+	{\left(1-2\sin^2\beta\sin^2\frac\varphi2\right)^2}\sin\beta
+	\left[\begin{matrix}0\\0\\1\end{matrix}\right]\mathrm d\varphi.
+\end{equation}
+
+记长方体对杆的摩擦力为 $\mathbf f'$.
+显然它应当平行于杆与长方体的相对位移.
+这意味着
+\begin{equation}
+	\mathbf f'\parallel\mathrm d_2\mathbf h'-\mathrm d_1\mathbf h'\parallel
+	\left[\begin{matrix}
+		2\sin^2\beta\sin^2\frac\varphi2\left(\cos\varphi+1\right)\\
+		-\cos\beta\sin\varphi\left(1-2\sin^2\beta\sin^2\frac\varphi2\right)\\
+		\sin\beta\sin\varphi\left(1-2\sin^2\beta\sin^2\frac\varphi2\right)
+	\end{matrix}\right].
+\end{equation}
+
+记长方体对杆的弹力为 $\mathbf N'$.
+显然它应当同时垂直于杆和长方体的棱.
+这意味着
+\begin{equation}
+	\mathbf N'\parallel\left[\begin{matrix}0\\1\\0\end{matrix}\right]\times\mathbf a'
+	\parallel\left[\begin{matrix}
+	1-2\sin^2\beta\sin^2\frac\varphi2\\0\\-\sin\beta\sin\varphi\end{matrix}\right].
+\end{equation}
+
+记 $N:=\left|\mathbf N'\right|$.
+则摩擦力的大小为 $\mu N$.
+于是可以获得
+\begin{equation}
+	\mathbf f'=\frac{2\mu N}{\sin\varphi\sqrt{3+4\cos4\beta+2\sin^22\beta\cos\varphi}}
+	\left[\begin{matrix}
+		2\sin^2\beta\sin^2\frac\varphi2\left(\cos\varphi+1\right)\\
+		-\cos\beta\sin\varphi\left(1-2\sin^2\beta\sin^2\frac\varphi2\right)\\
+		\sin\beta\sin\varphi\left(1-2\sin^2\beta\sin^2\frac\varphi2\right)
+	\end{matrix}\right],
+\end{equation}
+\begin{equation}
+	\mathbf N'=\frac N{\sqrt{1-\sin^22\beta\sin^4\frac\varphi2}}\left[\begin{matrix}
+	1-2\sin^2\beta\sin^2\frac\varphi2\\0\\-\sin\beta\sin\varphi\end{matrix}\right].
+\end{equation}
+令
+\begin{equation}\begin{split}
+	\label{eq:u'}
+	\mathbf u':=&\frac{2\mu}{\sin\varphi\sqrt{3+4\cos4\beta+2\sin^22\beta\cos\varphi}}
+	\left[\begin{matrix}
+		2\sin^2\beta\sin^2\frac\varphi2\left(\cos\varphi+1\right)\\
+		-\cos\beta\sin\varphi\left(1-2\sin^2\beta\sin^2\frac\varphi2\right)\\
+		\sin\beta\sin\varphi\left(1-2\sin^2\beta\sin^2\frac\varphi2\right)
+	\end{matrix}\right]
+	\\&+
+	\frac 1{\sqrt{1-\sin^22\beta\sin^4\frac\varphi2}}\left[\begin{matrix}
+	1-2\sin^2\beta\sin^2\frac\varphi2\\0\\-\sin\beta\sin\varphi\end{matrix}\right].
+\end{split}\end{equation}
+由于杆是轻杆, 所以由力矩平衡关系可得
+\begin{equation}
+	N=\frac K{\left|\mathbf h'\times\mathbf u'\right|}.
+\end{equation}
+于是可得长方体对杆所做的功
+\begin{equation}
+	W=\int_{\varphi=0}^{2\arcsin\left(\frac1{\sin\beta}\sqrt{\frac w{2l}}\right)}
+	\frac K{\left|\mathbf h'\times\mathbf u'\right|}\mathbf u'\cdot\mathrm d_1\mathbf h',
+\end{equation}
+式中 $\beta,\mathbf h',\mathrm d_1\mathbf h',\mathbf u'$ 分别由式 \ref{eq:beta关于alpha},
+式 \ref{eq:h'}, 式 \ref{eq:d1h'}, 式 \ref{eq:u'} 给出.
 
 \subsection{Hohmann 转移轨道}
 
