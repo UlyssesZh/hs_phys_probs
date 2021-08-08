@@ -1,0 +1,458 @@
+\documentclass{article}
+\usepackage[UTF8]{ctex}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{amsthm}
+\usepackage[total={7in,10in}]{geometry}
+\usepackage{mathtools}
+
+\newcounter{para}
+\newcommand\mypara{\par\refstepcounter{para}(\thepara)\space}
+\titleformat{\section}[block]{\Large\bfseries\filcenter}{}{0em}{}
+\renewcommand\thesection{}
+\renewcommand\thesubsection{\protect\setcounter{equation}{0}\protect\setcounter{para}{0}第 \arabic{subsection} 题}
+
+\title{hs\_phys\_probs 004}
+\author{詹有丘}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\subsection{突破}
+
+考虑质量为 $m$ 的非相对论性粒子在势场 $U=U\!\left(x\right)$ 中的一维运动.
+
+\mypara
+若 $U=-Ax^4$, 其中 $A>0$,
+证明具有非零能量的粒子总会在有限时间内到达无穷远处.
+
+\mypara
+若 $U$ 有下界, 证明粒子不能在有限时间内到达无穷远处.
+
+\subsection{惯量椭球}
+
+给定一个刚体. 选取点 O.
+任取以 O 为起点的射线, 在射线上取点 P,
+使得 $\left|\mathrm{OP}\right|$ 等于刚体绕 OP 轴的转动惯量的 $\gamma$ 次幂.
+$\gamma$ 被恰当地选取, 使得对于任意的 O, P 的轨迹是椭球面.
+证明该椭球的体积取到最值当且仅当 O 是该刚体的质心.
+
+\subsection{圆轨道常量}
+
+粒子在有心力场中运动.
+记粒子在 $r_{\mathrm{min}}$ 和 $r_{\mathrm{max}}$
+之间往复运动一个周期的过程中位矢转过的角度为 $\Phi$.
+显然它是粒子的能量和角动量的函数.
+现调整其能量和角动量, 使得粒子的运动轨迹趋近于圆轨道,
+记这一过程中 $\Phi$ 的极限为 $\Psi$.
+若 $\Psi$ 与轨道的半径无关, 求该有心力场的形式.
+
+\subsection{摆线气体}
+
+一些单原子气体被约束在摆线
+$$\begin{dcases}x=R\left(\varphi-\sin\varphi\right),\\
+y=R\cos\varphi,\end{dcases}\quad\varphi\in\left[0,2\pi\right]$$
+上. 每个微粒受到 $-y$ 方向的重力 $G$.
+这些气体在温度 $T$ 下达到热平衡状态.
+求这些气体的质心的坐标.
+
+\subsection{半反半透膜}
+
+真空中有一块平整的厚度为 $d$ 的薄膜,
+其相对介电常数为 $\varepsilon_\mathrm r$,
+相对磁导率为 $\mu_\mathrm r$.
+求其能量反射率 $R$,
+表达为入射角 $\theta$ 和偏振方向 $\alpha$
+(电场强度与法线平面所夹锐角, $0$ 对应 p 偏振态, $\frac\pi2$ 对应 s 偏振态) 的函数.
+
+\subsection{电子偶素}
+
+求电子偶素 (如同氢原子, 但由正电子代替原子核) 的结合能.
+
+\subsection{电电圈}
+
+有一个圆环 (甜甜圈), 其截面的半径为 $r$,
+截面的圆心到圆环的轴线的距离为 $R$.
+圆环内均匀分布着电荷.
+圆环以角速度 $\omega$ 绕着轴线旋转.
+求轴线附近的磁感应强度,
+用柱坐标表示, 精确到 $\rho$ 的一阶小量.
+
+\subsection{Theremin}
+
+1928 年, 发明家 Leon Theremin 发明了乐器 theremin.
+这是一种不需要身体接触就可以演奏的电子乐器.
+现介绍其基本原理.
+它具有两个天线, 分别被称为音调天线和音量天线.
+演奏者的右手与音调天线组成一个电容器, 演奏者的左手与音量天线组成一个电容器,
+而演奏者的脚接地.
+当演奏者的手移动时, 电容就会发生改变, 从而导致振荡电路的振荡频率发生改变.
+振荡频率不断改变的电信号在经过电子电路的处理之后被输入压控放大器,
+输出最终能被扬声器播放的音频信号.
+现探究演奏者是如何控制音调的.
+
+\mypara
+在音调信号被送入压控放大器之前,
+会先通过低通滤波器, 将人听不见的超声波滤去.
+一个简单的低通滤波器由电阻和电容器串联组成,
+输入电压施加在串联 RC 的两端, 输出电压即为电容器上的分压.
+已知人能听见的声音的最高频率为 $f_{\mathrm{max}}$,
+若要保证超声波的振幅通过率不超过振幅通过率最高的频段的振幅通过率的 $\eta$ 倍,
+求 $R$ 和 $C$ 满足的条件.
+
+\mypara
+被送入低通滤波器的音调信号是由可变音调振荡器的输出信号
+$U_1=U_{10}\cos\!\left(2\pi f_1t\right)$
+和参考音调振荡器的输出信号
+$U_2=U_{20}\cos\!\left(2\pi f_2t\right)$
+经过混频器混合而成的,
+它们的频率满足 $f_1\approx f_2\gg f_{\mathrm{max}}$,
+$\left|f_1-f_2\right|<f_{\mathrm{max}}$.
+一种简易的混频器只需要一个二极管
+(伏安特性为 $I=I_0\left(\mathrm e^{U/U_0}-1\right)$,
+其中 $U_0\gg U_{10},U_{20}$)
+和一个电阻 $R\ll U_0/I_0$ 串联即可制成.
+两个输入信号被串联后施加在二极管和电阻上,
+输出信号即为电阻上的分压.
+求混频器输出的信号中的低频部分 (高频部分会被低通滤波器滤除, 无需写出).
+
+\mypara
+可变音调振荡器和参考音调振荡器都是 LC 振荡电路,
+其中可变音调振荡器的电容由音调天线和演奏者的右手作为两个电极,
+而参考音调振荡器在 theremin 的内部且保持不变.
+振荡器利用互感向混频器输出信号.
+根据以上所给信息画出 theremin 的音调控制部分的电路图
+(无需画出音量控制部分和扬声器),
+用虚线框出并标注演奏者, 可变音调振荡器, 参考音调振荡器, 混频器, 低通滤波器.
+
+\mypara
+将音调天线和演奏者的右手看作轴线互相平行的两个长度为 $l$, 半径分别为
+$R_{\mathrm{ant}}$ 和 $R_{\mathrm{per}}$ 的圆柱形导体.
+在演奏过程中, 这两个圆柱的两端的连线始终垂直于它们的轴线,
+而它们的轴线间距在 $d_{\mathrm{min}}$ 和 $d_{\mathrm{max}}$ 之间改变,
+从而改变 $f_1$ (不是已知量).
+已知 $l\gg R_{\mathrm{ant}},R_{\mathrm{per}},d_{\mathrm{min}},d_{\mathrm{max}}$.
+参考音调振荡器的频率 $f_2$ 是已知量.
+若低通滤波器最终输出的信号的频率刚好能覆盖人能听见的频段
+($f_{\mathrm{min}}$ 到 $f_{\mathrm{max}}$ 之间),
+求可变音调振荡器中的电感 $L_1$.
+
+\newpage
+\section{参考答案}
+
+\subsection{突破}
+
+\mypara
+\begin{proof}
+显然原问题等价为证明
+\begin{equation}
+	I:=\int_1^{+\infty}\frac{\mathrm du}{\sqrt{u^4-1}}
+\end{equation}
+收敛 (给出这一等价命题可得一半分).
+令
+\begin{equation}
+	I_1:=\int_1^2\frac{\mathrm du}{\sqrt{u^4-1}},
+	\qquad I_2:=\int_2^{+\infty}\frac{\mathrm du}{\sqrt{u^4-1}},
+\end{equation}
+则有 $I=I_1+I_2$.
+现在分别处理 $I_1$ 和 $I_2$.
+
+首先处理 $I_1$.
+注意到, 当 $u>1$ 时, 有
+\begin{equation}
+	u^4-1=\left(u^2+1\right)\left(u+1\right)\left(u-1\right)
+	>4\left(u-1\right),
+\end{equation}
+因此
+\begin{equation}
+	I_1<\int_1^2\frac{\mathrm du}{\sqrt{4\left(u-1\right)}}=1.
+\end{equation}
+由比较审敛法知 $I_1$ 收敛.
+
+再处理 $I_2$.
+注意到, 当 $u>2$ 时, 有
+\begin{equation}
+	u^4-2>14>0\Rightarrow u^4-1>\frac12u^4,
+\end{equation}
+因此
+\begin{equation}
+	I_2<\int_2^{+\infty}\frac{\mathrm du}{\sqrt{\frac12u^4}}=\frac1{\sqrt2}.
+\end{equation}
+由比较审敛法知 $I_2$ 收敛.
+
+因此 $I$ 收敛, 从而任意具有非零能量的粒子都会在有限时间内到达无穷远.
+\end{proof}
+
+\textit{推广}: 对于 $A,n>0$,
+势场 $U=-A\left|x\right|^n$ 中具有非零能量的粒子能在有限时间内到达无穷远处,
+当且仅当 $n>2$.
+
+\begin{proof}
+问题等价于证明
+\begin{equation}
+	I:=\int_1^{+\infty}\frac{\mathrm du}{\sqrt{u^n-1}}
+\end{equation}
+收敛, 当且仅当 $n>2$.
+置换元 $w:=u^{-n}$, 则有
+\begin{equation}
+	I=\frac1n\int_0^1w^{-\frac12-\frac1n}\left(1-w\right)^{-\frac12}\mathrm dw
+	=\frac1n\mathrm B\!\left(\frac12-\frac1n,\frac12\right),
+\end{equation}
+其中 $\mathrm B$ 是 beta 函数.
+注意到在宗量的实部趋于 $0^+$ 时 beta 函数趋于正无穷,
+可以得到积分收敛的条件
+\begin{equation}
+	\frac12-\frac1n>0.
+\end{equation}
+\end{proof}
+
+\mypara
+\begin{proof}
+设 $U$ 有下界 $U_0$, 则具有能量 $E$ 的粒子在 $\tau$ 时间内的位移大小
+\begin{equation}
+\begin{split}
+	\left|\int_0^\tau\dot x\,\mathrm dt\right|
+	\le&\int_0^\tau\left|\dot x\right|\mathrm dt\\
+	=&\int_0^\tau\sqrt{\frac2m\left(E-U\right)}\,\mathrm dt\\
+	<&\int_0^\tau\sqrt{\frac2m\left(E-U_0\right)}\,\mathrm dt\\
+	=&\,\tau\sqrt{\frac2m\left(E-U_0\right)},
+\end{split}
+\end{equation}
+这在 $\tau$ 有限时不可能为无穷大量.
+\end{proof}
+
+\subsection{惯量椭球}
+
+\begin{proof}
+建立直角坐标系 $\mathrm O$, 使得三条轴对应于刚体的三个惯量主轴.
+
+设 OP 方向的单位矢量为 $\mathbf n$.
+设刚体以角速度 $\omega\mathbf n$ 转动,
+且 $\omega$ 恰好使得其具有 $\frac12$ 单位能量的动能,
+即
+\begin{equation}
+	\label{eq:用分量之和表示动能}
+	E=\frac12\sum_jI_j\left(\omega n_j\right)^2=\frac12
+\end{equation}
+另一方面, 刚体具有的动能还可以表示为
+\begin{equation}
+	\label{eq:另一个动能}
+	E=\frac12I\omega^2,
+\end{equation}
+其中 $I$ 是绕 OP 轴的转动惯量.
+用式 \ref{eq:另一个动能} 表示出 $\omega$ 并代入式 \ref{eq:用分量之和表示动能},
+可得
+\begin{equation}
+	\label{eq:力学角度的椭球}
+	\sum_jI_j\frac{n_j^2}I=1.
+\end{equation}
+
+另一方面, 由题目给出的椭球的构造方法, 可以得出椭球面的方程
+\begin{equation}
+	\label{eq:数学角度的椭球}
+	\sum_j\frac{\left(I^\gamma n_j\right)^2}{a_j^2}=1,
+\end{equation}
+其中 $a_j$ 是椭球的第 $j$ 半轴长.
+比较式 \ref{eq:力学角度的椭球} 与式 \ref{eq:数学角度的椭球},
+它们应当描述同一个椭球.
+由此可得
+\begin{equation}
+	\gamma=-\frac12,\qquad a_j=I_j^{-\frac12}.
+\end{equation}
+由此, 可以注意到椭球的体积正比于三个主转动惯量的乘积的 $\gamma$ 次幂.
+注意到三个主转动惯量的乘积就是惯量矩阵的行列式 (因为矩阵的行列式等于其特征值之积),
+因此椭球的体积取最值相当于惯量矩阵的行列式取最值.
+另外, 为了保证这是个椭球, 我们可以得知对于任意的 O, 刚体的三个主转动惯量都不为零.
+
+令 $\mathrm O'$ 为刚体的质心.
+重新建立直角坐标系, 使得三条轴对应于刚体绕 $\mathrm O'$ 转动的三个惯量主轴.
+从而, 刚体绕质心的惯量矩阵可以写为 
+\begin{equation}
+	I'=\left[\begin{matrix}a\\&b\\&&c\end{matrix}\right].
+\end{equation}
+设 $\mathrm O$ 在以 $\mathrm O'$ 为原点的坐标系中的坐标为 $\left(x_1,x_2,x_3\right)$.
+利用平行轴定理, 可得
+\begin{equation}
+	I_{j,k}=I'_{j,k}+\Delta I_{j,k},
+\end{equation}
+其中
+\begin{equation}
+	\Delta I_{j,k}:=\delta_{j,k}\sum_lx_l^2-x_jx_k
+\end{equation}
+(不失一般性地假设了刚体具有单位质量).
+
+现在我们要令 $\det_{j,k}I_{j,k}$ 取极值,
+只需对每个 $l$, 让它对 $x_l$ 的偏导数等于零即可.
+
+首先我们有 Jacobi 公式 (利用 Laplace 展开可以容易地证明这一公式)
+\begin{equation}
+	\label{eq:行列式对矩阵元的全微分}
+	\mathrm d\det_{j,k}I_{j,k}=\sum_{j,k}I^*_{k,j}\,\mathrm dI_{j,k},
+\end{equation}
+其中 $I^*$ 是 $I$ 的伴随矩阵.
+同时, 将 $I_{j,k}$ 对 $x_l$ 求导可得
+\begin{equation}
+	\frac{\partial I_{j,k}}{\partial x_l}=\frac{\partial}{\partial x_l}\Delta I_{j,k}=
+	2\delta_{j,k}x_l-\delta_{j,l}x_j-\delta_{k,l}x_k.
+\end{equation}
+将其代入式 \ref{eq:行列式对矩阵元的全微分}, 可得
+\begin{equation}
+\begin{split}
+	\mathrm d\det_{j,k}I_{j,k}&=\sum_{j,k}I^*_{k,j}
+	\sum_l\left(2\delta_{j,k}x_l-\delta_{j,l}x_j-\delta_{k,l}x_k\right)\mathrm dx_l\\
+	&=\sum_l\mathrm dx_l\sum_{j,k}I^*_{k,j}\left(2\delta_{j,k}x_l-\delta_{j,l}x_j-\delta_{k,l}x_k\right)\\
+	&=\sum_l\mathrm dx_l
+	\left(2x_l\sum_{j,k}\delta_{j,k}I^*_{k,j}
+	-\sum_{j,k}\delta_{j,l}I^*_{k,j}x_j
+	-\sum_{j,k}\delta_{k,l}I^*_{k,j}x_k\right)\\
+	&=\sum_l\mathrm dx_l\left(2x_l\sum_jI^*_{j,j}-\sum_kI^*_{k,l}x_l-\sum_jI^*_{l,j}x_l\right)\\
+	&=\sum_lx_l\,\mathrm dx_l\left(2\sum_jI^*_{j,j}-\sum_kI^*_{k,l}-\sum_jI^*_{l,j}\right)\\
+	&=2\sum_lx_l\,\mathrm dx_l\sum_j\left(I^*_{j,j}-I^*_{j,l}\right)
+\end{split}
+\end{equation}
+(最后一个等号是因为 $I^*$ 作为对称矩阵 $I$ 的伴随矩阵, 必然是对称矩阵).
+由该全微分式可以得到
+\begin{equation}
+	\frac{\partial}{\partial x_l}\det_{j,k}I_{j,k}=2x_l\sum_j\left(I^*_{j,j}-I^*_{j,l}\right).
+\end{equation}
+
+在 $\det_{j,k}I_{j,k}$ 取极值时, 其对各个 $x_l$ 的偏导数为 $0$.
+由此可得, 对于每个 $l$, 有
+\begin{equation}
+	x_l=0\text{ 或 }\sum_j\left(I^*_{j,j}-I^*_{j,l}\right)=0
+\end{equation}
+成立.
+
+情形 1: 对每个 $l$, 都有 $x_l=0$.
+
+该情形显然可以成立.
+若只有该情形成立, 原命题天然成立.
+
+情形 2: 有且只有两个 $l$, 使得 $x_l=0$.
+
+我们将证明该情形不可能成立.
+将 $x_1,x_2,x_3$ 记作 $x,y,z$ 以简化算式.
+不失一般性地, 假设 $x\ne0$ 且 $y=z=0$.
+在这种情况下将 $I$ 显式地以矩阵写出, 得
+\begin{equation}
+	I=\left[\begin{matrix}a\\&b+x^2\\&&c+x^2\end{matrix}\right].
+\end{equation}
+由于 $x\ne0$, 目标行列式对 $x$ 的偏导数等于零要求
+\begin{equation}
+	\sum_j\left(I^*_{j,j}-I^*_{j,1}\right)=0,
+\end{equation}
+即
+\begin{equation}
+	I^*_{2,2}+I^*_{3,3}=I^*_{2,1}+I^*_{3,1}.
+\end{equation}
+由此可得
+\begin{equation}
+	a\left(c+x^2\right)+a\left(b+x^2\right)=0+0.
+\end{equation}
+这显然无解.
+
+情形 3: 有且只有一个 $l$, 使得 $x_l=0$.
+
+我们将证明该情形不可能成立.
+不失一般性地, 假设 $x,z\ne0$ 且 $y=0$.
+将 $I$ 显式地以矩阵写出, 得
+\begin{equation}
+	I=\left[\begin{matrix}a+z^2&&-xz\\&b+x^2+z^2\\-xz&&c+x^2\end{matrix}\right].
+\end{equation}
+由于 $x,z\ne0$, 目标行列式对 $x$ 和 $z$ 的偏导数等于零要求
+\begin{equation}
+	\begin{dcases}
+		\sum_j\left(I^*_{j,j}-I^*_{j,1}\right)=0,\\
+		\sum_j\left(I^*_{j,j}-I^*_{j,3}\right)=0,
+	\end{dcases}
+\end{equation}
+即
+\begin{equation}
+	\label{eq:情形2方程组}
+	\begin{dcases}
+		I^*_{2,2}+I^*_{3,3}=I^*_{2,1}+I^*_{3,1},\\
+		I^*_{1,1}+I^*_{2,2}=I^*_{1,3}+I^*_{2,3}.
+	\end{dcases}
+\end{equation}
+将这两式相减, 注意到 $I^*_{2,1}=I^*_{2,3}=0$, 并且 $I^*_{1,3}=I^*_{3,1}$,
+可得
+\begin{equation}
+	I^*_{1,1}=I^*_{3,3}.
+\end{equation}
+这意味着
+\begin{equation}
+	\label{eq:z用x表示}
+	z^2=c-a+x^2.
+\end{equation}
+
+取式 \ref{eq:情形2方程组} 的第一个式子, 它可以显式地写为
+\begin{equation}
+	xz\left(b+x^2+z^2\right)=\left(a+z^2\right)\left(c+x^2\right)
+	-x^2z^2+\left(a+z^2\right)\left(b+x^2+z^2\right).
+\end{equation}
+两边平方, 并将式 \ref{eq:z用x表示} 代入, 然后因式分解可得
+\begin{equation}
+	\left(\left(a+c\right)x^2+c^2\right)
+	\left(8x^4+\left(-5a+6b+11c\right)x^2+\left(-a+b+2c\right)^2\right)=0.
+\end{equation}
+这两个因子中, 第一个因子不可能为零.
+因此我们需要研究第二个因子能否为零.
+第二个因子是关于 $x^2$ 的二次式, 它是否有零点取决于该二次式是否有非负根.
+注意到该二次式的二次项系数和零次项系数都是非负的,
+因此它有正根当且仅当一次项系数非正且判别式非负.
+由此可以列出不等式组
+\begin{equation}
+	\begin{dcases}
+		-5a+6b+11c\le0,\\
+		\left(-5a+6b+11c\right)^2-32\left(-a+b+2c\right)^2\ge0.
+	\end{dcases}
+\end{equation}
+该不等式组显然可以约化为一次不等式组
+\begin{equation}
+	-5a+6b+11c\le4\sqrt2\left(-a+b+2c\right)\le5a-6b-11c.
+\end{equation}
+该不等式组对于正的 $a,b,c$ 无解.
+
+情形 4: 对每个 $l$, 都有 $x_l\ne0$.
+
+我们将证明该情形不可能成立.
+在这种情形下, 目标行列式的偏导数为零要求对于每个 $l$ 有
+\begin{equation}
+	\sum_jI^*_{j,j}=\sum_jI^*_{j,l}.
+\end{equation}
+可以将其以矩阵形式紧凑地写为
+\begin{equation}
+	\operatorname{tr}I^*\left[\begin{matrix}1\\1\\1\end{matrix}\right]=
+	I^*\left[\begin{matrix}1\\1\\1\end{matrix}\right],
+\end{equation}
+这意味着 $\operatorname{tr}I^*$ 是 $I^*$ 的特征值.
+由伴随矩阵的性质可知, $I^*$ 的特征值有 $ab,bc,ca$.
+因此 $\operatorname{tr}I^*$ 等于 $ab,bc,ca$ 的其中之一.
+这意味着
+\begin{equation}
+\begin{split}
+	&\left(b+x^2+z^2\right)\left(c+x^2+y^2\right)-y^2z^2\\
+	+&\left(a+y^2+z^2\right)\left(b+x^2+z^2\right)-x^2y^2\\
+	+&\left(a+y^2+z^2\right)\left(c+x^2+y^2\right)-x^2z^2\\
+	=&\,\text{$ab$ 或 $bc$ 或 $ca$}.
+\end{split}
+\end{equation}
+这显然是无解的, 因为等式左边恒大于 $ab,bc,ca$ 中的任何一个.
+
+综合以上四种情形, 只有 $x_l=0$ 才能使得目标行列式对所有 $x_l$ 的偏导数为零.
+这意味着若 O 不与质心重合, 则惯量椭球的体积不可能取到局部极值.
+
+最后证明 $x_l=0$ 确实是目标行列式的极值点.
+为此我们需要考察目标行列式对 $x_l$ 的二阶导数.
+经过繁琐的计算后可得
+\begin{equation}
+	\left.\frac{\partial^2}{\partial x_l\partial x_m}\det_{j,k}I_{j,k}\right|_0
+	=2\left[\begin{matrix}a\left(b+c\right)\\&b\left(c+a\right)\\&&c\left(a+b\right)\end{matrix}\right].
+\end{equation}
+这显然是正定矩阵. 因此 $x_l=0$ 确实是目标行列式的极值.
+\end{proof}
+
+\end{document}
