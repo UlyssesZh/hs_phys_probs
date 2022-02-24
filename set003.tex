@@ -12,6 +12,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage[RPvoltages]{circuitikz}
+\usepackage{mathtools}
 
 \newcounter{para}
 \newcommand\mypara{\par\refstepcounter{para}(\thepara)\space}
@@ -117,13 +118,13 @@ Kat 想要研究在力场 $F\!\left(z\right)$ 的作用下物体由静止开始�
 
 \mypara
 Kat 看到你写下的方程后皱了皱眉: 它是一个二阶的微分方程.
-但你自信地拍了拍胸脯, 说只需要令 $v:=\dot z$, 就可以将原本的二阶微分方程化为一阶微分方程.
+但你自信地拍了拍胸脯, 说只需要令 $v\coloneqq \dot z$, 就可以将原本的二阶微分方程化为一阶微分方程.
 帮 Kat 写出这个一阶的微分方程.
 
 \mypara
 Kat 看到你写下的新的方程后皱了皱眉: 它是一个非线性的微分方程.
 但你自信地拍了拍胸脯, 说你可以找到一个 $\varphi\!\left(z\right)$,
-使得令 $u:=\varphi\!\left(z\right)v$ 后就可以将原本的非线性微分方程化为线性的.
+使得令 $u\coloneqq \varphi\!\left(z\right)v$ 后就可以将原本的非线性微分方程化为线性的.
 帮 Kat 写出这个线性的微分方程.
 
 \mypara
@@ -223,7 +224,7 @@ $$\int\left(1+x\right)^{a-\frac32}\left(1-x\right)^{-a-\frac32}\mathrm dx
 	\label{eq:热力学基本方程}
 	\mathrm dU=-E\,\mathrm dq,
 \end{equation}
-其中 $E:=E_{\mathrm A/\mathrm B}$
+其中 $E\coloneqq E_{\mathrm A/\mathrm B}$
 是以 A 为负极, 以 B 为正极时所定义的电动势,
 $q$ 是在 A-B 体系内部从 A 端搬运到 B 端的电荷量.
 
@@ -235,7 +236,7 @@ $q$ 是在 A-B 体系内部从 A 端搬运到 B 端的电荷量.
 	\label{eq:Gibbs能全微分}
 	\mathrm dG=-A\,\mathrm dn,
 \end{equation}
-其中 $A:=-\Delta G_\mathrm m$ 是化学亲合势, $n$ 是化学反应进程 (正向反应的 mol 数).
+其中 $A\coloneqq -\Delta G_\mathrm m$ 是化学亲合势, $n$ 是化学反应进程 (正向反应的 mol 数).
 
 根据 Gibbs 能与内能的关系 $G=U+pV-TS$, 又考虑到 $p,V,T,S$ 的微分均为 $0$ (如前所述),
 因此, 可以写
@@ -398,7 +399,7 @@ $\mathrm dn$ 的 A 比 $\mathrm dn$ 的 B 多带 $eN_\mathrm A\,\mathrm dn$ 的�
 \end{equation}
 
 \mypara
-令 $$\beta:=\arcsin\xi.$$
+令 $$\beta\coloneqq \arcsin\xi.$$
 
 首先, 当两只脚都与地面接触时体系静力平衡,
 因此此时 Kat (重心) 必然在两脚之间.
@@ -530,7 +531,7 @@ $\mathrm dn$ 的 A 比 $\mathrm dn$ 的 B 多带 $eN_\mathrm A\,\mathrm dn$ 的�
 \begin{equation}
 	\rho=\rho_0\mathrm e^{-\alpha z},
 \end{equation}
-其中 $\rho_0$ 为积分常数, $\alpha:=Mg/RT$.
+其中 $\rho_0$ 为积分常数, $\alpha\coloneqq Mg/RT$.
 
 \mypara
 注意到题目中说物体做下落运动, 因此阻力是向上的.
@@ -541,7 +542,7 @@ $\mathrm dn$ 的 A 比 $\mathrm dn$ 的 B 多带 $eN_\mathrm A\,\mathrm dn$ 的�
 其中 $A$ 是阻力系数.
 
 \mypara
-令 $v:=\dot z$, 从而 $\ddot z=v\,\mathrm dv/\mathrm dz$. 于是
+令 $v\coloneqq \dot z$, 从而 $\ddot z=v\,\mathrm dv/\mathrm dz$. 于是
 \begin{equation}
 	\label{eq:一阶微分方程}
 	mv\frac{\mathrm dv}{\mathrm dz}
@@ -550,8 +551,8 @@ $\mathrm dn$ 的 A 比 $\mathrm dn$ 的 B 多带 $eN_\mathrm A\,\mathrm dn$ 的�
 
 \mypara
 令
-$$u:=\varphi\!\left(z\right)v,\qquad
-\psi\!\left(z\right):=\frac1{\varphi\!\left(z\right)},$$
+$$u\coloneqq \varphi\!\left(z\right)v,\qquad
+\psi\!\left(z\right)\coloneqq \frac1{\varphi\!\left(z\right)},$$
 其中 $\varphi$ 是待定函数.
 于是我们有 $v=\psi\!\left(z\right)u$.
 代入式 \ref{eq:一阶微分方程} 可得
@@ -571,7 +572,7 @@ $$u:=\varphi\!\left(z\right)v,\qquad
 \begin{equation}
 	\psi=\mathrm e^{-\beta\mathrm e^{-\alpha z}}
 \end{equation}
-其中 $\beta:=A\rho_0/\alpha m$.
+其中 $\beta\coloneqq A\rho_0/\alpha m$.
 于是式 \ref{eq:phi的微分方程} 化为
 \begin{equation}
 	\label{eq:一阶线性微分方程}
@@ -1077,7 +1078,7 @@ $\left(0,y,z\right)$ 处穿过 $x=0$ 平面上单位面积的磁感线条数
 	\label{eq:x微分方程}
 	\ddot x^2=u\left(3\dot x\ddot x^2-\left(1-\dot x^2\right)\dddot x\right).
 \end{equation}
-令 $v:=\dot x$, $a:=\ddot x$, 则有 $\dddot x=a\,\mathrm da/\mathrm dv$.
+令 $v\coloneqq \dot x$, $a\coloneqq \ddot x$, 则有 $\dddot x=a\,\mathrm da/\mathrm dv$.
 从而式 \ref{eq:x微分方程} 变为
 \begin{equation}
 	a^2=u\left(3a^2v+\left(1-v^2\right)a\frac{\mathrm da}{\mathrm dv}\right),
@@ -1094,7 +1095,7 @@ $\left(0,y,z\right)$ 处穿过 $x=0$ 平面上单位面积的磁感线条数
 其中 $a_0$ 为初始的加速度, 可以通过在式 \ref{eq:加速度} 中代入 $\dot x=0$, $t'=0$ 获得
 \begin{equation}
 	\label{eq:a0}
-	a_0:=\left.\ddot x\right|_{\dot x=0,~t'=0}=\frac\mu m\frac u{\sqrt{1-u^2}}.
+	a_0\coloneqq \left.\ddot x\right|_{\dot x=0,~t'=0}=\frac\mu m\frac u{\sqrt{1-u^2}}.
 \end{equation}
 将式 \ref{eq:a0} 代入式 \ref{eq:首次积分} 并整理可得
 \begin{equation}
@@ -1140,7 +1141,7 @@ $\left(v-u\right)/\left(1-uv\right)$.
 其中
 \begin{equation}
 	\label{eq:飞船E}
-	E:=\frac M{\sqrt{1-v^2}}.
+	E\coloneqq \frac M{\sqrt{1-v^2}}.
 \end{equation}
 将式 \ref{eq:E,v微分方程} 分离变量可得
 \begin{equation}
@@ -1155,7 +1156,7 @@ $\left(v-u\right)/\left(1-uv\right)$.
 其中 $E_0$ 为 $E$ 的初始值, 可以通过在式 \ref{eq:飞船E} 中代入 $M=m$, $v=0$ 获得
 \begin{equation}
 	\label{eq:E0}
-	E_0:=\left.E\right|_{M=m,~v=0}=m.
+	E_0\coloneqq \left.E\right|_{M=m,~v=0}=m.
 \end{equation}
 将式 \ref{eq:E0} 代入式 \ref{eq:首次积分2} 后可整理得
 \begin{equation}
@@ -1186,7 +1187,7 @@ $\left(v-u\right)/\left(1-uv\right)$.
 \end{equation}
 其中常数
 \begin{equation}
-	a:=\sqrt{\frac{q^2R}{4\pi\varepsilon_0mv^2}}
+	a\coloneqq \sqrt{\frac{q^2R}{4\pi\varepsilon_0mv^2}}
 \end{equation}
 具有长度量纲.
 
@@ -1226,8 +1227,8 @@ $\left(R,+\infty\right)\subseteq S$.
 其中
 \begin{equation}
 	\label{eq:Delta,r_pm}
-	\Delta:=\left(\frac{R^2-a^2+\rho^2}2\right)^2-\rho^2R^2,
-	\qquad r_\pm^2:=\frac{R^2-a^2+\rho^2}2\pm\sqrt\Delta.
+	\Delta\coloneqq \left(\frac{R^2-a^2+\rho^2}2\right)^2-\rho^2R^2,
+	\qquad r_\pm^2\coloneqq \frac{R^2-a^2+\rho^2}2\pm\sqrt\Delta.
 \end{equation}
 因此, 如果想让 $\left(R,+\infty\right)\subseteq S$, 条件为
 \begin{equation}

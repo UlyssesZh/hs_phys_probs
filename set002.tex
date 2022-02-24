@@ -170,7 +170,7 @@ $\left\{f_j\right\}$ 是线性无关的.
 视锥细胞在受到刺激后, 会将响应信号以电信号的形式告诉大脑,
 大脑即可获得视网膜上某处的各种视锥细胞的响应程度 $\mathbf c\in\left[0,+\infty\right)^n$,
 其中 $\mathbf c$ 的分量 $c_j$ 为第 $j$ 种视锥细胞的响应程度.
-从而颜色可以与 $C:=\left[0,+\infty\right)^n$ 中的向量一一对应.
+从而颜色可以与 $C\coloneqq \left[0,+\infty\right)^n$ 中的向量一一对应.
 特殊地, 我们称并不是每个分量都相同的 $\mathbf c$ 组成的集合为 $C^*$.
 
 规定两种变换: $T_u:c_j\mapsto uc_j$ ($u>0$)
@@ -276,13 +276,13 @@ B 的内壁是可以完全反射热辐射的镜面.
 
 定义 Lagrangian
 \begin{equation}
-	\mathcal L:=\left(y^2-\lambda\right)\sqrt{1+y'^2}.
+	\mathcal L\coloneqq \left(y^2-\lambda\right)\sqrt{1+y'^2}.
 \end{equation}
 代入 Euler--Lagrange 方程后化简可得
 \begin{equation}
 	2y\left(1+y'^2\right)=\left(y^2-\lambda\right)y''.
 \end{equation}
-进行变换 $p:=y'$ 后可得
+进行变换 $p\coloneqq y'$ 后可得
 \begin{equation}
 	2y\left(1+p^2\right)=\left(y^2-\lambda\right)p\frac{\mathrm dp}{\mathrm dy}.
 \end{equation}
@@ -291,7 +291,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 	\ln\!\left(1+p^2\right)=2\ln\frac{a^2-y^2}{a^2-y_0^2},
 	\label{eq:变分法}
 \end{equation}
-其中 $y_0:=y\!\left(0\right)>0$, $a:=\sqrt\lambda>y_0$.
+其中 $y_0\coloneqq y\!\left(0\right)>0$, $a\coloneqq \sqrt\lambda>y_0$.
 回代 $p=y'$, 再次分离变量并积分可得
 \begin{equation}
 	\int_{y_0}^y\frac{\mathrm dy}{\sqrt{\left(\frac{a^2-y^2}{a^2-y_0^2}\right)^2-1}}=\pm x.
@@ -374,7 +374,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 \begin{equation}
 	\frac{m\omega^2}{l}\sqrt{1+y'^2}=-T_0y''.
 \end{equation}
-变换 $p:=y'$, 分离变量得
+变换 $p\coloneqq y'$, 分离变量得
 \begin{equation}
 	\frac{p\,\mathrm dp}{\sqrt{1+p^2}}=-\frac{m\omega^2}{T_0l}y\,\mathrm dy.
 \end{equation}
@@ -383,7 +383,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 	\sqrt{1+p^2}-1=-\frac{m\omega^2}{2T_0l}\left(y^2-y_0^2\right).
 	\label{eq:受力法}
 \end{equation}
-代换 $a:=\sqrt{\frac{2T_0l}{m\omega^2}+y_0^2}$ 可将式 \ref{eq:受力法} 变为与式 \ref{eq:变分法} 等价的形式.
+代换 $a\coloneqq \sqrt{\frac{2T_0l}{m\omega^2}+y_0^2}$ 可将式 \ref{eq:受力法} 变为与式 \ref{eq:变分法} 等价的形式.
 
 \subsection{地铁站闸机}
 
@@ -473,7 +473,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 \end{equation}
 令
 \begin{equation}
-	\mathbf R\!\left(\varphi\right):=
+	\mathbf R\!\left(\varphi\right)\coloneqq 
 	\left[\begin{matrix}1&0&0\\0&\cos\beta&-\sin\beta\\0&\sin\beta&\cos\beta\end{matrix}\right]^{-1}
 	\left[\begin{matrix}\cos\varphi&-\sin\varphi&0\\\sin\varphi&\cos\varphi&0\\0&0&1\end{matrix}\right]
 	\left[\begin{matrix}1&0&0\\0&\cos\beta&-\sin\beta\\0&\sin\beta&\cos\beta\end{matrix}\right],
@@ -485,7 +485,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 \end{equation}
 其中
 \begin{equation}
-	\mathbf a'\!\left(0\right):=\left[\begin{matrix}0\\0\\l\end{matrix}\right].
+	\mathbf a'\!\left(0\right)\coloneqq \left[\begin{matrix}0\\0\\l\end{matrix}\right].
 \end{equation}
 是 A 的初始坐标.
 将式 \ref{eq:a'(phi)未展开} 全部展开后化简可得
@@ -606,7 +606,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 	1-2\sin^2\beta\sin^2\frac\varphi2\\0\\-\sin\beta\sin\varphi\end{matrix}\right].
 \end{equation}
 
-记 $N:=\left|\mathbf N'\right|$.
+记 $N\coloneqq \left|\mathbf N'\right|$.
 则摩擦力的大小为 $\mu N$.
 于是可以获得
 \begin{equation}
@@ -624,7 +624,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 令
 \begin{equation}\begin{split}
 	\label{eq:u'}
-	\mathbf u':=&\frac{2\mu}{\sin\varphi\sqrt{3+4\cos4\beta+2\sin^22\beta\cos\varphi}}
+	\mathbf u'\coloneqq &\frac{2\mu}{\sin\varphi\sqrt{3+4\cos4\beta+2\sin^22\beta\cos\varphi}}
 	\left[\begin{matrix}
 		2\sin^2\beta\sin^2\frac\varphi2\left(\cos\varphi+1\right)\\
 		-\cos\beta\sin\varphi\left(1-2\sin^2\beta\sin^2\frac\varphi2\right)\\
@@ -658,7 +658,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 
 于是
 \begin{equation}
-	\Delta v_1+\Delta v_2\propto f\!\left(x\right):=
+	\Delta v_1+\Delta v_2\propto f\!\left(x\right)\coloneqq 
 	\sqrt{\frac{2x}{1+x}}-1+\sqrt{\frac1x}-\sqrt{\frac2{x\left(1+x\right)}}.
 \end{equation}
 为了使 $\Delta v_1+\Delta v_2$ 极大,
@@ -673,7 +673,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 \end{equation}
 此方程可约化为多项式方程
 \begin{equation}
-	P\!\left(x\right):=x^3-15x^2-9x-1=0.
+	P\!\left(x\right)\coloneqq x^3-15x^2-9x-1=0.
 \end{equation}
 
 注意到
@@ -685,7 +685,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 	\cos^3\frac y3=\frac14\left(\cos y+3\cos\frac y3\right).
 \end{equation*}
 
-令 $x^\star:=5+4\sqrt7\cos\!\left(\frac13\arctan\frac{\sqrt3}{37}\right)$, 则
+令 $x^\star\coloneqq 5+4\sqrt7\cos\!\left(\frac13\arctan\frac{\sqrt3}{37}\right)$, 则
 \begin{align}
 	\left(x^\star-5\right)^3&=16\cdot 7^{\frac 32}\left(\cos\arctan\frac{\sqrt3}{37}+3\cos\!\left(\frac13\arctan\frac{\sqrt3}{37}\right)\right)\\
 	&=16\cdot 7^{\frac 32}\left(\frac{37}{2\cdot 7^{\frac32}}+3\cdot\frac{x^\star-5}{4\sqrt7}\right)\\
@@ -699,7 +699,7 @@ B 的内壁是可以完全反射热辐射的镜面.
 $V\,\mathrm dQ$ 是电源对电容所做的功, $-F\,\mathrm dX$ 是外力对电容所做的功.
 
 \mypara
-令 $H:=U+FX$, 则
+令 $H\coloneqq U+FX$, 则
 \begin{equation}
 	\mathrm dH=V\,\mathrm dQ+X\,\mathrm dF.
 \end{equation}
@@ -765,7 +765,7 @@ $\frac{\partial^2H}{\partial Q\partial F}=\frac{\partial^2H}{\partial F\partial 
 设两个正 $n$ 边形所在平面之间的距离为 $h$,
 两个正 $n$ 边形的半径为
 \begin{equation}
-	r:=\frac a{2\sin\frac\pi n}.
+	r\coloneqq \frac a{2\sin\frac\pi n}.
 \end{equation}
 
 建立坐标系. 给出点的坐标:
@@ -792,9 +792,9 @@ $\frac{\partial^2H}{\partial Q\partial F}=\frac{\partial^2H}{\partial F\partial 
 考虑对称性, 每个 $T\!\left(\mathrm A_j\mathrm B_j\right)$ 相等,
 每个 $T\!\left(\mathrm A_j\mathrm B_{j+1}\right)$ 相等,
 每个 $T\!\left(\mathrm A_j\mathrm A_{j+1}\right)$ 相等.
-令 $T_a:=T\!\left(\mathrm A_j\mathrm A_{j+1}\right)$,
-$T_b:=T\!\left(\mathrm A_j\mathrm B_j\right)$,
-以及 $T_l:=T\!\left(\mathrm A_j\mathrm B_{j+1}\right)$.
+令 $T_a\coloneqq T\!\left(\mathrm A_j\mathrm A_{j+1}\right)$,
+$T_b\coloneqq T\!\left(\mathrm A_j\mathrm B_j\right)$,
+以及 $T_l\coloneqq T\!\left(\mathrm A_j\mathrm B_{j+1}\right)$.
 
 点 $\mathrm A_0$ 静力平衡给出条件
 \begin{equation}
@@ -876,7 +876,7 @@ $L=C$ 的充要条件是
 	\operatorname{supp}\!\left(f_{j^*}\right)\setminus
 	\bigcup_{l\ne j^*}\operatorname{supp}\!\left(f_l\right)=\varnothing,
 \end{equation}
-则显然对于 $c_j:=\delta_{j,j^*}$, 有 $C\ni\mathbf c\notin L$.
+则显然对于 $c_j\coloneqq \delta_{j,j^*}$, 有 $C\ni\mathbf c\notin L$.
 
 \mypara
 首先考虑 $n=1$ 的情形.
@@ -895,7 +895,7 @@ $\forall\mathbf c,\mathbf c'\in C^*:\mathbf c\sim\mathbf c'$.
 所以对于任意的 $\mathbf c\in C^*$,
 与 $\mathbf c$ 等色相的全体颜色组成的集合
 \begin{equation}
-	\left[\mathbf c\right]:=\left\{\mathbf c'\in C^*\,\middle|\,
+	\left[\mathbf c\right]\coloneqq \left\{\mathbf c'\in C^*\,\middle|\,
 	\mathbf c\sim\mathbf c'\right\}.
 \end{equation}
 是 $C$ 中的二维曲面.
@@ -907,7 +907,7 @@ $\forall\mathbf c,\mathbf c'\in C^*:\mathbf c\sim\mathbf c'$.
 二维曲面 $\left[\mathbf c\right]$ 将扫过一片三维超曲面 $P$.
 显然 $P$ 可被定义为
 \begin{equation}
-	P:=\left\{\mathbf c\in C^*\,\middle|\,
+	P\coloneqq \left\{\mathbf c\in C^*\,\middle|\,
 	\exists\mathbf c'\in R:\mathbf c\sim\mathbf c'\right\}.
 \end{equation}
 由于 $P$ 是三维超曲面, 然而 $C$ 是 $n>3$ 维空间,
@@ -925,11 +925,11 @@ $p\!\left(\mathbf c\right)=p\!\left(\mathbf c'\right)$.
 
 定义
 \begin{equation}
-	\mathbf s\!\left(\mathbf c\right):=
+	\mathbf s\!\left(\mathbf c\right)\coloneqq 
 	S_\frac{c_{\max}+c_{\min}}{c_{\max}-c_{\min}}\mathbf c,
-	\quad\mathbf t\!\left(\mathbf c\right):=
+	\quad\mathbf t\!\left(\mathbf c\right)\coloneqq 
 	T_\frac1{c_{\max}}\mathbf c,
-	\quad\mathbf u\!\left(\mathbf c\right):=\mathbf t\!\left(\mathbf s\!\left(\mathbf c\right)\right).
+	\quad\mathbf u\!\left(\mathbf c\right)\coloneqq \mathbf t\!\left(\mathbf s\!\left(\mathbf c\right)\right).
 	\label{eq:标准化}
 \end{equation}
 此时 $\mathbf u$ 的作用是将 $\mathbf c\in C^*$ 标准化为满足
@@ -942,13 +942,13 @@ $\mathbf u\!\left(\mathbf c\right)$.
 对应于 $\mathbf c$ 的最大分量的下标为 $\max$.
 定义 $q$ 为
 \begin{equation}
-	q\!\left(\mathbf c^\circ\right):=\frac\pi3\left(b+\varepsilon c^\circ_\mathrm{mid}\right),
+	q\!\left(\mathbf c^\circ\right)\coloneqq \frac\pi3\left(b+\varepsilon c^\circ_\mathrm{mid}\right),
 \end{equation}
 其中 $c_\mathrm{mid}$ 表示 $\mathbf c$ 中除了最大和最小以外的那个分量,
 $b$ 与 $\varepsilon$ 的取值如表 \ref{tab:be} 所示.
 从而, 可定义
 \begin{equation}
-	p\!\left(\mathbf c\right):=
+	p\!\left(\mathbf c\right)\coloneqq 
 	q\!\left(\mathbf u\!\left(\mathbf c\right)\right).
 \end{equation}
 
@@ -1169,12 +1169,12 @@ $\forall\lambda:f_1\!\left(\lambda\right)>f_2\!\left(\lambda\right)$.
 \end{equation}
 定义电容矩阵
 \begin{equation}
-	\mathbf C:=\left[\begin{matrix}\frac1{C_1}&\frac1N\\
+	\mathbf C\coloneqq \left[\begin{matrix}\frac1{C_1}&\frac1N\\
 	\frac1N&\frac1{C_2}\end{matrix}\right]^{-1},
 \end{equation}
 电感矩阵
 \begin{equation}
-	\mathbf L:=\left[\begin{matrix}L_1&M\\M&L_2\end{matrix}\right],
+	\mathbf L\coloneqq \left[\begin{matrix}L_1&M\\M&L_2\end{matrix}\right],
 \end{equation}
 从而式 \ref{eq:Kirchhoff电压} 可重写为
 \begin{equation}
@@ -1185,17 +1185,17 @@ $\forall\lambda:f_1\!\left(\lambda\right)>f_2\!\left(\lambda\right)$.
 	\ddot{\mathbf Q}=\mathbf L^{-1}\mathbf C^{-1}\mathbf Q,
 	\label{eq:二阶ODE}
 \end{equation}
-其中 $\mathbf Q:=\left[\begin{matrix}Q_1\\Q_2\end{matrix}\right]$.
+其中 $\mathbf Q\coloneqq \left[\begin{matrix}Q_1\\Q_2\end{matrix}\right]$.
 将 $\mathbf L^{-1}\mathbf C^{-1}$ 特征分解:
 \begin{equation}
 	\mathbf L^{-1}\mathbf C^{-1}=\mathbf P\boldsymbol\Lambda\mathbf P^{-1},
 \end{equation}
-其中 $\boldsymbol\Lambda:=
+其中 $\boldsymbol\Lambda\coloneqq 
 \left[\begin{matrix}-\omega_1^2&0\\0&-\omega_2^2\end{matrix}\right]$
 是对角矩阵.
 令
 \begin{equation}
-	\left[\begin{matrix}q_1\\q_2\end{matrix}\right]:=\mathbf P^{-1}\mathbf Q,
+	\left[\begin{matrix}q_1\\q_2\end{matrix}\right]\coloneqq \mathbf P^{-1}\mathbf Q,
 \end{equation}
 从而式 \ref{eq:二阶ODE} 可重写为
 \begin{equation}
@@ -1226,8 +1226,8 @@ $\forall\lambda:f_1\!\left(\lambda\right)>f_2\!\left(\lambda\right)$.
 \end{equation}
 其中
 \begin{gather}
-	p:=\frac MN-\frac12\left(\frac{L_1}{C_2}+\frac{L_2}{C_1}\right),\\
-	\Delta:=\frac{L_1L_2}{N^2}+\frac{M^2}{C_1C_2}+\frac14\left(\frac{L_1}{C_2}-\frac{L_2}{C_1}\right)^2-\left(\frac{L_1}{C_2}+\frac{L_2}{C_1}\right)\frac MN.
+	p\coloneqq \frac MN-\frac12\left(\frac{L_1}{C_2}+\frac{L_2}{C_1}\right),\\
+	\Delta\coloneqq \frac{L_1L_2}{N^2}+\frac{M^2}{C_1C_2}+\frac14\left(\frac{L_1}{C_2}-\frac{L_2}{C_1}\right)^2-\left(\frac{L_1}{C_2}+\frac{L_2}{C_1}\right)\frac MN.
 \end{gather}
 
 \subsection{球套黑球}
@@ -1342,11 +1342,11 @@ B 在 $\mathrm P$ 处小面积 $\mathrm dA$ 的辐射中, 能射到 A 的功率�
 	\mathrm dP_\mathrm{BA}\!\left(\theta\right)=
 	L_\mathrm B\,\mathrm dA\cdot g\!\left(\theta\right),
 \end{equation}
-其中 $L_\mathrm B:=\frac\sigma\pi S^4$ 是温度为 $S$ 的黑体表面的辐射率 (单位面积上单位立体角的辐射通量),
-$\mathrm dA:=R^2\sin\theta\,\mathrm d\theta\,\mathrm d\varphi$,
+其中 $L_\mathrm B\coloneqq \frac\sigma\pi S^4$ 是温度为 $S$ 的黑体表面的辐射率 (单位面积上单位立体角的辐射通量),
+$\mathrm dA\coloneqq R^2\sin\theta\,\mathrm d\theta\,\mathrm d\varphi$,
 而
 \begin{equation}
-	g\!\left(\theta\right):=\begin{cases}
+	g\!\left(\theta\right)\coloneqq \begin{cases}
 		\int_{\varphi'=-\pi}^{\pi}
 		\int_{\theta'=0}^{f\!\left(\theta,\varphi'\right)}
 		\cos\theta'\mathrm d\Omega,
@@ -1358,7 +1358,7 @@ $\mathrm dA:=R^2\sin\theta\,\mathrm d\theta\,\mathrm d\varphi$,
 		&\text{若 $d\ge r$ 且 $\theta\in\left[\arcsin\frac rd,\pi-\arcsin\frac rd\right]$,}
 	\end{cases}
 \end{equation}
-其中 $\mathrm d\Omega:=\sin\theta'\mathrm d\theta'\mathrm d\varphi'$.
+其中 $\mathrm d\Omega\coloneqq \sin\theta'\mathrm d\theta'\mathrm d\varphi'$.
 从而 B 对 A 的总辐射功率为
 \begin{equation}
 	P_\mathrm{BA}=\int_{\theta=0}^\pi\int_{\varphi=-\pi}^{\pi}\mathrm dP_\mathrm{BA}\!\left(\theta\right),
@@ -1369,7 +1369,7 @@ $\mathrm dA:=R^2\sin\theta\,\mathrm d\theta\,\mathrm d\varphi$,
 \end{equation}
 其中常数
 \begin{equation}
-	\lambda:=\begin{cases}
+	\lambda\coloneqq \begin{cases}
 		\sigma R^2\int_0^\pi\sin\theta\,\mathrm d\theta
 		\int_{-\pi}^\pi\mathrm d\varphi'
 		\int_0^{f\!\left(\theta,\varphi'\right)}\sin\!\left(2\theta'\right)\mathrm d\theta',

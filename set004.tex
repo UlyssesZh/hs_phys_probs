@@ -6,6 +6,12 @@
 \usepackage{amsthm}
 \usepackage[total={7in,10in}]{geometry}
 \usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{caption}
+\usepackage[RPvoltages]{circuitikz}
+
+\usetikzlibrary{arrows}
 
 \newcounter{para}
 \newcommand\mypara{\par\refstepcounter{para}(\thepara)\space}
@@ -52,12 +58,17 @@ $\gamma$ 被恰当地选取, 使得对于任意的 O, P 的轨迹是椭球面.
 
 \subsection{摆线气体}
 
-一些单原子气体被约束在摆线
+粒子数为 $N$ 的一些单原子气体被约束在摆线
 $$\begin{dcases}x=R\left(\varphi-\sin\varphi\right),\\
 y=R\cos\varphi,\end{dcases}\quad\varphi\in\left[0,2\pi\right]$$
-上. 每个微粒受到 $-y$ 方向的重力 $G$.
-这些气体在温度 $T$ 下达到热平衡状态.
-求这些气体的质心的坐标.
+上. 这些气体在温度 $T$ 下达到热平衡状态.
+每个微粒受到 $-y$ 方向的重力, 其大小为 $\frac{kT}{R}$,
+其中 $k$ 为 Boltzmann 常量.
+求这些气体的质心坐标.
+可能有用的特殊函数:
+\begin{equation*}
+	\operatorname{erf}z\coloneqq\frac2{\sqrt\pi}\int_0^z\mathrm e^{-t^2}\mathrm dt.
+\end{equation*}
 
 \subsection{半反半透膜}
 
@@ -70,16 +81,15 @@ y=R\cos\varphi,\end{dcases}\quad\varphi\in\left[0,2\pi\right]$$
 
 \subsection{电子偶素}
 
-求电子偶素 (如同氢原子, 但由正电子代替原子核) 的结合能.
+求电子偶素 (如同氢原子, 但由正电子代替原子核) 的结合能, 精确到 $\SI{0.1}{eV}$.
 
 \subsection{电电圈}
 
-有一个圆环 (甜甜圈), 其截面的半径为 $r$,
-截面的圆心到圆环的轴线的距离为 $R$.
-圆环内均匀分布着电荷.
+有一个圆环 (甜甜圈), 截面的圆心到圆环的轴线的距离为 $R$, 截面的半径为 $r\ll R$,
+圆环内均匀分布着总量为 $Q$ 的电荷.
 圆环以角速度 $\omega$ 绕着轴线旋转.
 求轴线附近的磁感应强度,
-用柱坐标表示, 精确到 $\rho$ 的一阶小量.
+用柱坐标表示, 精确到 $\rho$ 的一阶和 $r$ 的二阶.
 
 \subsection{Theremin}
 
@@ -126,19 +136,18 @@ $\left|f_1-f_2\right|<f_{\mathrm{max}}$.
 振荡器利用互感向混频器输出信号.
 根据以上所给信息画出 theremin 的音调控制部分的电路图
 (无需画出音量控制部分和扬声器),
-用虚线框出并标注演奏者, 可变音调振荡器, 参考音调振荡器, 混频器, 低通滤波器.
+标注演奏者, 音调天线, 可变音调振荡器, 参考音调振荡器, 混频器, 低通滤波器.
 
 \mypara
 将音调天线和演奏者的右手看作轴线互相平行的两个长度为 $l$, 半径分别为
-$R_{\mathrm{ant}}$ 和 $R_{\mathrm{per}}$ 的圆柱形导体.
+$R_1$ 和 $R_2$ 的圆柱形导体.
 在演奏过程中, 这两个圆柱的两端的连线始终垂直于它们的轴线,
 而它们的轴线间距在 $d_{\mathrm{min}}$ 和 $d_{\mathrm{max}}$ 之间改变,
 从而改变 $f_1$ (不是已知量).
-已知 $l\gg R_{\mathrm{ant}},R_{\mathrm{per}},d_{\mathrm{min}},d_{\mathrm{max}}$.
-参考音调振荡器的频率 $f_2$ 是已知量.
+已知 $l\gg R_1,R_2,d_{\mathrm{min}},d_{\mathrm{max}}$.
 若低通滤波器最终输出的信号的频率刚好能覆盖人能听见的频段
 ($f_{\mathrm{min}}$ 到 $f_{\mathrm{max}}$ 之间),
-求可变音调振荡器中的电感 $L_1$.
+求可变音调振荡器中的电感 $L_1$ 和参考音调振荡器的频率 $f_2$.
 
 \newpage
 \section{参考答案}
@@ -454,5 +463,531 @@ $R_{\mathrm{ant}}$ 和 $R_{\mathrm{per}}$ 的圆柱形导体.
 \end{equation}
 这显然是正定矩阵. 因此 $x_l=0$ 确实是目标行列式的极值.
 \end{proof}
+
+\subsection{圆轨道常量}
+
+容易获得
+\begin{equation}
+	\Phi=\int_{r_\mathrm{min}}^{r_\mathrm{max}}\frac{\frac{M}{mr^2}\,\mathrm dr}{\sqrt{\frac2m\left(E-U-\frac{M^2}{2mr^2}\right)}}.
+\end{equation}
+代换 $x\coloneqq\frac{M}{mr}$, 注意到 $x_{\mathrm{min}}=\frac{M}{mr_{\mathrm{max}}}$ 以及 $x_{\mathrm{max}}=\frac{M}{mr_{\mathrm{min}}}$ 可得
+\begin{equation}
+	\Phi=\int_{x_{\mathrm{min}}}^{x_{\mathrm{max}}}\frac{\mathrm dx}{\frac2m\left(E-U-\frac{mx^2}2\right)}.
+\end{equation}
+于是形式上可以认为 $\Phi$ 是质量为 $m$ 的质点在势场
+\begin{equation}
+	W\!\left(x\right)\coloneqq U\!\left(\frac M{mx}\right)+\frac{mx^2}2
+\end{equation}
+中运动的半周期.
+
+在圆轨道极限下, 该质点在势场 $W$ 的最低点微振动. 可以得到
+\begin{equation}
+	0=\lim_{\text{圆轨道}}W'\!\left(x\right)=\lim_{\text{圆轨道}}\left(-\frac M{mx^2}U'\!\left(\frac M{mx}\right)+mx\right)
+	=\lim_{\text{圆轨道}}\left(-\frac{mr^2}MU'+\frac Mr\right),
+\end{equation}
+于是
+\begin{equation}
+	\label{eq:圆轨道下的M}
+	\lim_{\text{圆轨道}}M=\sqrt{mr^3U'}.
+\end{equation}
+该微振动的半周期
+\begin{equation}
+	\label{eq:圆轨道下的Psi含M}
+	\begin{split}
+	\Psi\coloneqq\lim_{\text{圆轨道}}\Phi=\lim_{\text{圆轨道}}\pi\sqrt{\frac m{W''\!\left(x\right)}}&=
+	\lim_{\text{圆轨道}}\pi\sqrt{\frac{m}{\frac{M^2}{m^2x^4}U''\!\left(\frac M{mx}\right)+\frac{2M}{mx^3}U'\!\left(\frac M{mx}\right)+m}}\\
+	&=\lim_{\text{圆轨道}}\frac{\pi M}{\sqrt{mr^4U''+2mr^3U'^2+M^2}}.
+	\end{split}
+\end{equation}
+将式 \ref{eq:圆轨道下的M} 代入式 \ref{eq:圆轨道下的Psi含M} 得
+\begin{equation}
+	\label{eq:关于U的微分方程}
+	\Psi=\pi\sqrt{\frac{U'}{3U'+rU''}}.
+\end{equation}
+
+对于 $\Psi$ 与 $r$ 无关的情形, 将 $\Psi$ 视作常量, 将式 \ref{eq:关于U的微分方程} 视作关于 $U$ 的微分方程. 解得
+\begin{equation}
+	U=\begin{cases}
+	B\ln\frac{r}{r_0},&\Psi=\frac\pi{\sqrt2},\\
+	Ar^{\frac{\pi^2}{\Psi^2}-2}+C,&\Psi\ne\frac\pi{\sqrt2},
+	\end{cases}
+\end{equation}
+其中 $A,B,C,r_0$ 为积分常量. 因此有心力场的形式为幂函数或对数函数.
+
+\subsection{摆线气体}
+
+由 Boltzmann 分布可知, 热平衡态下粒子数线密度 $n$ 正比于 $\mathrm e^{-\frac V{kT}}$,
+其中势能
+\begin{equation}
+	V=mgy=\frac{kT}{R}y=kT\cos\varphi.
+\end{equation}
+于是
+\begin{equation}
+	\label{eq:数密度正比}
+	n=A\mathrm e^{-\cos\varphi}.
+\end{equation}
+易知摆线上的线微元 $\mathrm ds=2R\sin\frac\varphi2\,\mathrm d\varphi$,
+于是总粒子数
+\begin{equation}
+	N=2AR\int_0^{2\pi}\mathrm e^{-\cos\varphi}\sin\frac\varphi2\,\mathrm d\varphi.
+\end{equation}
+注意到
+\begin{equation}
+	\int_0^{2\pi}\mathrm e^{-\cos\varphi}\sin\frac\varphi2\,\mathrm d\varphi
+	=-\sqrt2\int_0^{2\pi}\mathrm e^{1-2\cos^2\frac\varphi2}\,\mathrm d\!\left(\sqrt2\cos\frac\varphi2\right)
+	=\mathrm e\sqrt2\int_{-\sqrt2}^{\sqrt2}\mathrm e^{-u^2}\,\mathrm du.
+\end{equation}
+利用题目所给 $\operatorname{erf}$ 的定义, 得
+\begin{equation}
+	N=2\mathrm e\sqrt{2\pi}\operatorname{erf}\sqrt2AR,
+\end{equation}
+于是
+\begin{equation}
+	A=\frac1{2\mathrm e\sqrt{2\pi}\operatorname{erf}\sqrt2}\frac NR.
+\end{equation}
+代入式 \ref{eq:数密度正比} 可知数密度, 于是知密度
+\begin{equation}
+	\lambda=\frac{nkT}{gR}=\frac1{2\mathrm e\sqrt{2\pi}\operatorname{erf}\sqrt2}\frac{NkT}{gR^2}\mathrm e^{-\cos\varphi}.
+\end{equation}
+
+于是易得质心纵坐标
+\begin{equation}
+	y_\mathrm c=\frac{gR}{NkT}\int_{\varphi=0}^{2\pi}y\lambda\,\mathrm ds=\frac R{\mathrm e\sqrt{2\pi}\operatorname{erf}\sqrt2}\int_0^{2\pi}\mathrm e^{-\cos\varphi}\cos\varphi\sin\frac\varphi2\,\mathrm d\varphi.
+\end{equation}
+注意到
+\begin{equation}
+	\int_0^{2\pi}\mathrm e^{-\cos\varphi}\cos\varphi\sin\frac\varphi2\,\mathrm d\varphi
+	=-\sqrt2\int_0^{2\pi}\mathrm e^{1-2\cos^2\frac\varphi2}\left(2\cos^2\frac\varphi2-1\right)\mathrm d\!\left(\sqrt2\cos\frac\varphi2\right)=-\frac2{\mathrm e}-\mathrm e\sqrt{\frac\pi2}\operatorname{erf}\sqrt2.
+\end{equation}
+于是质心坐标为
+\begin{equation}
+	x_\mathrm c=\pi R,\qquad
+	y_\mathrm c=\left(-\frac{\mathrm e^{-2}}{\operatorname{erf}\sqrt2}\sqrt\frac2\pi-\frac12\right)R.
+\end{equation}
+
+\textit{另}: 若不使用 Boltzmann 分布, 可对线微元应用静力平衡.
+
+取线元 $\mathrm ds$.
+易知其斜率为 $-\cot\frac\varphi2$.
+线元两端的受到压力之差 (沿线元方向的压力的合力) 的大小为 $kT\,\mathrm dn$,
+其应当等于该线元的重力在该方向上的分力 $\frac{kT}{R}n\,\mathrm ds\cdot\cos\frac\varphi2$.
+于是得到微分方程
+\begin{equation}
+	kT\,\mathrm dn=n\frac{kT}R\cos\frac\varphi2\cdot2R\sin\frac\varphi2\,\mathrm d\varphi.
+\end{equation}
+由此可得
+\begin{equation}
+	n=A\mathrm e^{-\cos\varphi}.
+\end{equation}
+其与式 \ref{eq:数密度正比} 相同.
+
+\subsection{半反半透膜}
+
+介质的折射率为
+\begin{equation}
+	n\coloneqq\sqrt{\mu_\mathrm r\varepsilon_\mathrm r}.
+\end{equation}
+设入射表面为 $xy$ 平面.
+
+设入射光线为
+\begin{equation}
+	\mathbf E=\mathbf E_0\mathrm e^{\mathrm i\left(\mathbf k\cdot\mathbf x-\omega t\right)},
+	\quad\mathbf B=\frac1c\frac{\mathbf k\times\mathbf E}{k},
+\end{equation}
+折射光线为
+\begin{equation}
+	\mathbf E'=\mathbf E_0'\mathrm e^{\mathrm i\left(\mathbf k'\cdot\mathbf x-\omega t\right)},
+	\quad\mathbf B=\frac nc\frac{\mathbf k'\times\mathbf E'}{k'},
+\end{equation}
+反射光线为
+\begin{equation}
+	\mathbf E''=\mathbf E_0''\mathrm e^{\mathrm i\left(\mathbf k''\cdot\mathbf x-\omega t\right)},
+	\quad\mathbf B=\frac1c\frac{\mathbf k''\times\mathbf E'}{k''}.
+\end{equation}
+显然各光线的波数大小满足关系
+\begin{equation}
+	\label{eq:波数关系}
+	k=k''=\frac\omega c,\qquad k'=\frac{\omega n}c.
+\end{equation}
+
+记反射角为 $r$, 由 Snell 定律 (或者由 $z=0$ 处相位因子相等) 可得
+\begin{equation}
+	\frac{\sin\theta}{\sin r}=n.
+\end{equation}
+
+由于 $z=0$ 边界处 $\mathbf E$ 与 $\mathbf H$ 的切向分量连续, 得到
+\begin{equation}
+	\label{eq:边界3}
+	\left(\mathbf E_0+\mathbf E_0''-\mathbf E_0'\right)\times\mathbf n=0,
+\end{equation}
+\begin{equation}
+	\label{eq:边界4}
+	\left(\mu_\mathrm r\left(\mathbf k\times\mathbf E_0+\mathbf k''\times\mathbf E_0''\right)-\mathbf k'\times\mathbf E_0'\right)\times\mathbf n=0.
+\end{equation}
+
+将 $\mathbf E_0$ 分解为 s 偏振方向 $\mathbf E_{0\text s}$ 和 p 偏振方向 $\mathbf E_{0\text p}$.
+对于 s 偏振, 式 \ref{eq:边界3} 给出
+\begin{equation}
+	E_{0\text s}+E_{0\text s}''-E_{0\text s}'=0.
+\end{equation}
+式 \ref{eq:边界4} 给出 (利用式 \ref{eq:波数关系})
+\begin{equation}
+	\sqrt{\mu_\mathrm r}\left(E_{0\text s}-E_{0\text s}''\right)\cos\theta-\sqrt{\varepsilon_\mathrm r}E_{0\text s}'\cos r=0.
+\end{equation}
+由此解得 s 偏振的折射率与反射率
+\begin{equation}
+	t_{1\text s}\coloneqq\frac{E_{0\text s}'}{E_{0\text s}}=\frac{2\mu_\mathrm r\cos\theta}{\mu_\mathrm r\cos\theta+\sqrt{n^2-\sin^2\theta}},
+\end{equation}
+\begin{equation}
+	r_{1\text s}\coloneqq\frac{E_{0\text s}''}{E_{0\text s}}=\frac{\mu_\mathrm r\cos\theta-\sqrt{n^2-\sin^2\theta}}{\mu_\mathrm r\cos\theta+\sqrt{n^2-\sin^2\theta}}.
+\end{equation}
+
+对于 p 偏振, 式 \ref{eq:边界3} 给出
+\begin{equation}
+	\left(E_{0\text p}-E_{0\text p}''\right)\cos\theta-E_{0\text p}'\cos r=0.
+\end{equation}
+式 \ref{eq:边界4} 给出
+\begin{equation}
+	\sqrt{\mu_\mathrm r}\left(E_{0\text p}+E_{0\text p}''\right)-\sqrt{\varepsilon_\mathrm r}E_{0\text p}'=0.
+\end{equation}
+由此解得 p 偏振的折射率与反射率
+\begin{equation}
+	t_{1\text p}\coloneqq\frac{E_{0\text p}'}{E_{0\text p}}=\frac{2n\cos\theta}{n^2\cos\theta+\mu_\mathrm r\sqrt{n^2-\sin^2\theta}},
+\end{equation}
+\begin{equation}
+	r_{1\text p}\coloneqq\frac{E_{0\text p}''}{E_{0\text p}}=\frac{n^2\cos\theta-\mu_\mathrm r\sqrt{n^2-\sin^2\theta}}{n^2\cos\theta+\mu_\mathrm r\sqrt{n^2-\sin^2\theta}}.
+\end{equation}
+
+类似地, 若从介质内部入射介质表面, 可得 s 偏振和 p 偏振的折射率与反射率
+\begin{equation}
+	t_{2\text s}=\frac{2\sqrt{n^2-\sin^2\theta}}{\sqrt{n^2-\sin^2\theta}+\mu_\mathrm r\cos\theta},
+\end{equation}
+\begin{equation}
+	r_{2\text s}=\frac{\sqrt{n^2-\sin^2\theta}-\mu_{\mathrm r}\cos\theta}{\sqrt{n^2-\sin^2\theta}+\mu_{\mathrm r}\cos\theta},
+\end{equation}
+\begin{equation}
+	t_{2\text p}=\frac{2\sqrt{n^2-\sin^2\theta}}{\mu_\mathrm r\sqrt{n^2-\sin^2\theta}+n\cos\theta},
+\end{equation}
+\begin{equation}
+	r_{2\text p}=\frac{\mu_\mathrm r\sqrt{n^2-\sin^2\theta}-n\cos\theta}{\mu_\mathrm r\sqrt{n^2-\sin^2\theta}+n\cos\theta}.
+\end{equation}
+
+设在膜底面反射过 $l+1$ 次的反射光线的振幅为 $A_l$, 简单分析可知
+\begin{equation}
+	A_l=t_1t_2r_2^{2l+1}\mathrm e^{\mathrm in\frac{2d}{\cos r}l-\mathrm i\cdot2d\tan r\sin\theta\cdot l}E_0.
+\end{equation}
+干涉后反射光线的总振幅
+\begin{equation}
+	A=r_1\mathrm e^{\mathrm i\cdot2d\tan r\sin\theta}E_0+\sum_lA_l
+	=\left(r_1\mathrm e^{2\mathrm id\tan r\sin\theta}+\frac{t_1t_2r_2}{1-r_2^2\mathrm e^{\mathrm in\frac{2d}{\cos r}-2\mathrm id\tan r\sin\theta}}\right)E_0.
+\end{equation}
+考虑到两种偏振, 于是有总能量反射率
+\begin{equation}
+	R=\frac{\left|A_\text s\right|^2\sin^2\alpha+\left|A_\text p\right|^2\cos^2\alpha}{E_0^2}.
+\end{equation}
+代入得到答案 (不必展开)
+\begin{equation}
+	R=
+	\left|r_{1\text s}\mathrm e^{2\mathrm id\frac{\sin^2\theta}{\sqrt{n^2-\sin^2\theta}}}+\frac{t_{1\text s}t_{2\text s}r_{2\text s}}{1-r_{2\text s}^2\mathrm e^{2\mathrm id\frac{n-\sin^2\theta}{\sqrt{n^2-\sin^2\theta}}}}\right|^2\sin^2\alpha+
+	\left|r_{1\text p}\mathrm e^{2\mathrm id\frac{\sin^2\theta}{\sqrt{n^2-\sin^2\theta}}}+\frac{t_{1\text p}t_{2\text p}r_{2\text p}}{1-r_{2\text p}^2\mathrm e^{2\mathrm id\frac{n-\sin^2\theta}{\sqrt{n^2-\sin^2\theta}}}}\right|^2\cos^2\alpha.
+\end{equation}
+
+\subsection{电子偶素}
+
+一般地, 对于二体问题, 令 $\mathbf r\coloneqq\mathbf r_1-\mathbf r_2$, 以及 $\mathbf r_\mathrm c$ 为质心, 则有
+\begin{equation}
+	\mathbf r_1=\mathbf r_\mathrm c+\frac\mu{m_1}\mathbf r,\quad
+	\mathbf r_2=\mathbf r_{\mathrm c}-\frac{\mu}{m_2}\mathbf r,
+\end{equation}
+其中 $\mu\coloneqq\frac{m_1m_2}{m_1+m_2}$ 为约化质量.
+因此容易证明
+\begin{equation}
+	\label{eq:梯度}
+	\nabla_1=\frac{\mu}{m_2}\nabla_\mathrm c+\nabla_r,\quad
+	\nabla_2=\frac{\mu}{m_1}\nabla_{\mathrm c}-\nabla_r.
+\end{equation}
+
+设势场的形式为 $V\!\left(\mathbf r\right)$, 则不含时 Schrödinger 方程给出
+\begin{equation}
+	\label{eq:不含时SE}
+	-\frac{\hbar^2}{2m_1}\nabla_1^2\psi-\frac{\hbar^2}{2m_2}\nabla_2^2\psi+V\!\left(\mathbf r\right)\psi=E\psi.
+\end{equation}
+将式 \ref{eq:梯度} 代入式 \ref{eq:不含时SE} 可得
+\begin{equation}
+	-\frac{\hbar^2}{2\left(m_1+m_2\right)}\nabla_\mathrm c^2\psi-\frac{\hbar^2}{2\mu}\nabla_r^2\psi+V\!\left(\mathbf r\right)\psi=E\psi.
+\end{equation}
+该方程成为可分离变量的方程.
+将 $\psi$ 写作 $\psi_\mathrm c\!\left(\mathbf r_\mathrm c\right)\psi_r\!\left(\mathbf r\right)$,
+得到
+\begin{equation}
+	-\frac{\hbar^2}{2\left(m_1+m_2\right)}\frac{\nabla_\mathrm c^2\psi_\mathrm c}{\psi_\mathrm c}-\frac{\hbar^2}{2\mu}\frac{\nabla_r^2\psi_r}{\psi_r}+V\!\left(\mathbf r\right)=E.
+\end{equation}
+于是有分离出的两个方程
+\begin{equation}
+	\label{eq:质心SE}
+	-\frac{\hbar^2}{2\left(m_1+m_2\right)}\nabla_\mathrm c^2\psi_\mathrm c=E_\mathrm c\psi_\mathrm c,
+\end{equation}
+\begin{equation}
+	\label{eq:相对SE}
+	-\frac{\hbar^2}{2\mu}\nabla_r^2\psi_r+V\!\left(\mathbf r\right)\psi_r=E_r\psi_r.
+\end{equation}
+式 \ref{eq:质心SE} 描述质心运动, 式 \ref{eq:相对SE} 描述相对运动,
+后者与处于势场 $V\!\left(\mathbf r\right)$ 中质量为 $\mu$ 的粒子的不含时 Schrödinger 方程相同.
+式 \ref{eq:相对SE} 描述的系统的基态能量的相反数即为该二体系统的结合能.
+
+设电子质量为 $m$, 则一个正电子和一个电子组成的系统的约化质量 $\mu=\frac m2$.
+另一方面, 由于质子的质量远大于电子, 氢原子作为一个二体系统, 其约化质量 $\mu=m$.
+因为正电子和电子之间的相互作用势能与电子与质子之间的相互作用势能是相同的,
+所以式 \ref{eq:相对SE} 对电子偶素和氢原子两个模型的唯一区别就是 $\mu$.
+
+记 $\psi^*\!\left(\mathbf r\right)$ 为氢原子的不含时 Schrödinger 方程的一个解,
+则有
+\begin{equation}
+	\label{eq:氢原子特解}
+	-\frac{\hbar^2}{2m}\nabla_r^2\psi^*\!\left(\mathbf r\right)-\frac{ke^2}{r}\psi^*\!\left(\mathbf r\right)=E^*\psi^*\!\left(\mathbf r\right).
+\end{equation}
+令 $\mathbf r'\coloneqq2\mathbf r$, 则有
+\begin{equation}
+	-\frac{\hbar^2}{2m}\cdot4\nabla_{r'}^2\psi^*\!\left(\frac{\mathbf r'}2\right)-2\frac{ke^2}{r'}\psi^*\!\left(\frac{\mathbf r'}2\right)=E^*\psi^*\!\left(\frac{\mathbf r'}2\right),
+\end{equation}
+或者
+\begin{equation}
+	\label{eq:变换为电子偶素的解}
+	-\frac{\hbar^2}{2\frac m2}\nabla_{r'}^2\psi^*\!\left(\frac{\mathbf r'}2\right)-\frac{ke^2}{r'}\psi^*\!\left(\frac{\mathbf r'}2\right)=\frac{E^*}2\psi^*\!\left(\frac{\mathbf r'}2\right).
+\end{equation}
+式 \ref{eq:氢原子特解} 与式 \ref{eq:变换为电子偶素的解} 分别对应于式 \ref{eq:相对SE} 在 $\mu=m$ 与 $\mu=\frac m2$ 的情形.
+因此, 对于氢原子的任意一个具有能量 $E^*$ 的定态解 $\psi^*\!\left(\mathbf r\right)$,
+都有 $\psi^*\!\left(\frac{\mathbf r}2\right)$ 作为电子偶素的一个具有能量 $\frac{E^*}2$ 的定态解.
+因此, 电子偶素的基态具有氢原子基态一半的能量.
+即电子偶素的结合能为 $\SI{6.8}{eV}$.
+
+\textit{另}: 此题可用 Bohr 模型解.
+
+设电子与正电子在同一个半径为 $r$ 的圆轨道上运动, 速率恒定为 $v$.
+则该系统的角动量为
+\begin{equation}
+	\label{eq:角动量}
+	L=2mvr.
+\end{equation}
+对于基态, 有
+\begin{equation}
+	\label{eq:量子化条件}
+	L=\hbar.
+\end{equation}
+另一方面, 静电力充当向心力, 得到
+\begin{equation}
+	\label{eq:向心力}
+	\frac{mv^2}r=\frac{ke^2}{4r^2}.
+\end{equation}
+由式 \ref{eq:角动量}, 式 \ref{eq:量子化条件}, 式 \ref{eq:向心力} 解得
+\begin{equation}
+	v=\frac{ke^2}{2\hbar},\quad r=\frac{\hbar^2}{mke^2}.
+\end{equation}
+于是总能量
+\begin{equation}
+	E=2\cdot\frac12mv^2-\frac{ke^2}{2r}=-\frac{mk^2e^4}{4\hbar^2}=-\SI{6.8}{eV}.
+\end{equation}
+获得结合能 $\SI{6.8}{eV}$.
+
+\subsection{电电圈}
+
+容易得到半径为 $\rho'$ 的电流环轴线上的磁感应强度
+\begin{equation}
+	B_z=\frac{\mu_0I\rho'^2}{2\left(z^2+\rho'^2\right)^\frac32}.
+\end{equation}
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw (5,0) circle (2);
+		\node[anchor=north west] at (6.6,-1.2) {$r$};
+		\draw[dashed] (0,0) -- (5,0) node[midway,anchor=north] {$R$};
+		\draw[dashed] (5,0) node[anchor=north] {$\psi$} -- (3.8,0.9) node[midway,anchor=south] {$p$};
+		\fill (3.8,0.9) circle (0.1);
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:电流环元}
+\end{figure}
+将整个圆环分解为多个电流环, 每个电流环的位置由圆环截面上的极坐标 $\left(p,\psi\right)$ 给出, 如图 \ref{fig:电流环元} 所示.
+写出每个电流环元对轴线上磁场的贡献, 而后积分得
+\begin{equation}
+	B_z=\int_{p=0}^r\int_{\psi=0}^{2\pi}\frac{\mu_0\left(R-p\cos\psi\right)^2}{2\left(\left(z-p\sin\psi\right)^2+\left(R-p\cos\psi\right)^2\right)^\frac32}
+	\frac{Q\omega\left(R-p\cos\psi\right)}{2\pi^2Rr^2}
+	p\,\mathrm dp\,\mathrm d\psi.
+\end{equation}
+整理得
+\begin{equation}
+	B_z=\frac{\mu_0Q\omega}{4\pi^2Rr^2}
+	\int_{p=0}^r\int_{\psi=0}^{2\pi}
+	\frac{\left(R-p\cos\psi\right)^3p}{2\left(\left(z-p\sin\psi\right)^2+\left(R-p\cos\psi\right)^2\right)^\frac32}
+	\,\mathrm dp\,\mathrm d\psi.
+\end{equation}
+由于积分号前有 $r^{-2}$ 因子, 而对 $p$ 的积分限是一阶量,
+因此若要保证最终 $B_z$ 有 $r$ 的二阶量, 积分号内至少要展开至 $p$ 的三阶量.
+展开后, 丢弃掉对 $\psi$ 积分后等于零的项, 得到
+\begin{equation}
+	B_z=\frac{\mu_0Q\omega}{4\pi^2Rr^2}
+	\int_{p=0}^r\int_{\psi=0}^{2\pi}
+	\left(\frac{R^3}{\left(R^2+z^2\right)^{\frac32}}p-
+	\frac32\frac{Rz^2\left(3R^2-2z^2\right)\cos^2\psi+R^3\left(R^2-4z^2\right)\sin^2\psi}{\left(R^2+z^2\right)^\frac72}p^3\right)
+	\mathrm dp\,\mathrm d\psi.
+\end{equation}
+将积分积出, 得到
+\begin{equation}
+	B_z=\frac{\mu_0Q\omega}{4\pi\left(R^2+z^2\right)^{\frac32}}
+	\left(R^2-
+	\frac{3}{8}\frac{R^2-2z^2}{R^2+z^2}r^2\right).
+\end{equation}
+
+在轴线上偏离轴线位置 $\rho$ 处的磁场的 $z$ 分量显然不包含 $\rho$ 的一阶项.
+而 $B_\rho$ 对 $\rho$ 的一阶项可由静磁场 Gauss 定理易得
+\begin{equation}
+	B_\rho=-\frac12\frac{\mathrm dB_z}{\mathrm dz}\rho=
+	\frac{3\mu_0Q\omega z\rho}{8\pi\left(R^2+z^2\right)^\frac52}\left(-R^2+\frac3{8}\frac{3R^2-2z^2}{R^2+z^2}r^2\right).
+\end{equation}
+
+\subsection{Theremin}
+
+\mypara
+电容的阻抗
+\begin{equation}
+	Z_C=\frac1{\mathrm i\omega C}=\frac1{2\pi\mathrm ifC}.
+\end{equation}
+通过率
+\begin{equation}
+	\left|\frac{Z_C}{R+Z_C}\right|=
+	\frac1{\sqrt{1+4\pi^2C^2R^2f^2}}.
+\end{equation}
+通过率最高的频率的通过率为 $1$.
+因此
+\begin{equation}
+	\eta\ge\frac1{\sqrt{1+4\pi^2C^2R^2f_{\mathrm{max}}^2}}.
+\end{equation}
+
+\mypara
+考虑到 $U_0\ge U_{10},U_{20}$, 将二极管的伏安特性在小电压下展开到二阶, 得到
+\begin{equation}
+	I=I_0\left(\frac U{U_0}+\frac12\frac{U^2}{U_0^2}\right),
+\end{equation}
+其中 $U$ 为二极管上的分压.
+二极管上的分压加上电阻上的分压等于 $U_1+U_2$, 于是
+\begin{equation}
+	U+RI_0\left(\frac{U}{U_0}+\frac{U^2}{2U_0^2}\right)=U_1+U_2.
+\end{equation}
+解得
+\begin{equation}
+	U=U_0\left(\sqrt{\left(\frac{U_0}{I_0R}+1\right)^2+\frac{U_1+U_2}{I_0R}}-\frac{U_0}{I_0R}-1\right).
+\end{equation}
+展开并保留到 $U_1+U_2$ 的二阶量, 得到
+\begin{equation}
+	U=U_0\left(\frac{U_1+U_2}{2\left(I_0R+U_0\right)}-\frac{I_0R\left(U_1+U_2\right)^2}{8\left(I_0R+U_0\right)^3}\right).
+\end{equation}
+上式是关于 $U_1,U_2$ 的二次函数,
+将其展开后会有 $U_1,U_2,U_1^2,U_2^2,U_1U_2$ 各项.
+前四种都是高频项 (因为 $f_1,f_2\gg f_{\mathrm{max}}$), 可以丢弃, 而
+\begin{equation}
+	U_1U_2=U_{10}U_{20}\cos\!\left(2\pi f_1t\right)\cos\!\left(2\pi f_2t\right)=
+	\frac{U_{10}U_{20}}2\left(\cos\!\left(2\pi\left(f_1-f_2\right)t\right)+\cos\!\left(2\pi\left(f_1+f_2\right)t\right)\right),
+\end{equation}
+最终只有 $\cos\!\left(2\pi\left(f_1-f_2\right)t\right)$ 是低频项. 因此
+\begin{equation}
+	U\sim-\frac{U_0I_0RU_{10}U_{20}}{8\left(I_0R+U_0\right)^3}\cos\!\left(2\pi\left(f_1-f_2\right)t\right).
+\end{equation}
+电阻上的分压即为输出信号
+\begin{equation}
+	U_{\mathrm{out}}=U_1+U_2-U\sim
+	\frac{U_0I_0RU_{10}U_{20}}{8\left(I_0R+U_0\right)^3}\cos\!\left(2\pi\left(f_1-f_2\right)t\right).
+\end{equation}
+
+\mypara
+如图 \ref{fig:电路图} 所示.
+
+\begin{figure}[h!]
+	\centering
+	\begin{circuitikz}
+		\ctikzset{inductors/scale=1,quadpoles/transformer core/inner=1,quadpoles/transformer core/height=1.4, quadpoles/transformer core/width=0.6}
+		\draw (2.4,0) node[transformer core,anchor=A1] (T1) {};
+		\draw (T1.A2) to ++(-1.4,0) node[ground] {} to[capacitor] (1,0) to (T1.A1);
+		\draw (2.4,-4) node[transformer core,anchor=A1] (T2) {};
+		\draw (T2.A2) to ++(-1.4,0) node[ground] {} to[capacitor] (1,-4) to (T2.A1);
+		\draw (T1.B1) to[diode] ++(2,0) node (N1) {} to[generic] ++(2,0) node (N2) {} to ++(1.5,0) node[ocirc] (end1) {};
+		\draw (T2.B2) to ++(2,0) node (N3) {} to ++(2,0) node (N4) {} to ++(1.5,0) node[ocirc] (end2) {};
+		\draw (T1.B2) to (T2.B1);
+		\draw (N1) to[generic] (N3);
+		\draw (N2) to[capacitor] (N4);
+		\draw[<->] (end1) -- (end2) node[midway,fill=white] {音调信号};
+		\node[anchor=north east] at (0.5,-1) {演奏者};
+		\node[anchor=south east] at (0.5,-1) {音调天线};
+		\node[anchor=south] at (1.7,-4) {参考音调振荡器};
+		\node[anchor=south] at (1.7,0) {可变音调振荡器};
+		\path (T2.B2) -- (N3) node[midway,anchor=north] {混频器};
+		\path (N3) -- (N4) node[midway,anchor=north] {低通滤波器};
+	\end{circuitikz}
+	\caption{}
+	\label{fig:电路图}
+\end{figure}
+
+\mypara
+为计算两个圆柱形成的电容器单位长度上的电容, 运用电像法求解它们的电势,
+电像为两根线电荷密度为 $\pm\lambda$ 的带电直线.
+设圆柱 1 内的电像距离圆柱 1 的轴线为 $b_1$, 另一个为 $b_2$.
+
+带电相反的两根均匀带电直线的等势面是到它们距离比值为定值的圆柱.
+可以列出方程
+\begin{equation}
+	\begin{dcases}
+		b_1\left(d-b_2\right)=R_1^2,\\
+		b_2\left(d-b_1\right)=R_2^2.
+	\end{dcases}
+\end{equation}
+由此解得 (一组解, 另一组解已舍)
+\begin{equation}
+	b_{1,2}=\frac d2\pm\frac{R_1^2-R_2^2}{2d}-\frac{\sqrt{\Delta}}{2d},
+\end{equation}
+其中 $\Delta\coloneqq\left(d-R_1-R_2\right)\left(d+R_1-R_2\right)\left(d-R_1+R_2\right)\left(d+R_1+R_2\right)$.
+
+由此可以获得两个圆柱的电势差
+\begin{equation}
+	V_1-V_2=\frac\lambda{2\pi\varepsilon_0}\ln\frac{R_1-b_1}{d-R_1-b_2}
+	-\frac\lambda{2\pi\varepsilon_0}\ln\frac{d-R_2-b_1}{R_2-b_2}.
+\end{equation}
+代入并整理得
+\begin{equation}
+	V_1-V_2=\frac{\lambda}{2\pi\varepsilon_0}\ln\frac{d^2-R_1^2-R_2^2-\sqrt{\Delta}}{2R_1R_2}.
+\end{equation}
+于是可以获得电容
+\begin{equation}
+	C=\frac{2\pi\varepsilon_0l}{\ln\frac{d^2-R_1^2-R_2^2-\sqrt{\Delta}}{2R_1R_2}}.
+\end{equation}
+$C$ 是随 $d$ 单调增的. 定义
+$C_{\mathrm{min}}\coloneqq\left.C\right|_{d=d_{\mathrm{min}}}$ 以及 $C_{\mathrm{max}}$.
+
+情形 1: 始终有 $f_1>f_2$.
+
+此时有方程组
+\begin{equation}
+	\begin{dcases}
+		\frac1{2\pi\sqrt{L_1C_{\mathrm{max}}}}-f_2=f_{\mathrm{min}},\\
+		\frac1{2\pi\sqrt{L_1C_{\mathrm{min}}}}-f_2=f_{\mathrm{max}}.
+	\end{dcases}
+\end{equation}
+解得
+\begin{equation}
+	L_1=\frac{\left(\sqrt{C_{\mathrm{max}}}-\sqrt{C_{\mathrm{min}}}\right)^2}{4\pi^2C_{\mathrm{max}}C_{\mathrm{min}}\left(f_{\mathrm{max}}-f_{\mathrm{min}}\right)^2},\qquad
+	f_2=\frac{\sqrt{C_{\mathrm{min}}}f_{\mathrm{max}}-\sqrt{C_{\mathrm{max}}}f_{\mathrm{min}}}{\sqrt{C_{\mathrm{max}}}-\sqrt{C_{\mathrm{min}}}}.
+\end{equation}
+
+情形 2: 始终有 $f_1<f_2$.
+
+\begin{equation}
+	\begin{dcases}
+		f_2-\frac1{2\pi\sqrt{L_1C_{\mathrm{min}}}}=f_{\mathrm{min}},\\
+		f_2-\frac1{2\pi\sqrt{L_1C_{\mathrm{max}}}}=f_{\mathrm{max}}.
+	\end{dcases}
+\end{equation}
+
+\begin{equation}
+	L_1=\frac{\left(\sqrt{C_{\mathrm{max}}}-\sqrt{C_{\mathrm{min}}}\right)^2}{4\pi^2C_{\mathrm{max}}C_{\mathrm{min}}\left(f_{\mathrm{max}}-f_{\mathrm{min}}\right)^2},\qquad
+	f_2=\frac{\sqrt{C_{\mathrm{max}}}f_{\mathrm{max}}-\sqrt{C_{\mathrm{min}}}f_{\mathrm{min}}}{\sqrt{C_{\mathrm{max}}}-\sqrt{C_{\mathrm{min}}}}.
+\end{equation}
 
 \end{document}
