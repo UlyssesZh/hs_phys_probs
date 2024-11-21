@@ -1,0 +1,542 @@
+\documentclass{article}
+
+\usepackage[total={7in,10in}]{geometry}
+
+% basic
+\usepackage{comment}
+\makeatletter
+\@ifclassloaded{revtex4-2}{}{
+	\@ifclassloaded{standalone}{}{
+		\@ifclassloaded{beamer}{}{
+			\usepackage{geometry} % only use geometry outside of RevTeX and TeXit
+		}
+	}
+}
+\makeatother
+\usepackage{microtype}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{titlesec}
+
+% programmability
+\usepackage{xparse}
+\usepackage{xtemplate}
+\usepackage{ifthen}
+\usepackage{xintexpr}
+\usepackage{mathcommand}
+
+% Support for CJK characters
+\ifthenelse{\equal{\meaning\pdftexbanner}{\meaning\someundefinednonsense}}{
+	\ifthenelse{\equal{\meaning\luatexbanner}{\meaning\someundefinednonsense}}{
+		% xelatex
+		\usepackage[UTF8]{ctex}
+	}{
+		% lualatex
+	}
+}{
+	% pdflatex
+	\usepackage{CJKutf8}
+	\AddToHook{begindocument/end}{\CJK{UTF8}{gbsn}}
+	\AddToHook{enddocument}{\endCJK}
+}
+
+% fonts
+\usepackage{amsfonts} % for \mathbb, \mathfrak
+\usepackage{mathrsfs} % for \mathscr
+\usepackage{bm}
+\usepackage{upgreek}
+
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\mfk}[1]{\mathfrak{#1}}
+\newcommand{\mrm}[1]{\mathrm{#1}}
+\newcommand{\trm}[1]{\textrm{#1}}
+\newcommand{\mbf}[1]{\mathbf{#1}}
+\newcommand{\tbf}[1]{\textbf{#1}}
+%\newcommand{\mit}[1]{\mathit{#1}}
+\newcommand{\msf}[1]{\mathsf{#1}}
+\newcommand{\mcal}[1]{\mathcal{#1}}
+\newcommand{\mscr}[1]{\mathscr{#1}}
+%\newcommand{\mtt}[1]{\mathtt{#1}}
+\newcommand{\tit}[1]{\textit{#1}}
+\newcommand{\ttt}[1]{\texttt{#1}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+
+% basic utilities
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{verbatim}
+\usepackage{lipsum}
+
+% extensions
+\usepackage{cancel} % \cancel
+\usepackage{tensor} % \tensor, \indices
+\usepackage{fixdif} % \d
+\usepackage[shortlabels]{enumitem} % options to enumerate and itemize environments
+\usepackage{dcolumn} % align numbers by decimal point in tabular
+\usepackage{hyperref} % \url, \href, and add hyperlinks to crossrefs
+\usepackage{scalerel} % \scalerel, \stretchrel, \scaleto, \stretchto
+\usepackage[notquote]{hanging} % \hangpara
+\usepackage{chngcntr} % \counterwithin, \counterwithout
+\usepackage{slashed} % \slashed
+
+\makeatletter
+\@ifclassloaded{beamer}{
+	% https://tex.stackexchange.com/a/24491
+	\setitemize{label=\usebeamerfont*{itemize item}%
+	\usebeamercolor[fg]{itemize item}
+	\usebeamertemplate{itemize item}}
+}{}
+\makeatother
+
+% beamer style
+\makeatletter
+\@ifclassloaded{beamer}{
+	\usetheme{Boadilla}
+	\usefonttheme{serif}
+	\setbeamertemplate{footline}{% https://tex.stackexchange.com/a/67000
+		\leavevmode%
+		\hbox{%
+			\begin{beamercolorbox}[wd=.2\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+				\usebeamerfont{author in head/foot}\insertshortauthor
+			\end{beamercolorbox}%
+			\begin{beamercolorbox}[wd=.8\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+				\usebeamerfont{title in head/foot}\insertshorttitle\hspace*{3em}
+				\insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+			\end{beamercolorbox}
+		}%
+		\vskip0pt%
+	}
+}{}
+
+% floats
+\usepackage{listings}
+\lstdefinestyle{mystyle}{
+	basicstyle=\ttfamily\scriptsize,
+	tabsize=2,
+	showspaces=false,
+	showstringspaces=false,
+	extendedchars=true
+}
+\lstset{style=mystyle}
+
+\makeatletter
+\@ifclassloaded{revtex4-2}{
+	% https://tex.stackexchange.com/a/597712
+	\usepackage[caption=false]{subfig}
+	\usepackage{ragged2e}
+	\DeclareCaptionJustification{justified}{\justifying}
+}{
+	\usepackage{caption} % not compatible with RevTeX
+	\usepackage{subfig}
+}
+\makeatother
+
+\usepackage{graphicx} % \includegraphics
+\usepackage{booktabs} % \toprule, \midrule, \bottomrule
+\setlength{\tabcolsep}{12pt}
+
+% fancy tools
+\usepackage[version=4]{mhchem}
+\usepackage{chemfig}
+\usepackage{chemmacros}
+
+\usepackage{physics2}
+\usephysicsmodule[empty={}]{diagmat}
+\usephysicsmodule{doubleprod}
+\usephysicsmodule{xmat}
+
+\usepackage[separate-uncertainty=true,multi-part-units=single]{siunitx}
+\sisetup{range-phrase=--, range-units=single} % use -- for ranges, unit appears only once
+\catcode`\%=12\relax
+\DeclareSIUnit[number-unit-product=]\percent{%}
+\catcode`\%=14\relax % use \percent in \SI{}{}
+\DeclareSIUnit[number-unit-product=\,]\fahrenheit{\SIUnitSymbolDegree F} % \fahrenheit
+
+% symbols
+\usepackage{amssymb}
+\usepackage[nointegrals]{wasysym}
+\usepackage[safe]{tipa}
+
+\usepackage{pifont}
+\newcommand{\cmark}{\text{\ding{51}}}
+\newcommand{\xmark}{\text{\ding{55}}}
+
+\newcommand{\bN}{\mbb{N}}
+\newcommand{\bC}{\mbb{C}}
+\newcommand{\bR}{\mbb{R}}
+\newcommand{\bQ}{\mbb{Q}}
+\newcommand{\bZ}{\mbb{Z}}
+
+\newcommand{\alp}{\alpha}
+\newcommand{\gma}{\gamma}
+\newcommand{\Gma}{\Gamma}
+\newcommand{\dlt}{\delta}
+\newcommand{\Dlt}{\Delta}
+\newcommand{\eps}{\epsilon}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\vphi}{\varphi}
+\newcommand{\tht}{\theta}
+\newcommand{\Tht}{\Theta}
+\newcommand{\kap}{\kappa}
+\newcommand{\lmd}{\lambda}
+\newcommand{\Lmd}{\Lambda}
+\newcommand{\sgm}{\sigma}
+\newcommand{\Sgm}{\Sigma}
+\newcommand{\omg}{\omega}
+\newcommand{\Omg}{\Omega}
+
+\newcommand{\divby}{\divisionsymbol}
+\newcommand{\ceq}{\coloneqq}
+\newcommand{\eqc}{\eqqcolon}
+
+\renewmathcommand{\i}{\mrm{i}}
+\newcommand{\e}{\mrm{e}}
+\newcommand{\st}{\trm{s.t.}}
+
+\NewChemParticle{\muon}{\chemmu}
+\NewChemParticle{\tauon}{\chemtau}
+\NewChemParticle{\eneu}{\chemnu_{\!\!e}}
+\NewChemParticle{\mneu}{\chemnu_{\!\!\chemmu}}
+\NewChemParticle{\tneu}{\chemnu_{\!\!\chemtau}}
+\NewChemParticle{\pion}{\chempi}
+\NewChemParticle{\etaon}{\chemeta}
+
+% for drawing
+\usepackage{tikz-cd}
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\usepackage{tikz-3dplot}
+%\usepackage{tikz-feynhand}
+
+\usetikzlibrary{intersections}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+\usetikzlibrary{bending}
+\usetikzlibrary{patterns}
+\usetikzlibrary{positioning}
+\usetikzlibrary{math}
+\usetikzlibrary{pgfplots.units}
+\usetikzlibrary{angles}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{shadings}
+
+\pgfplotsset{
+	compat=newest,
+	ylabel style={rotate=-90},
+	trig format=rad
+}
+% https://tex.stackexchange.com/a/685953
+\makeatletter
+\patchcmd\pgfpatharc{\pgfutil@in@}{%
+	\pgfmathiftrigonometricusesdeg{}{%
+		\pgfmathradians@{\pgf@temp@a}\let\pgf@temp@a\pgfmathresult
+		\pgfmathradians@{\pgf@temp@b}\let\pgf@temp@b\pgfmathresult
+		\def\pgfmath@trig@format@choice{0}
+	}\pgfutil@in@}{}{\PatchFailed}
+\makeatother
+
+% more shortcuts
+\newcommand{\mcl}{\mathclap}
+\newcommand{\mll}{\mathllap}
+\newcommand{\mrl}{\mathrlap}
+\newcommand{\fr}{\frac}
+\newcommand{\dfr}{\dfrac}
+\newcommand{\tfr}{\tfrac}
+\newcommand{\opn}{\operatorname}
+\newcommand{\bhat}[1]{\hat{\bs{\mbf{#1}}}}
+\newcommand{\fs}{\slashed}
+\newcommand{\hatfs}[1]{{\hat{\phantom{#1}}\mathllap{\fs{#1}}}}
+\newcommand{\func}[3]{#1\colon#2\to#3} % \func{f}{A}{B} => f:A->B
+\newcommand{\vfunc}[5]{\func{#1}{#2}{#3},\quad#4\longmapsto#5} % \vfunc{f}{A}{B}{a}{b} => f:A->B, a|->b
+\newcommand{\fc}[2]{#1\mathchoice{\!}{\!}{}{}\p{#2}} % \fc{f}{x} => f(x)
+\newcommand{\bfc}[2]{#1\mathchoice{\!}{\!}{}{}\b{#2}} % \bfc{f}{x} => f[x]
+\newcommand{\Bfc}[2]{#1\mathchoice{\!}{\!}{}{}\B{#2}} % \bfc{f}{x} => f{x}
+\newcommand{\opc}[2]{\fc{\opn{#1}}{#2}} % \opc{sgn}{x} => sgn(x)
+\newcommand{\bopc}[2]{\bfc{\opn{#1}}{#2}} % \bopc{sgn}{x} => sgn[x]
+\newcommand{\Bopc}[2]{\Bfc{\opn{#1}}{#2}} % \bopc{sgn}{x} => sgn{x}
+\newcommand{\set}[2]{\left\{#1\;\middle|\;#2\right\}} % \set{x}{S} => {x|S}
+\newcommand{\tp}[3][]{
+	\ifthenelse{\equal{#1}{}}
+	{\fr{\partial#2}{\partial#3}}{\p{\fr{\partial#2}{\partial#3}}_{#1}}
+} % \tp[a]{f}{x} => (df/dx)_a, \tp{f}{x} => df/dx
+\newcommand{\abar}[2]{\left.#1\right|_{#2}} % \abar{f}{a} => f|_a
+\newcommand{\order}[1]{\fc{\mrm{O}}{#1}} % \order{x} => O(x)
+
+% parentheses
+\renewmathcommand\p[1]{\left(#1\right)}
+\newcommand\B[1]{\left\{#1\right\}}
+\newcommand\V[1]{\left\lVert#1\right\rVert}
+\renewmathcommand\b[1]{\left[#1\right]}
+\renewmathcommand\v[1]{\left|#1\right|}
+\renewmathcommand\a[1]{\left\langle#1\right\rangle}
+\newcommand\floor[1]{\left\lfloor#1\right\rfloor}
+\newcommand\ceil[1]{\left\lceil#1\right\rceil}
+\newcommand\round[1]{\left\lfloor#1\right\rceil}
+\newcommand\bra[1]{\left<#1\right|}
+\newcommand\ket[1]{\left|#1\right>}
+\newcommand\braket[2]{\left<#1\middle|#2\right>}
+\newcommand\mel[3]{\left<#1\middle|#2\middle|#3\right>}
+\newcommand\bbra[1]{\left[#1\right|}
+\newcommand\bket[1]{\left|#1\right]}
+\newcommand\bbraket[2]{\left[#1\middle|#2\right]}
+\newcommand\bmel[3]{\left[#1\middle|#2\middle|#3\right]}
+\newcommand\bmela[3]{\left[#1\middle|#2\middle|#3\right>}
+\newcommand\amelb[3]{\left<#1\middle|#2\middle|#3\right]}
+
+% operators
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\artanh}{artanh}
+\DeclareMathOperator{\arcoth}{arcoth}
+\DeclareMathOperator{\arsech}{arsech}
+\DeclareMathOperator{\arcsch}{arcsch}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\nint}{nint}
+\DeclareMathOperator{\PV}{PV}
+\let\Re\relax
+\let\Im\relax
+\DeclareMathOperator{\Re}{Re}
+\DeclareMathOperator{\Im}{Im}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator*{\bigTr}{Tr}
+\DeclareMathOperator*{\bigdet}{det}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\Res}{Res}
+\DeclareMathOperator*{\supp}{supp}
+\letdif\dt{delta}
+\letdif\Dt{Delta}
+
+% Lie groups and others
+\renewmathcommand\O[1]{\fc{\mrm O}{#1}}
+\newcommand\SO[1]{\fc{\mrm{SO}}{#1}}
+\newcommand\U[1]{\fc{\mrm U}{#1}}
+\newcommand\SU[1]{\fc{\mrm{SU}}{#1}}
+\newcommand\GL[1]{\fc{\mrm{GL}}{#1}}
+\newcommand\SL[1]{\fc{\mrm{SL}}{#1}}
+\newcommand\Spin[1]{\fc{\mrm{Spin}}{#1}}
+\newcommand\Pin[1]{\fc{\mrm{Pin}}{#1}}
+\newcommand\Cl[1]{\fc{\mrm{Cl}}{#1}}
+
+\renewmathcommand\o[1]{\fc{\mfk o}{#1}}
+\newcommand\so[1]{\fc{\mfk{so}}{#1}}
+\newcommand\su[1]{\fc{\mfk{su}}{#1}}
+\newcommand\gl[1]{\fc{\mfk{gl}}{#1}}
+\renewmathcommand\sl[1]{\fc{\mfk{sl}}{#1}}
+\newcommand\spin[1]{\fc{\mfk{spin}}{#1}}
+\newcommand\pin[1]{\fc{\mfk{pin}}{#1}}
+
+% theorems
+\makeatletter
+\@ifclassloaded{beamer}{}{
+	\newtheorem{theorem}{Theorem}
+	\newtheorem{proposition}{Theorem}
+	\newtheorem{lemma}[theorem]{Lemma}
+	\newtheorem{corollary}[theorem]{Corollary}\theoremstyle{definition}
+	\newtheorem{definition}[theorem]{Definition}
+}
+\makeatother
+
+% displaystyle matrices
+\makeatletter
+\def\env@dmatrix{
+	\hskip-\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\extrarowheight=2ex
+	\array{*\c@MaxMatrixCols{>{\displaystyle}c}}
+}
+\newenvironment{dmatrix}{\env@dmatrix}{\endarray\hskip-\arraycolsep}
+\newenvironment{pdmatrix}{\left(\env@dmatrix}{\endmatrix\right)}
+\newenvironment{bdmatrix}{\left[\env@dmatrix}{\endmatrix\right]}
+\newenvironment{Bdmatrix}{\left\{\env@dmatrix}{\endmatrix\right\}}
+\newenvironment{vdmatrix}{\left|\env@dmatrix}{\endmatrix\right|}
+\newenvironment{Vdmatrix}{\left\lVert\env@dmatrix}{\endmatrix\right\rVert}
+\makeatother
+
+\newcounter{para}
+\newcommand\mypara{\par\refstepcounter{para}(\thepara)\space}
+\titleformat{\section}[block]{\Large\bfseries\filcenter}{}{0em}{}
+\renewcommand\thesection{}
+\renewcommand\thesubsection{\protect\setcounter{equation}{0}\protect\setcounter{para}{0}第 \arabic{subsection} 题}
+
+\title{hs\_phys\_probs 005}
+\author{詹有丘}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\subsection{喷流}
+
+有时对黑洞等天体的观测中能发现喷流:
+沿着天体的自转轴有两束反方向运动的高速发光物质喷出.
+今对某天体的喷流进行观测.
+天体相对于地球的运动速度大小远小于喷流的速度大小, 因此忽略不计.
+喷流离天体的距离足够远, 因此忽略广义相对论效应.
+\tit{本题中, 凡涉及方向, 指天体到地球连线与所说方向的夹角.}
+
+\mypara
+天体到地球的距离为 $D$.
+两束喷流在天球 (不计地球自转) 上运动的角速度大小分别为 $\mu_\mrm a$ 和 $\mu_\mrm r$ ($\mu_\mrm r\le\mu_\mrm a$).
+求天体的自转轴的方向.
+
+\mypara
+天体以恒定角速度进动.
+喷流的光谱中某谱线波长为 $\lmd_0$ (光源静止系中).
+其因 Doppler 效应而变化的范围, 在两束喷流中分别是 $\b{\lmd_{\mrm a1},\lmd_{\mrm a2}}$
+和 $\b{\lmd_{\mrm r1},\lmd_{\mrm r2}}$.
+求天体的进动角速度的方向.
+\tit{注}: 已知量有冗余.
+
+\mypara
+假设在喷流与地球相对静止的情况下, 其发光是各向同性的, 光谱为 $I_\nu\d\nu\propto\nu^\alp\d\nu$,
+且其视光度 (特定频率范围内通过瞳孔/光圈的总电磁功率) 为 $S_0$.
+求速率为 $\beta c$, 方向为 $\tht$ 的一束喷流的视光度.
+
+\newpage
+\section{参考答案}
+
+\subsection{喷流}
+
+\mypara
+设喷流的速度大小为 $\beta c$, 方向为 $\tht$.
+在喷流运动了 $\Dlt t'$ 的时间前后各向地球发出一束光线. 如图~\ref{fig:jets} 所示.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[scale=0.5]
+		\begin{scope}[decoration={markings,mark=at position 0.5 with {\arrow{>}}}]
+			\draw[postaction={decorate}] (-3,-2) node[left] {天体} -- node[midway,below right] {喷流} (0,0);
+			\draw[postaction={decorate}] (0,0) -- (3,2);
+			\draw[postaction={decorate}] (0,0) -- (10,0);
+			\draw[postaction={decorate}] (3,2) -- node[midway,below] {光线} (10,2);
+		\end{scope}
+		\node at (10,1) {地球};
+		\draw[|<->|] (-3,0) -- node[midway,left] {$\Dt y$} (-3,2);
+		\draw[|<->|] (-0.2,0.3) -- node[midway, above left] {$\beta c\Dt t'$} ++(3,2);
+		\node[above right,xshift=15] at (0,0) {$\tht$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:jets}
+\end{figure}
+
+两束光线到达地球的时间分别为 $D/c$ 和 $\Dt t'+\p{D-\beta c\Dt t'\cos\tht}/c$.
+由此获得时间差
+\[\Dt t=\Dt t'-\beta\Dt t'\cos\tht.\]
+这两束光线的距离为 $\Dt y=\beta c\Dt t'\sin\tht$, 因此喷流的视速率为
+\[\fr{\Dt y}{\Dt t}=\fr{\beta\sin\tht}{1-\beta\cos\tht}c.\]
+对于锐角 $\tht$, 这是接近喷流. 对于远离喷流, 只需替换 $\tht\to\pi-\tht$ 即可.
+
+因此可以获得两束喷流在天球上的角速度大小:
+\[\mu_\mrm a=\fr1D\fr{\Dt y}{\Dt t}=\fr{\beta\sin\tht}{1-\beta\cos\tht}\fr cD,\quad
+\mu_\mrm r=\fr{\beta\sin\tht}{1+\beta\cos\tht}\fr cD.\]
+由此反解 $\beta,\tht$, 获得
+\[\tan\tht=\fr{2D}c\fr{\mu_\mrm a\mu_\mrm r}{\mu_a-\mu_\mrm r},\quad
+\beta\cos\tht=\fr{\mu_\mrm a-\mu_\mrm r}{\mu_\mrm a+\mu_\mrm r}.\]
+
+\mypara
+设进动角速度的方向为 $\vphi$, 其与自转轴的夹角为 $\psi$.
+在进动的过程中, $\tht$ 的变化范围是 $\b{\v{\vphi-\psi},\vphi+\psi}$.
+应用 Doppler 效应的公式时, 注意角度是观察者系中的, 于是得到
+\[\lmd=\gma\p{1-\beta\cos\tht}\lmd_0,\]
+其中 $\gma\ceq\p{1-\beta^2}^{-1/2}$.
+因此,
+\[\lmd_{\mrm a1,2}=\p{1-\beta\fc\cos{\vphi\mp\psi}}\gma\lmd_0,\quad
+\lmd_{\mrm b1,2}=\p{1+\beta\fc\cos{\vphi\pm\psi}}\gma\lmd_0.\]
+题中所说已知量的冗余可以看出指的是 $\lmd_{\mrm a2}+\lmd_{\mrm b1}=\lmd_{\mrm a1}+\lmd_{\mrm b2}$,
+因此这里的 4 个方程只有 3 个独立.
+由这些方程反解 $\beta,\vphi,\psi$, 可以解得
+\[\vphi=\fr12\p{
+	\arccos\fr{\lmd_{\mrm b1}-\lmd_{\mrm a2}}{\sqrt{\p{\lmd_{\mrm b1}+\lmd_{\mrm a2}}^2-4\lmd_0^2}}
+	\pm\arccos\fr{\lmd_{\mrm b2}-\lmd_{\mrm a1}}{\sqrt{\p{\lmd_{\mrm b2}+\lmd_{\mrm a1}}^2-4\lmd_0^2}}
+}.\]
+式中 ``$\pm$'' 对应于两个物理上可能的解.
+还可以加上 $\pi$ 的整数倍获得更多的解, 但最终只会有两个不同的锐角解.
+
+\mypara
+该问题涉及多个效应: 光行差, 宏观 Doppler 效应, 以及微观 Doppler 效应.
+光行差指光的传播方向变化, 导致立体角变化;
+宏观 Doppler 效应指的是先后到达地球的光线时间差不等于发出它们的时间差;
+微观 Doppler 效应指的是光线的频率的变化, 导致每个光子的能量变化.
+具体思路是, 将视光度表达为
+\[S_\mrm{obs}\d t_\mrm{obs}=\int_\text{特定频率范围}\int_\text{光圈张成的立体角}
+\fc{I_\mrm{obs}}{\nu,\Omg}\d\nu\d\Omg\d t_\mrm{obs},\]
+其中 $I_\mrm{obs}\d\nu_\mrm{obs}$ 是观察者系中单位立体角的功率随频率的分布,
+$\Omg$ 是 $\p{\tht,\vphi}$ 的缩写, $\d\Omg=\sin\tht\d\tht\d\vphi$.
+这里需要注意的是, 积分范围是与参考系无关的
+(因为 $S_\mrm{rest}$ 是在假设喷流与地球相对静止的情况下得到的),
+所以实际上被积变量 $\nu,\Omg$ 可以任意替换名字,
+比如说可以换成 $\nu_\mrm{rest},\Omg_\mrm{rest}$, 只需要保证积分范围和被积函数不变即可;
+但是\tbf{不能}说 $\d\nu_\mrm{obs}=\d\nu_\mrm{rest}$.
+然后, 研究光行差效应可获得 $\d\Omg_\mrm{obs}$ 与 $\d\Omg_\mrm{rest}$ 的关系;
+研究宏观 Doppler 效应可获得 $\d t_\mrm{obs}$ 与 $\d t_\mrm{rest}$ 的关系;
+研究微观 Doppler 效应可获得 $I_\mrm{obs}\d\Omg_\mrm{obs}\d t_\mrm{obs}$
+与 $I_\mrm{rest}\d\Omg_\mrm{rest}\d t_\mrm{rest}$ 的关系.
+利用 Lorentz 不变量 (光子数不变)
+\[\fc{N_\mrm{obs}}{\nu_\mrm{obs},\Omg_\mrm{obs}}\d\nu_\mrm{obs}\d\Omg_\mrm{obs}\d t_\mrm{obs}
+=\fc{N_\mrm{rest}}{\nu_\mrm{rest},\Omg_\mrm{rest}}\d\nu_\mrm{rest}\d\Omg_\mrm{rest}\d t_\mrm{rest}\]
+即可最终获得 $S_\mrm{obs}$ 与 $S_\mrm{rest}$ 的关系,
+其中 $N_\mrm{obs}\d\nu_\mrm{obs}$ 是单位立体角内单位时间发出的光子数随频率的分布.
+
+首先考虑光行差. 利用速度合成公式, 可以容易得到,
+对于在观察者系中出射角 (出射方向与运动方向的夹角) 为 $\tht_\mrm{obs}$ 的光线, 在静止系中其出射角为
+\[\cos\tht_\mrm{rest}=\fr{\cos\tht_\mrm{obs}-\beta}{1-\beta\cos\tht_\mrm{obs}}.\]
+于是, 可以计算得立体角 (注意 $\vphi_\mrm{obs}=\vphi_\mrm{rest}$)
+\[\d\Omg_\mrm{rest}=\sin\tht_\mrm{rest}\d\tht_\mrm{rest}\d\vphi_\mrm{rest}
+=\fr{\sin\tht_\mrm{obs}\d\tht_\mrm{obs}\d\vphi_\mrm{obs}}{\gma^2\p{1-\beta\cos\tht_\mrm{obs}}^2}
+=\dlt^2\d\Omg_\mrm{obs},\]
+其中 $\dlt\ceq\gma^{-1}\p{1-\beta\cos\tht_\mrm{obs}}^{-1}$ 是 Doppler 因子.
+
+然后考虑宏观 Doppler 效应. \tbf{不能}由钟慢效应简单得到 $\d t_\mrm{obs}=\gma^{-1}\d t_\mrm{rest}$.
+要理解这一点, 可以这么考虑: 光源每单位时间发射一定数量的光子, 这定义了一个频率 $f_\mrm{rest}$.
+单位时间内, 观察者又会看到一定数量的光子, 这是另一个频率 $f_\mrm{obs}$.
+这两个频率之间的关系 $f_\mrm{obs}=\dlt f_\mrm{rest}$ 就是 Doppler 效应.
+而 $\d t_\mrm{rest}$ 的意义是, 静止系中发射一定数量
+$f_\mrm{rest}\d t_\mrm{rest}$ 的光子所需要的总时间, 它会反比于这个频率.
+所以得到 $\d t_\mrm{obs}=\dlt^{-1}\d t_\mrm{rest}$.
+
+最后探讨微观 Doppler 效应.
+我们知道
+\[\fc{I_\mrm{rest}}{\nu,\Omg}\d\nu=h\nu\fc{N_\mrm{rest}}{\nu,\Omg}\d\nu,\quad
+\fc{I_\mrm{obs}}{\nu,\Omg}\d\nu=h\nu\fc{N_\mrm{obs}}{\nu,\Omg}\d\nu,\]
+其中 $h\nu$ 是频率为 $\nu$ 的单个光子的能量.
+另一方面, 题目给出了 $\fc{I_\mrm{rest}}{\nu,\Omg}\propto\nu^\alp$, 于是可知
+\[\fc{N_\mrm{rest}}{\nu,\Omg}=K\nu^{\alp-1},\]
+其中 $K$ 是比例常数.
+由 Doppler 效应知 $\nu_\mrm{obs}=\dlt\nu_\mrm{rest}$, 因此由光子数的 Lorentz 不变性可知
+\begin{align*}
+	\fc{N_\mrm{obs}}{\nu_\mrm{obs},\Omg_\mrm{obs}}\d\nu_\mrm{obs}\d\Omg_\mrm{obs}\d t_\mrm{obs}
+	&=\fc{N_\mrm{rest}}{\nu_\mrm{rest},\Omg_\mrm{rest}}\d\nu_\mrm{rest}\d\Omg_\mrm{rest}\d t_\mrm{rest}\\
+	&=K\nu_\mrm{rest}^{\alp-1}\d\nu_\mrm{rest}\d\Omg_\mrm{rest}\d t_\mrm{rest}\\
+	&=\dlt^{-\alp}K\nu_\mrm{obs}^{\alp-1}\d\nu_\mrm{obs}\d\Omg_\mrm{rest}\d t_\mrm{rest}\\
+	&=\dlt^{-\alp}\fc{N_\mrm{rest}}{\nu_\mrm{obs},\Omg_\mrm{obs}}\d\nu_\mrm{obs}\d\Omg_\mrm{rest}\d t_\mrm{rest}.
+\end{align*}
+
+综合三种效应, 可以得到
+\begin{align*}
+	\fc{I_\mrm{obs}}{\nu_\mrm{obs},\Omg_\mrm{obs}}\d\nu_\mrm{obs}\d\Omg_\mrm{obs}\d t_\mrm{obs}
+	&=h\nu_\mrm{obs}\fc{N_\mrm{obs}}{\nu_\mrm{obs},\Omg_\mrm{obs}}\d\nu_\mrm{obs}\d\Omg_\mrm{obs}\d t_\mrm{obs}\\
+	&=\dlt^{-\alp}h\nu_\mrm{obs}\fc{N_\mrm{rest}}{\nu_\mrm{obs},\Omg_\mrm{obs}}\d\nu_\mrm{obs}\d\Omg_\mrm{rest}\d t_\mrm{rest}\\
+	&=\dlt^{-\alp}\fc{I_\mrm{rest}}{\nu_\mrm{obs},\Omg_\mrm{obs}}\d\nu_\mrm{obs}\,\dlt^2\d\Omg_\mrm{obs}\d t_\mrm{rest}.
+\end{align*}
+现在, 两边对 $\nu_\mrm{obs},\Omg_\mrm{obs}$ 积分, 然后除以 $\d t_\mrm{obs}$, 可得
+\begin{align*}
+	S_\mrm{obs}&=\fr1{\d t_\mrm{obs}}\int\fc{I_\mrm{obs}}{\nu,\Omg}\d\nu\d\Omg\d t_\mrm{obs}\\
+	&=\dlt^{2-\alp}\fr1{\d t_\mrm{obs}}\int\fc{I_\mrm{rest}}{\nu,\Omg}\d\nu\d\Omg\d t_\mrm{rest}\\
+	&=\dlt^{3-\alp}\fr1{\d t_\mrm{rest}}\int\fc{I_\mrm{rest}}{\nu,\Omg}\d\nu\d\Omg\d t_\mrm{rest}\\
+	&=\dlt^{3-\alp}S_\mrm{rest}.
+\end{align*}
+这里 $S_\mrm{rest}$ 就是题目中所给的 $S_0$. 因此,
+\[S_\mrm{obs}=\p{1-\beta^2}^{\p{3-\alp}/2}\p{1-\beta\cos\tht}^{\alp-3}S_0.\]
+
+\tit{另}: 可利用结论: $I/\nu^3$ 是 Lorentz 不变量, 其中 $I\d\nu$ 是单位立体角的功率随频率的分布.
+于是可以直接获得
+\[I_\mrm{obs}=I_\mrm{rest}\p{\fr{\nu_\mrm{obs}}{\nu_\mrm{rest}}}^3
+=\dlt^3I_\mrm{rest}=\dlt^3K\nu_\mrm{rest}^\alp=\dlt^{3-\alp}K\nu_\mrm{obs}^\alp.\]
+获得跟上一种解法相同的结果 (因子 $\dlt^{3-\alp}$).
+
+\end{document}
