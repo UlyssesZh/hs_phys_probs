@@ -224,7 +224,7 @@
 \pgfplotsset{
 	compat=newest,
 	ylabel style={rotate=-90},
-	trig format=rad
+	%trig format=rad
 }
 % https://tex.stackexchange.com/a/685953
 \makeatletter
@@ -376,7 +376,7 @@
 沿着天体的自转轴有两束反方向运动的高速发光物质喷出.
 今对某天体的喷流进行观测.
 天体相对于地球的运动速度大小远小于喷流的速度大小, 因此忽略不计.
-喷流离天体的距离足够远, 因此忽略广义相对论效应.
+喷流离天体的距离足够远, 因此忽略引力.
 \tit{本题中, 凡涉及方向, 指天体到地球连线与所说方向的夹角.}
 
 \mypara
@@ -415,6 +415,90 @@
 假设 $z>0$ 区域内 $a=0$, 而 $z<0$ 区域内 $a=a_0$, 另外在点 $\p{0,0,d>0}$ 处有点电荷 $q$.
 求全空间 (不包括 $z=0$ 平面, 不包括点 $\p{0,0,d}$) 内的 $\mathbf E$ 和 $\mathbf B$.
 \tit{提示}: 设出像电荷的 ``磁荷''.
+
+\subsection{缓慢拉伸}
+
+考虑三种会在外力作用下改变长度的装置
+(所有装置均为轻质).
+装置 1 为长度为 $L_1$ 的无弹性软绳.
+装置 2 为原长为 $L_2$ 的弹簧, 其劲度系数为 $k$.
+装置 3 为一种特殊的机械装置, 性质如下.
+当它的长度为 $0$ 时, 需要用大小为 $F_\mrm o$ 的拉力才能使其长度变为正数,
+此后它可以自由伸长;
+当它的长度至少为 $L_3$ 时, 需要用大小为 $F_\mrm c$ 的压力才能使其长度缩减至 $L_3$ 以下;
+在长度在 $0$ 和 $L_3$ 之间, 或者长度大于 $L_3$ 时, 其长度可以在没有外力的情况下自由变化.
+所有装置的长度都不能小于 $0$.
+出于清晰起见, 图~\ref{fig:2} 展示了这三种装置的势能 $U_{1,2,3}$ 与长度 $l_{1,2,3}$ 之间的关系.
+用这些装置组装成如图~\ref{fig:1} 所示的装置
+(图中的竖线仅表示连接情况, 并非真实物体; 实际上整个装置是一维的),
+总长度为 $l$.
+在其两端施加大小为 $F$ 的压力 (或者大小为 $-F$ 的拉力), 以维持其长度 $l$ 不变.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw[->] (-1,0) -- (3,0) node[below] {$l_1$};
+		\draw[->] (0,0) -- (0,2) node[left] {$U_1$};
+		\draw[very thick] (0,1.5) -- (0,0) -- (2,0) -- (2,1.5);
+		\node[below] at (0,0) {$0$};
+		\node[below] at (2,0) {$L_1$};
+		\node at (-0.5,1) {$+\infty$};
+		\node at (1,0.5) {$0$};
+		\node at (2.5,1) {$+\infty$};
+	\end{tikzpicture}
+	\quad
+	\begin{tikzpicture}
+		\draw[->] (-1,0) -- (3,0) node[below] {$l_2$};
+		\draw[->] (0,0) -- (0,2) node[left] {$U_2$};
+		\draw[very thick] (0,1.5) -- plot[smooth,variable=\x,domain=0:3] ({\x},{(\x-1)^2/3});
+		\node[below] at (0,0) {$0$};
+		\node[below] at (1,0) {$L_2$};
+		\node at (-0.5,1) {$+\infty$};
+		\node at (1.5,1) {$\dfr12k\p{l_2-L_2}^2$};
+	\end{tikzpicture}
+	\quad
+	\begin{tikzpicture}
+		\draw[->] (-1,0) -- (3,0) node[below] {$l_3$};
+		\draw[->] (0,0) -- (0,2) node[left] {$U_3$};
+		\draw[very thick] (0,1.5) -- (0,0) -- (0.2,0.4) -- (1.7,0.4) -- (2,0) -- (2.5,0);
+		\node[below] at (0,0) {$0$};
+		\node[below] at (2,0) {$L_3$};
+		\node at (-0.5,1) {$+\infty$};
+		\node at (0.9,0.7) {$\approx0$};
+		\node at (2.5,0.5) {$0$};
+		\draw[dotted] (0,0) -- (0.5,1) node[above] {$F_\mrm ol_3$};
+		\draw[dotted] (2,0) -- (1.1,1.2) node[right] {$F_\mrm c\p{L_3-l_3}$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:2}
+\end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[xscale=0.4,yscale=0.3]
+		\draw (-6,-3) -- (-6,3);
+		\draw (-6,-2) -- node[midway,below] {1} (2,-2);
+		\draw (2,-3) -- (2,1);
+		\draw (2,-1) -- node[midway,above] {2} (6,-1);
+		\draw (6,-3) -- (6,3);
+		\draw (-2,0) -- node[midway,above] {3} (2,0);
+		\draw (-2,-1) -- (-2,3);
+		\draw (-6,1) -- node[midway,above] {2} (-2,1);
+		\draw (-2,2) -- node[midway,above] {1} (6,2);
+		\draw[->] (-9,0) -- (-6,0) node[midway,above] {$F$};
+		\draw[->] (9,0) -- (6,0) node[midway,above] {$F$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:1}
+\end{figure}
+
+\mypara
+将 $F$ 缓慢地从 $-\infty$ 变化至 $+\infty$.
+定性描述 $l$ 在这期间的变化过程.
+
+\mypara
+将 $F$ 缓慢地从 $+\infty$ 变化至 $-\infty$.
+定性描述 $l$ 在这期间的变化过程.
 
 \newpage
 \section{参考答案}
@@ -557,5 +641,544 @@ $f_\mrm{rest}\d t_\mrm{rest}$ 的光子所需要的总时间, 它会反比于这
 \[I_\mrm{obs}=I_\mrm{rest}\p{\fr{\nu_\mrm{obs}}{\nu_\mrm{rest}}}^3
 =\dlt^3I_\mrm{rest}=\dlt^3K\nu_\mrm{rest}^\alp=\dlt^{3-\alp}K\nu_\mrm{obs}^\alp.\]
 获得跟上一种解法相同的结果 (因子 $\dlt^{3-\alp}$).
+
+\subsection{轴子}
+
+\subsection{缓慢拉伸}
+
+为简洁起见, 选取单位使得 $k=1$.
+
+由对称性可知, 虽然有两个装置 1 和两个装置 2,
+但是两个装置 1 的长度相同, 两个装置 2 的长度也相同.
+设三种装置的长度分别为 $l_1,l_2,l_3$,
+三种装置上的压力分别为 $F_1,F_2,F_3$.
+以下方程和不等式在任何情况下都成立:
+\begin{gather*}
+	l=l_1+l_2=2l_2+l_3=2l_1-l_3,\quad l_1=l_2+l_3,\\
+	F=F_1+F_2=2F_1+F_3=2F_2-F_3,\quad F_2=F_1+F_3,\\
+	l_1\ge0,\quad l_2\ge0,\quad l_3\ge0.
+\end{gather*}
+而如下三组条件中, 每一组内只有一个条件成立:
+\begin{align*}
+	&\left[\begin{aligned}
+		&\mrm{1a}:\quad l_1<L_1,\quad F_1=0,\\
+		&\mrm{1b}:\quad l_1=L_1,\quad F_1<0,
+	\end{aligned}\right.\\
+	&\left[\begin{aligned}
+		&\mrm{2a}:\quad l_2=0,\quad F_2>L_2,\\
+		&\mrm{2b}:\quad l_2>0,\quad F_2=L_2-l_2,\\
+	\end{aligned}\right.\\
+	&\left[\begin{aligned}
+		&\mrm{\color{red}3a}:\quad l_3=0,\quad F_3>-F_\mrm o,\\
+		&\mrm{\color{green!50!black}3d}:\quad 0<l_3<L_3,\quad F_3=0,\\
+		&\mrm{\color{blue}3b}:\quad l_3=L_3,\quad 0<F_3<F_\mrm c,\\
+		&\mrm{\color{blue}3c}:\quad l_3>L_3,\quad F_3=0.
+	\end{aligned}\right.
+\end{align*}
+总共有 $2\cdot2\cdot4=16$ 种不同的组合.
+对于每一种组合, 所有的条件给出了一个线性不等式系统,
+可以系统性地用 Fourier--Motzkin 消元法求解出 $\p{l,F}$ 的取值范围,
+也可以对每种情况用不等式操作来求解.
+接下来考虑每一种情况.
+
+对于情况 1a2a{\color{red}3a}, 有 $l_1=l_2=l_3=0$,
+而 $F_1=0$, 以及 $F_2=F_3>L_2$.
+因此,
+\[\mrm{1a2a\color{red}3a}:\quad l=0,\quad F>L_2.\]
+
+对于情况 1a2a{\color{blue}3b}, 有 $l_1=l_3=L_3$ 和 $l_2=0$.
+另一方面, $F_1=0$, 而 $L_2<F_2=F_3<F_\mrm c$.
+因此,
+\[\mrm{1a2a\color{blue}3b}:\quad l=L_3,\quad L_2<F<F_\mrm c.\]
+
+对于情况 1a2a{\color{blue}3c}
+和情况 1a2a{\color{green!50!black}3d},
+因为 $L_2<F_2=F_3=0$, 所以不可能发生.
+
+对于情况 1a2b{\color{red}3a}, 有 $l_2=l_1<L_1$ 和 $l_3=0$.
+另外, 有 $F_1=0$ 和 $L_2-l_2=F_2=F_3>-F_\mrm o$.
+该不等式给出 $l_2<L_2+F_\mrm o$.
+因此,
+\[\mrm{1a2b\color{red}3a}:\quad
+0<l<\opc{min}{2L_1,2\p{L_2+F_\mrm o}},\quad
+F=L_2-\fr12l.\]
+
+对于情况 1a2b{\color{blue}3b}, 有 $l_3=L_3$.
+于是由 $l=2l_2+l_3=2l_1-l_3$ 得 $L_3<l<2L_1-L_3$.
+另外, 有 $F_1=0$ 和 $0<L_2-l_2=F_2=F_3<F_\mrm c$.
+代入 $l_2=\p{l-L_3}/2$ 可解得
+$2L_2+L_3-2F_\mrm c<l<2L_2+L_3$.
+因此,
+\[\mrm{1a2b\color{blue}3b}:\quad
+\opc{max}{L_3,2L_2+L_3-2F_\mrm c}<l<\opc{min}{2L_1-L_3,2L_2+L_3},\quad
+F=L_2+\fr12L_3-\fr12l\quad\p{L_3<L_1}.\]
+
+对于情况 1a2b{\color{blue}3c},
+有 $F_1=F_2=F_3=0$, 因此 $F=0$.
+此时有 $L_2=l_2=l_1-l_3<L_1-L_3$, 所以 $l=l_1+l_2<2L_1-L_3$.
+另一方面, 有 $l=l_1+l_2<L_1+L_2$.
+另外, 有 $l=2l_2+l_3>2L_2+L_3$.
+因此,
+\[\mrm{1a2b\color{blue}3c}:\quad
+2L_2<l<\opc{min}{2L_1-L_3,L_1+L_2},\quad F=0\quad\p{L_3<L_1}.\]
+
+对于情况 1a2b{\color{green!50!black}3d},
+$F=0$ 和 $l<L_1+L_2$ 与上一种情况相同.
+但是, 由 $l=2l_2+l_3$ 可知 $2L_2<l<2L_2+L_3$.
+因此,
+\[\mrm{1a2b\color{green!50!black}3d}:\quad
+2L_2<l<\opc{min}{2L_2+L_3,L_1+L_2},\quad F=0.\]
+
+对于情况 1b2a{\color{red}3a}, 有 $L_1=l_1=l_2+l_3=0$, 所以不可能出现.
+
+对于情况 1b2a{\color{blue}3b}, 有 $L_1=l_1=l_2+l_3=L_3$.
+因此, 这种情况只可能出现在 $L_3=L_1$ 时.
+此时, $F=2F_1+F_3<F_\mrm c$,
+而 $F=2F_2-F_3>2L_2-F_\mrm c$.
+因此,
+\[\mrm{1b2a\color{blue}3b}:\quad
+l=L_1,\quad
+2L_2-F_\mrm c<F<F_\mrm c\quad\p{L_3=L_1}.\]
+可以发现, 其实这就是将 1a2a{\color{blue}3b} 和 1b2b{\color{blue}3b}
+在 $L_3=L_1$ 时的情况合并在一起了,
+所以以后可以不必考虑这种情况.
+
+对于情况 1b2a{\color{blue}3c}
+和情况 1b2a{\color{green!50!black}3d},
+因为 $L_2<F_2=F_1<0$, 所以不可能出现.
+
+对于情况 1b2b{\color{red}3a}, 有 $l_1=l_2=L_1$ 和 $l_3=0$.
+另外, 有 $F_2=L_2-l_2=L_2-L_1$.
+因此, $F=2F_2-F_3<2\p{L_2-L_1}+F_\mrm o$.
+另一方面, $F=F_1+F_2<L_2-L_1$.
+因此,
+\[\mrm{1b2b\color{red}3a}:\quad
+l=2L_1,\quad F<\opc{min}{L_2-L_1,2\p{L_2-L_1}+F_\mrm o}.\]
+
+对于情况 1b2b{\color{blue}3b}, 有 $l_2=l_1-l_3=L_1-L_3$,
+所以 $F_2=L_2-l_2=L_2-L_1+L_3$.
+由 $F=2F_2-F_3$ 可知
+$2\p{L_2-L_1+L_3}-F_\mrm c<F<2\p{L_2-L_1+L_3}$.
+另外有 $F=F_1+F_2<L_2-L_1+L_3$.
+因此,
+\[\mrm{1b2b\color{blue}3b}:\quad
+l=2L_1-L_3,\quad
+2\p{L_2-L_1+L_3}-F_\mrm c<F<\opc{min}{2\p{L_2-L_1+L_3},L_2-L_1+L_3}
+\quad\p{L_3<L_1}.\]
+
+对于情况 1b2b{\color{blue}3c},
+有 $l=2l_1-l_3<2L_1-L_3$,
+以及 $F=2F_2-F_3=2\p{L_2-l+L_1}$.
+由 $F=2F_1+F_3<0$ 解得 $l>L_1+L_2$.
+因此,
+\[\mrm{1b2b\color{blue}3c}:\quad
+L_1+L_2<l<2L_1-L_3,\quad F=2\p{L_1+L_2-l},\quad
+\p{L_3<L_1}.\]
+
+对于情况 1b2b{\color{green!50!black}3d},
+$F=2\p{L_1+L_2-l}$ 和 $l>L_1+L_2$ 与上一种情况相同.
+但是, 由 $l=2l_1-l_3$ 得 $2L_1-L_3<l<2L_1$.
+因此,
+\[\mrm{1b2b\color{green!50!black}3d}:\quad
+\opc{max}{2L_1-L_3,L_1+L_2}<l<2L_1,\quad
+F=2\p{L_1+L_2-l}.\]
+
+至此, 所有情况都已讨论完毕.
+视 $L_{1,2,3},F_{\mrm o,\mrm c}$ 的大小关系不同,
+$\p{l,F}$ 的图像会有定性上的不同,
+且情况较为繁杂.
+但是, 原则上, 在画出图像之后, 给出最终解答就很容易了.
+只需要沿着图像上的线向上或者向下移动即可, 并且尽量不切换颜色.
+在 $F=\pm\infty$ 时, 只有情况 1a2a{\color{red}3a} 和 1b2b{\color{red}3a} 会出现,
+所以一开始一定是沿着红色的线移动.
+若不得不切换颜色, 则尽量选择红色和蓝色的线, 其次选择绿色的线
+(这是因为在装置 3 上有拉力或压力的情况下, 它的长度不会停留在 $0$ 到 $L_3$ 之间;
+严格来说, 具体情况要取决于实际装置中的阻力, 外力变化的缓慢程度,
+以及装置的惯性, 不过这不会影响定性结论).
+
+\mypara
+首先考虑所有的红线, 包括
+1a2a{\color{red}3a}, 1a2b{\color{red}3a},
+和 1b2b{\color{red}3a}.
+对于 $L_2-L_1+F_\mrm o\gtrless0$ 两种情况,
+它们的图像如图~\ref{fig:AFM} 所示.
+图中标记的点的坐标分别为
+\[\mrm A\p{2L_1,\opc{min}{L_2-L_1,2\p{L_2-L_1}+F_\mrm o}},\quad
+\mrm F\p{2\opc{min}{L_1,L_2+F_\mrm o},\opc{max}{L_2-L_1,-F_\mrm o}},\quad
+\mrm M\p{0,L_2}.\]
+可以看到, 当 $L_2-L_1+F_\mrm o>0$ 时,
+点 A 和 F 重合, 从而仅用红线即可连接 $F=-\infty$ 和 $F=+\infty$,
+不需要切换颜色.
+这种情况下, $l$ 的变化情况是先保持 $2L_1$ 不变, 然后线性减少至 $0$, 再保持不变.
+此后, 我们只考虑 $L_2-L_1+F_\mrm o<0$ 的情况.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[scale=0.5]
+		\draw[->] (0,0) -- (7,0) node[below] {$l$};
+		\draw[->] (0,-4) -- (0,3) node[left] {$F$};
+		\draw[thick,red] (0,2) -- (0,1) node[left] {M}
+			-- (6,-2) node[right] {A,F} -- (6,-4);
+		\node[below left] at (7,3) {$L_2-L_1+F_\mrm o>0$};
+	\end{tikzpicture}
+	\quad
+	\begin{tikzpicture}[scale=0.5]
+		\draw[->] (0,0) -- (7,0) node[below] {$l$};
+		\draw[->] (0,-4) -- (0,3) node[left] {$F$};
+		\draw[thick,red] (0,2) -- (0,1) node[left] {M}
+			-- (4,-1) node[below] {F};
+		\draw[thick,red] (6,-2.5) node[right] {A} -- (6,-4);
+		\node[below left] at (7,3) {$L_2-L_1+F_\mrm o<0$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:AFM}
+\end{figure}
+
+在 $F=-\infty$ 时, 位于情况 1b2b{\color{red}3a}.
+先考虑 1b2b{\color{red}3a}, 1b2b{\color{green!50!black}3d} 的一个端点 B,
+和 1b2b{\color{blue}3b} 的一个端点 C.
+对于 $2L_3-F_\mrm c\gtrless F_\mrm o$ 两种情况,
+它们在图像上的样子如图~\ref{fig:ABC} 所示.
+另外要注意 1b2b{\color{blue}3b} 只在 $L_3<L_1$ 时才存在.
+图中标记的点的坐标为
+\[\mrm B\p{2L_1,2\p{L_2-L_1}},\quad
+\mrm C\p{2L_1-L_3,2\p{L_2-L_1+L_3}-F_\mrm c}.\]
+因此, 我们可以发现, 在
+$2L_3-F_\mrm c<F_\mrm o$ 且 $L_3<L_1$ 时, 动点 $\p{l,F}$
+会在到达点 A 后切换到蓝线, 因此能观察到 $l$ 突然减小, 然后保持不变;
+而在另一种情况 ($2L_3-F_\mrm c>F_\mrm o$ 或 $L_3>L_1$) 下,
+它会在到达点 A 后切换到绿线,
+因此能观察到 $l$ 突然减小, 然后线性减小.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw[->] (0,0) -- (3,0) node[below] {$l$};
+		\draw[->] (0,-4) -- (0,1) node[left] {$F$};
+		\draw[thick,red] (2,-1) node[right] {A} -- (2,-4);
+		\draw[thick,green!50!black] (2,-3) node[right] {B} -- (1.5,-2);
+		\draw[thick,green!50!black,dotted] (1.5,-2) -- (1,-1);
+		\draw[thick,blue] (0.8,-2) node[below] {C} -- (0.8,-1);
+		\draw[thick,blue,dotted] (0.8,-1) -- (0.8,-0.5);
+		\node[below left] at (3,1) {$2L_3-F_\mrm c<F_\mrm o$};
+	\end{tikzpicture}
+	\quad
+	\begin{tikzpicture}
+		\draw[->] (0,0) -- (3,0) node[below] {$l$};
+		\draw[->] (0,-4) -- (0,1) node[left] {$F$};
+		\draw[thick,red] (2,-2) node[right] {A} -- (2,-4);
+		\draw[thick,green!50!black] (2,-3) node[right] {B} -- (1.5,-2);
+		\draw[thick,green!50!black,dotted] (1.5,-2) -- (1,-1);
+		\draw[thick,blue] (0.8,-1.5) node[below] {C} -- (0.8,-1);
+		\draw[thick,blue,dotted] (0.8,-1) -- (0.8,-0.5);
+		\node[below left] at (3,1) {$2L_3-F_\mrm c>F_\mrm o$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:ABC}
+\end{figure}
+
+接下来考虑 1b2b{\color{green!50!black}3d} (BD),
+1b2b{\color{blue}3b} (CE),
+3b2b{\color{blue}3c} (EH),
+1a2b{\color{blue}3c} (HG),
+1a2b{\color{blue}3b} 的一个端点 G,
+以及 1a2b{\color{green!50!black}3d} (JI).
+对于 $L_2-L_1+L_3\gtrless0$ 两种情况,
+它们在图像上的样子如图~\ref{fig:CEHG} 所示.
+另外要注意, 对于 $L_2-L_1+L_3>0$ 的情况,
+还要考虑到图中的蓝线只在 $L_3<L_1$ 时存在.
+图中标记的点的坐标为
+\begin{gather*}
+	\mrm D\p{\opc{max}{L_1+L_2,2L_1-L_3},\opc{min}{2\p{L_2-L_1+L_3},0}},\quad
+	\mrm E\p{2L_1-L_3,\opc{min}{2\p{L_2-L_1+L_3},L_2-L_1+L_3}},\\
+	\mrm G\p{\opc{min}{2L_1-L_3,2L_2+L_3},\opc{max}{L_2-L_1+L_3,0}},\quad
+	\mrm H\p{\opc{min}{2L_1-L_3,L_1+L_2},\opc{max}{L_2-L_1+L_3,0}},\\
+	\mrm I\p{2L_2,0},\quad
+	\mrm J\p{\opc{min}{L_1+L_2,2L_2+L_3},0}.
+\end{gather*}
+如果上一步中, 动点 $\p{l,F}$ 沿着蓝线 CE 向上移动,
+那么会有两种情况:
+若 $L_2-L_1+L_3<0$, 则 $l$ 会在保持不变后, 线性减小,
+然后再突然减小, 然后再线性减小;
+若 $L_2-L_1+L_3>0$, 则 $l$ 会在保持不变后, 线性减小.
+如果上一步中, 动点 $\p{l,F}$ 沿着绿线 BD 向上移动,
+那么会有两种情况:
+若 $L_2-L_1+L_3<0$, 则 $l$ 会在线性减小后, 切换到蓝线并继续线性减小,
+然后突然减小, 再继续线性减小;
+若 $L_2-L_1+L_3>0$
+(如果 $L_3<L_1$, 那么一定会处于这种情况;
+这种情况不涉及蓝线, 所以仍然成立), 则 $l$ 会在线性减小后, 突然减小.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw[->] (0,0) -- (5,0) node[below] {$l$};
+		\draw[->] (0,-4) -- (0,2) node[left] {$F$};
+		\draw[thick,green!50!black] (4.5,-3) node[right] {B}
+			-- (4,-2) node[above right] {D\color{black},\color{blue}E};
+		\draw[thick,blue] (4,-3.5) node[left] {C}
+			-- (4,-2)
+			-- (3,0) node[above] {H}
+			-- (2,0) node[below] {G\color{black},\color{green!50!black}J} -- (1,0.5);
+		\draw[thick,blue,dotted] (1,0.5) -- (0.5,0.75);
+		\draw[thick,green!50!black] (2,0)
+			-- (1,0) node[below] {I};
+		\node[below left] at (5,2) {$L_2-L_1+L_3<0$};
+	\end{tikzpicture}
+	\quad
+	\begin{tikzpicture}
+		\draw[->] (0,0) -- (5,0) node[below] {$l$};
+		\draw[->] (0,-4) -- (0,2) node[left] {$F$};
+		\draw[thick,green!50!black] (5,-2) node[right] {B}
+			-- (4,0) node[above] {D,J}
+			-- (2,0) node[below] {I};
+		\draw[thick,blue] (3,-3) node[left] {C}
+			-- (3,0.5) node[above right] {E,H,G} -- (2,1);
+		\draw[thick,blue,dotted] (2,1) -- (1,1.5);
+		\node[below left] at (5,2) {$L_2-L_1+L_3>0$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:CEHG}
+\end{figure}
+
+接下来考虑 1a2b{\color{blue}3b} 的另一个端点 K,
+1a2a{\color{blue}3b} (KL),
+1a2b{\color{green!50!black}3d} (JI),
+1a2b{\color{red}3a} (FM),
+以及 1a2a{\color{red}3a} (M 到无穷远).
+对于 $L_2\gtrless F_\mrm c$ 两种情况,
+它们在图像上的样子如图~\ref{fig:KL} 所示.
+注意 $L_3>L_1$ 时蓝线不存在,
+但是此时动点 $\p{l,F}$ 的运动一定与蓝线无关了, 所以无需特别考虑.
+图中标记的点的坐标为
+\[\mrm K\p{\opc{max}{L_3,L_3+2\p{L_2-F_\mrm c}},\opc{min}{L_2,F_\mrm c}},\quad
+\mrm L\p{\opc{max}{L_3,L_3+2\p{L_2-F_\mrm c}},F_\mrm c}.\]
+如果上一步中, 动点 $\p{l,F}$ 沿着绿线 JI 向左移动,
+那么在 $l$ 突然减小后, 会线性减小 (沿着红线 IM),
+减小到 $0$ 后再保持不变.
+如果在上一步中, 动点 $\p{l,F}$ 沿着蓝线 GK 移动,
+那么会有两种情况:
+若 $L_2<F_\mrm c$, 则 $l$ 会在线性减小之后,
+保持不变, 然后再突然减小到 $0$ (切换到红色), 再继续保持不变;
+若 $L_2>F_\mrm c$, 则 $l$ 会在线性减小之后,
+突然减小 (切换到红色), 然后线性减小到 $0$,
+再保持不变.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}
+		\draw[->] (0,0) -- (3.5,0) node[below] {$l$};
+		\draw[->] (0,-1) -- (0,2) node[left] {$F$};
+		\draw[thick,red] (0,1.5)
+			-- (0,1) node[left] {M}
+			-- (3,-0.5) node[below] {F};
+		\draw[thick,green!50!black] (2,0) node[below left] {I}
+			-- (3,0) node[above] {J};
+		\draw[thick,blue] (1,1.5) node[above] {L}
+			-- (1,1) node[above right] {K} -- (2,0.5);
+		\draw[thick,blue,dotted] (2,0.5) -- (2.5,0.25);
+		\node[below left] at (3.5,2) {$L_2<F_\mrm c$};
+	\end{tikzpicture}
+	\quad
+	\begin{tikzpicture}
+		\draw[->] (0,0) -- (3.5,0) node[below] {$l$};
+		\draw[->] (0,-1) -- (0,2) node[left] {$F$};
+		\draw[thick,red] (0,1.5)
+			-- (0,1) node[left] {M}
+			-- (3,-0.5) node[below] {F};
+		\draw[thick,green!50!black] (2,0) node[below left] {I}
+			-- (3,0) node[above] {J};
+		\draw[thick,blue] (1.5,0.75) node[above] {K,L} -- (2,0.5);
+		\draw[thick,blue,dotted] (2,0.5) -- (2.5,0.25);
+		\node[below left] at (3.5,2) {$L_2>F_\mrm c$};
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:KL}
+\end{figure}
+
+至此 $F$ 已经到达 $+\infty$.
+整个过程中 $l$ 的变化的定性描述由图~\ref{fig:compress} 中的流程图给出.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[
+		on grid,
+		node distance=1.5cm and 4cm,
+		startstop/.style = {
+			rectangle,rounded corners,
+			draw=black,
+			text centered
+		},
+		process/.style = {
+			rectangle,
+			text centered,
+			draw=black
+		},
+		decision/.style = {
+			rectangle,
+			text centered
+		}
+	]
+		\node[startstop] (start) {开始};
+		\node[process, left=of start] (red no change) {\color{red}不变};
+		\node[decision, below=of red no change] (L2-L1+Fo) {$L_2-L_1+F_\mrm o<0$};
+		\node[process, below=of L2-L1+Fo] (sudden 1) {突然减小};
+		\node[decision, below=of sudden 1] (2L2-Fc-Fo) {$2L_3-F_\mrm c<F_\mrm o$ 且 $L_3<L_1$};
+		\node[process, below=of 2L2-Fc-Fo] (blue no change 1) {\color{blue}不变};
+		\node[process, right=of 2L2-Fc-Fo] (green dec) {\color{green!50!black}线性减小};
+		\node[decision, below=of green dec] (L2-L1+L3 2) {$L_2-L_1+L_3<0$};
+		\node[process, right=of L2-L1+L3 2] (green sudden) {\color{green!50!black}突然减小};
+		\node[decision, below=of blue no change 1] (L2-L1+L3 1) {$L_2-L_1+L_3>0$};
+		\node[process, right=of L2-L1+L3 1] (blue dec 1) {\color{blue}线性减小};
+		\node[process, below=of L2-L1+L3 1] (blue dec 2) {\color{blue}线性减小};
+		\node[process, right=of blue dec 2] (blue sudden) {\color{blue}突然减小};
+		\node[decision, below=of blue dec 2] (L2-Fc) {$L_2<F_\mrm c$};
+		\node[process, right=of L2-Fc] (sudden 2) {突然减小};
+		\node[process, below=of L2-Fc] (blue no change 2) {\color{blue}不变};
+		\node[process, right=of sudden 2] (red dec) {\color{red}线性减小};
+		\node[process, right=of blue no change 2] (sudden 3) {突然减小};
+		\node[process, below=of red dec] (red no change 2) {\color{red}不变};
+		\node[startstop, right=of red no change 2] (stop) {结束};
+		\draw[->] (start) -- (red no change);
+		\draw[->] (red no change) -- (L2-L1+Fo);
+		\draw[->] (L2-L1+Fo) -- node[left] {是} (sudden 1);
+		\draw[->] (sudden 1) -- (2L2-Fc-Fo);
+		\draw[->] (2L2-Fc-Fo) -- node[left] {是} (blue no change 1);
+		\draw[->] (2L2-Fc-Fo) -- node[above] {否} (green dec);
+		\draw[->] (blue no change 1) -- (L2-L1+L3 1);
+		\draw[->] (green dec) -- (L2-L1+L3 2);
+		\draw[->] (L2-L1+L3 2) -- node[above] {否} (green sudden);
+		\draw[->] (L2-L1+L3 2) -- node[left] {是} (blue dec 1);
+		\draw[->] (L2-L1+L3 1) -- node[above] {否} (blue dec 1);
+		\draw[->] (blue dec 1) -- (blue sudden);
+		\draw[->] (L2-L1+L3 1) -- node[left] {是} (blue dec 2);
+		\draw[->] (blue sudden) -- (blue dec 2);
+		\draw[->] (blue dec 2) -- (L2-Fc);
+		\draw[->] (L2-Fc) -- node[left] {是} (blue no change 2);
+		\draw[->] (L2-Fc) -- node[above] {否} (sudden 2);
+		\draw[->] (blue no change 2) -- (sudden 3);
+		\draw[->] (sudden 2) -- (red dec);
+		\draw[->] (sudden 3) -- (red no change 2);
+		\draw[->] (red dec) -- (red no change 2);
+		\draw[->] (red no change 2) -- (stop);
+		\draw[->] (green sudden) -- (red dec);
+		\draw[->] (L2-L1+Fo) -- node[above] {否} ++(10cm,0cm) |- (red dec);
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:compress}
+\end{figure}
+
+\mypara
+当 $F=+\infty$ 时, 装置处于 1a2a{\color{red}3a}.
+当 $F$ 逐渐减小时, 点 $\p{l,F}$ 一点先沿着红线向下移动,
+然后沿着红线 MF 移动直到点 F.
+此时, 若 $L_2-L_1+F_\mrm o<0$, 它可以直接继续沿着红线向下移动到无穷远, 整个过程结束;
+若 $L_2-L_1+F_\mrm o>0$, 则它会从点 F 横向突变,
+而突变至蓝线还是绿线, 以及突变时 $l$ 会变大还是变小, 则取决于不同情况.
+
+首先研究它会突变至蓝线还是绿线.
+可以发现, 这取决于 F 的纵坐标和 C 纵坐标的大小关系.
+如果 F 的纵坐标大于 C 的纵坐标 (即 $-F_\mrm o>2\p{L_2-L_1+L_3}-F_\mrm c$)
+且 $L_3<L_1$,
+则突变至蓝线, 否则突变至绿线.
+
+当它突变至蓝线时, 又有两种情况:
+如果 F 的纵坐标大于 E 的纵坐标
+(即 $-F_\mrm o>2\p{L_2-L_1+L_3}$), 则突变至线段 HE, 否则突变至线段 EC.
+如果 F 在线段 HE 的左侧
+(即 $-F_\mrm o<2\p{L_1-L_2-2F_\mrm o}$)
+或者在线段 EC 的左侧
+(即 $2\p{L_2+F_\mrm o}<2L_1-L_3$), 那么突变时 $l$ 会增大,
+否则突变时 $l$ 会减小.
+
+当它突变至绿线时, 如果 F 在线段 BD 的左侧
+(即 $-F_\mrm o<2\p{L_1-L_2-2F_\mrm o}$),
+则突变时 $l$ 会增大,
+否则突变时 $l$ 会减小.
+
+\tit{注}: 可以看到, 对于某些情况, 在缓慢拉伸的过程中,
+装置的长度反而会突然减小.
+这个看似反直觉的现象被称为 Braess 悖论.
+
+另外要注意, 对于突变到蓝线的情况, 如果 $2L_3-F_\mrm c>F_\mrm o$,
+那么点 $\p{l,F}$ 在到达点 C 后无法直接突变到红线,
+所以它会先突变到绿线, 最后再到达红线.
+
+全过程的定性描述由图~\ref{fig:stretch} 中的流程图给出.
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[
+		on grid,
+		node distance=1.5cm and 4cm,
+		startstop/.style = {
+			rectangle,rounded corners,
+			draw=black,
+			text centered
+		},
+		process/.style = {
+			rectangle,
+			text centered,
+			draw=black
+		},
+		decision/.style = {
+			rectangle,
+			text centered
+		}
+	]
+		\node[startstop] (start) {开始};
+		\node[process, left=of start] (red no change 1) {\color{red}不变};
+		\node[process, left=of red no change 1] (red inc) {\color{red}线性增大};
+		\node[decision, below=of red inc] (L2-L1+Fo) {$L_2-L_1+F_\mrm o<0$};
+		\node[decision, below=of L2-L1+Fo] (Fc-Fo) {$F_\mrm o-F_\mrm c<2\p{L_1-L_2-L_3}$ 且 $L_3<L_1$};
+		\node[decision, below=of Fc-Fo] (Fo 1) {$F_\mrm o<2\p{L_1-L_2-L_3}$};
+		\node[decision, below=of Fo 1] (Fo 2) {$3F_\mrm o<2\p{L_1-L_2}$};
+		\node[process, right=of Fo 2] (sudden dec HE) {突然减小};
+		\node[process, below=of Fo 2] (sudden inc HE) {突然增大};
+		\node[process, right=of sudden inc HE] (blue inc) {\color{blue}线性增大};
+		\node[decision, below=of sudden inc HE] (Fo 3) {$2F_\mrm o<2\p{L_1-L_2}-L_3$};
+		\node[process, right=of Fo 3] (sudden dec EC) {突然减小};
+		\node[process, below=of Fo 3] (sudden inc EC) {突然增大};
+		\node[process, right=of sudden inc EC] (blue no change) {\color{blue}不变};
+		\node[process, below=of blue no change] (sudden inc) {突然增大};
+		\node[decision, below=of sudden inc] (Fo 4) {$F_\mrm o>2L_3-F_\mrm c$};
+		\node[process, left=of Fo 4] (green inc) {\color{green!50!black}线性增大};
+		\node[process, above=of green inc] (sudden dec DB) {突然减小};
+		\node[decision, left=of sudden dec DB] (Fo 5) {$3F_\mrm o<2\p{L_1-L_2}$};
+		\node[process, below=of Fo 5] (sudden inc DB) {突然增大};
+		\node[process, below=of Fo 4] (red no change 2) {\color{red}不变};
+		\node[startstop, below=of red no change 2] (stop) {结束};
+		\draw[->] (start) -- (red no change 1);
+		\draw[->] (red no change 1) -- (red inc);
+		\draw[->] (red inc) -- (L2-L1+Fo);
+		\draw[->] (L2-L1+Fo) -- node[left] {是} (Fc-Fo);
+		\draw[->] (Fc-Fo) -- node[right] {是} (Fo 1);
+		\draw[->] (Fo 1) -- node[right] {是} (Fo 2);
+		\draw[->] (Fo 2) -- node[left] {是} (sudden inc HE);
+		\draw[->] (Fo 2) -- node[above] {否} (sudden dec HE);
+		\draw[->] (sudden inc HE) -- (blue inc);
+		\draw[->] (sudden dec HE) -- (blue inc);
+		\draw[->] (Fo 3) -- node[left] {是} (sudden inc EC);
+		\draw[->] (Fo 3) -- node[above] {否} (sudden dec EC);
+		\draw[->] (sudden inc EC) -- (blue no change);
+		\draw[->] (sudden dec EC) -- (blue no change);
+		\draw[->] (blue no change) -- (sudden inc);
+		\draw[->] (sudden inc) -- (Fo 4);
+		\draw[->] (Fo 4) -- node[right] {是} (red no change 2);
+		\draw[->] (Fo 4) -- node[above] {否} (green inc);
+		\draw[->] (Fo 5) -- node[left] {是} (sudden inc DB);
+		\draw[->] (Fo 5) -- node[above] {否} (sudden dec DB);
+		\draw[->] (sudden inc DB) -- (green inc);
+		\draw[->] (sudden dec DB) -- (green inc);
+		\draw[->] (green inc) |- (red no change 2);
+		\draw[->] (red no change 2) -- (stop);
+		\draw[->] (L2-L1+Fo) -- node[above] {否} ++(7cm,0cm) |- (red no change 2);
+		\draw[->] (Fc-Fo) -- node[above] {否} ++(-4cm,0cm) -- (Fo 5);
+		\draw[->] (Fo 1) -- node[above] {否} ++(-3cm,0cm) |- (Fo 3);
+		\draw[->] (blue inc) -- ++(2cm,0cm) |- (blue no change);
+	\end{tikzpicture}
+	\caption{}
+	\label{fig:stretch}
+\end{figure}
 
 \end{document}
